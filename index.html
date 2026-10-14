@@ -121,8 +121,10 @@ button.l{font:inherit;font-weight:600;font-size:1rem;color:var(--film-t);backgro
 <p id="msg" role="status" aria-live="polite"></p>
 <div id="res"></div>
 <section id="home" hidden>
-<h2>Usciti di recente</h2><div id="now" class="rail"></div>
-<h2>In arrivo</h2><div id="soon" class="rail"></div>
+<div id="s-soon"><h2>In uscita</h2><div id="soon" class="rail"></div></div>
+<div id="s-gp"><h2>Novità Game Pass</h2><p class="sub">Aggiunti di recente al catalogo Xbox Game Pass</p><div id="gp" class="rail"></div></div>
+<div id="s-top"><h2>I più venduti</h2><p class="sub">La classifica di Steam in Italia, aggiornata ogni ora</p><div id="top" class="rail"></div></div>
+<div id="s-now"><h2>Usciti di recente</h2><div id="now" class="rail"></div></div>
 </section>
 <div id="film" hidden>
 <button id="back" class="link" type="button">← Novità</button>
@@ -137,7 +139,7 @@ button.l{font:inherit;font-weight:600;font-size:1rem;color:var(--film-t);backgro
 <div id="info"></div>
 <div id="p"></div>
 </div>
-<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Le trame e le descrizioni sono in inglese, come nel database.</p>
+<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni sono tradotte automaticamente dall'inglese.</p>
 </main>
 <script>
 const MOB=()=>window.matchMedia&&matchMedia("(max-width:700px)").matches;
@@ -179,6 +181,12 @@ else if(c==="http")setMsg("Il database non ha risposto correttamente. Riprova.")
 else setMsg("Connessione non riuscita. Controlla internet e riprova.")}
 
 const GF="name,cover.image_id,first_release_date,total_rating_count";
+const GIT={2:"Punta e clicca",4:"Picchiaduro",5:"Sparatutto",7:"Musicale",8:"Piattaforme",9:"Puzzle",10:"Corse",11:"Strategia in tempo reale",12:"Gioco di ruolo",13:"Simulazione",14:"Sport",15:"Strategia",16:"Strategia a turni",24:"Tattico",25:"Hack and slash",26:"Quiz",30:"Flipper",31:"Avventura",32:"Indie",33:"Arcade",34:"Visual novel",35:"Carte e giochi da tavolo",36:"MOBA"};
+// traduzione in italiano tramite il servizio Cloudflare; se non è attiva resta il testo inglese
+const trC=new Map();
+async function tr(t){if(!t)return"";if(trC.has(t))return trC.get(t);
+try{const r=await fetch(API+"/traduci",{method:"POST",body:t});if(!r.ok)return"";const j=await r.json();const x=j.testo||"";if(x)trC.set(t,x);return x}catch(e){return""}}
+async function trInto(elId,t,n){const x=await tr(t);const el=$(elId);if(x&&el&&el.dataset.src===t)el.textContent=cut(x,n)}
 async function loadGame(id){
 const my=++tok;setMsg("Carico il gioco…");
 try{
@@ -195,7 +203,7 @@ const m=cm.get(c.id)||{id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,dev:fals
 m.dev=m.dev||!!ic.developer;m.pub=m.pub||!!ic.publisher;cm.set(c.id,m)});
 const comps=[...cm.values()].filter(c=>c.dev||c.pub).sort((a,b)=>(b.dev-a.dev)||(a.pub-b.pub)).slice(0,4)
 .map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:c.dev&&c.pub?"Studio ed editore":c.dev?"Studio":"Editore"}));
-const gens=(d.genres||[]).slice(0,3).map(g=>({key:"g"+g.id,id:g.id,k:"g",name:g.name,role:"Genere"}));
+const gens=(d.genres||[]).slice(0,3).map(g=>({key:"g"+g.id,id:g.id,k:"g",name:GIT[g.id]||g.name,role:"Genere"}));
 const E=[...comps,...gens],gids=gens.map(g=>g.id);
 const res=await Promise.all(E.map(e=>e.k==="c"
 ?api("companies",`fields description,developed.${GF.split(",").join(",developed.")},published.${GF.split(",").join(",published.")}; where id = ${e.id};`).catch(()=>null)
@@ -218,17 +226,30 @@ try{history.replaceState(null,"","#g"+d.id)}catch(e){}
 const show=v=>{$("home").hidden=v!=="home";$("film").hidden=v!=="film"};
 const fmtD=t=>new Date(t*1000).toLocaleDateString("it-IT",{day:"numeric",month:"short"});
 const pc=(f,soon)=>`<button class="pc" data-f="${f.id}"><img src="${cov(cv(f),"cover_big")}" alt="" loading="lazy"><span class="pt">${esc(f.name)}</span><span class="pd">${f.first_release_date?(soon?"dal ":"uscito il ")+esc(fmtD(f.first_release_date)):""}</span></button>`;
+const getJ=async p=>{const r=await fetch(API+"/"+p);if(!r.ok)throw{code:"http"};const j=await r.json();if(!Array.isArray(j))throw{code:"http"};return j};
+// schede di Game Pass e Steam: si aprono cercando il titolo su IGDB
+const px=(x,sub)=>`<button class="pc" data-s="${esc(x.nome)}">${x.img?`<img src="${esc(x.img)}" alt="" loading="lazy" data-alt="${esc(x.ripiego||"")}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else this.style.opacity=0">`:`<span class="ph"></span>`}<span class="pt">${esc(x.nome)}</span><span class="pd">${esc(sub||"")}</span></button>`;
+function fill(sec,el,html,empty){$(el).innerHTML=html||`<p class="sub">${empty}</p>`;$(sec).hidden=false}
 async function loadHome(){
 setMsg("Carico le novità…");
-try{const F="name,cover.image_id,first_release_date";
-let[n,u]=await Promise.all([
-api("games",`fields ${F}; where first_release_date >= ${NOW-60*DAY} & first_release_date <= ${NOW} & cover != null & version_parent = null & hypes > 3; sort first_release_date desc; limit 20;`),
-api("games",`fields ${F}; where first_release_date > ${NOW} & first_release_date < ${NOW+240*DAY} & cover != null & version_parent = null & hypes > 5; sort first_release_date asc; limit 20;`)]);
+const F="name,cover.image_id,first_release_date";
+const jobs=[
+api("games",`fields ${F}; where first_release_date > ${NOW} & first_release_date < ${NOW+240*DAY} & cover != null & version_parent = null & hypes > 5; sort first_release_date asc; limit 20;`)
+.then(u=>fill("s-soon","soon",u.map(f=>pc(f,true)).join(""),"Nessuna uscita in programma trovata.")),
+getJ("gamepass").then(l=>fill("s-gp","gp",l.map(x=>px(x,x.editore)).join(""),"Nessuna novità trovata.")),
+getJ("piu-venduti").then(l=>fill("s-top","top",l.map((x,i)=>px(x,(i+1)+"º posto")).join(""),"Classifica non disponibile.")),
+(async()=>{let n=await api("games",`fields ${F}; where first_release_date >= ${NOW-60*DAY} & first_release_date <= ${NOW} & cover != null & version_parent = null & hypes > 3; sort first_release_date desc; limit 20;`);
 if(n.length<6)n=await api("games",`fields ${F}; where first_release_date >= ${NOW-60*DAY} & first_release_date <= ${NOW} & cover != null & version_parent = null & hypes > 0; sort first_release_date desc; limit 20;`);
-$("now").innerHTML=n.map(f=>pc(f,false)).join("")||"<p class=\"sub\">Nessun gioco trovato.</p>";
-$("soon").innerHTML=u.map(f=>pc(f,true)).join("")||"<p class=\"sub\">Nessuna uscita in programma trovata.</p>";
+fill("s-now","now",n.map(f=>pc(f,false)).join(""),"Nessun gioco trovato.")})()];
+["s-soon","s-gp","s-top","s-now"].forEach(id=>$(id).hidden=true);
+const r=await Promise.allSettled(jobs);
 setMsg("");
-}catch(e){if(!cur){setMsg("");startDefault()}else setMsg("Le novità non sono disponibili al momento.")}}
+if(r.every(x=>x.status==="rejected")){if(!cur)startDefault();else setMsg("Le novità non sono disponibili al momento.")}}
+async function openByName(n){
+const t=String(n).replace(/[™®©]/g,"").replace(/\s+[-–:]\s+(Complete|Definitive|Deluxe|Ultimate|Standard|Gold|Game of the Year|GOTY)\b.*$/i,"").replace(/\s*\((PC|Xbox[^)]*|Windows)\)\s*$/i,"").trim();
+setMsg("Cerco "+t+"…");
+try{const L=await api("games",`search "${t.replace(/["\\]/g," ")}"; fields name; where version_parent = null; limit 1;`);
+if(L[0])loadGame(L[0].id);else setMsg("Non trovo «"+t+"» nel database dei giochi.")}catch(e){showErr(e)}}
 async function startDefault(){try{const r=await api("games",'search "Elden Ring"; fields name; where version_parent = null; limit 1;');if(r[0])loadGame(r[0].id)}catch(e){showErr(e)}}
 
 // icone dei generi IGDB (per numero di genere; se manca, un'etichetta)
@@ -303,7 +324,7 @@ clearTimeout(aT);if(first)aT=setTimeout(()=>$("g").setAttribute("class",""),2300
 $("g").innerHTML=s;
 const dev=P.filter(e=>e.k==="c"&&e.role!=="Editore"),pub=P.filter(e=>e.k==="c"&&e.role!=="Studio"),gen=P.filter(e=>e.k==="g");
 let i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h2>${esc(cur.title)}</h2>${tags([cur.year,cur.rating&&"Voto "+cur.rating+"/100",...gen.map(g=>g.name)])}</div></div>`+
-(cur.summary?`<p class="ov">${esc(cut(cur.summary,320))}</p>`:"")+
+(cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
 (dev.length?`<div class="k">Sviluppo</div>${dev.map(ch).join("")}`:"")+
 (pub.length?`<div class="k">Edizione</div>${pub.map(ch).join("")}`:"")+
 (gen.length?`<div class="k">Genere</div>${gen.map(ch).join("")}`:"")+
@@ -312,9 +333,11 @@ let i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<di
 const e=P.find(x=>x.key===sel);
 if(e){const kn=cur.known[e.key]||[];
 i=`<section class="card p ${ecl(e)}"><div class="hd">${pa(e,1)}<div><h2>${esc(e.name)}</h2>${tags([e.role])}</div></div>`+
-(e.desc?`<p class="ov">${esc(cut(e.desc,320))}</p>`:"")+
+(e.desc?`<p class="ov" id="edesc" data-src="${esc(e.desc)}">${esc(cut(trC.get(e.desc)||e.desc,320))}</p>`:"")+
 `<div class="k">${e.k==="g"?"Giochi simili per tipologia":"Altri giochi di "+esc(e.name)}</div><div>${kn.slice(0,10).map(fc).join("")||"Nessun altro gioco trovato."}</div></section>`+i}
 $("info").innerHTML=i;
+if(cur.summary&&!trC.has(cur.summary))trInto("sum",cur.summary,320);
+if(e&&e.desc&&!trC.has(e.desc))trInto("edesc",e.desc,320);
 $("p").innerHTML=`<h2>Giochi collegati a ${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.sim?'<span class="tag sim">Simile secondo IGDB</span>':""}</div></div></li>`).join("")+"</ul>"}
 
 async function cerca(){
@@ -326,6 +349,7 @@ $("res").innerHTML=L.length>1?`<div class="k">Intendevi un altro gioco?</div><di
 await loadGame(L[0].id)}catch(e){showErr(e)}finally{b.disabled=false}}
 
 document.addEventListener("click",e=>{
+const sn=e.target.closest("[data-s]");if(sn){openByName(sn.dataset.s);return}
 const f=e.target.closest("[data-f]"),p=e.target.closest("[data-e]");
 if(f&&MOB()&&f.closest("#g")&&!f.classList.contains("ctr")){const id=Number(f.dataset.f),o=sortedLinks().find(x=>x.f.id===id);
 $("g").querySelectorAll(".tap").forEach(x=>{x.classList.remove("tap");if(x.nextElementSibling)x.nextElementSibling.classList.remove("sel")});
@@ -339,7 +363,7 @@ const u=n.parentNode;if(u&&u.classList&&u.classList.contains("u")&&u.parentNode.
 $("g").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-f],[data-e]");
 if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();const pe=t.dataset.e;t.dispatchEvent(new MouseEvent("click",{bubbles:true}));
 if(pe){const nn=$("g").querySelector('[data-e="'+pe+'"]');if(nn)nn.focus()}}});
-$("back").addEventListener("click",()=>{show("home");try{history.replaceState(null,"",location.pathname)}catch(e){}if(!$("now").innerHTML)loadHome()});
+$("back").addEventListener("click",()=>{show("home");try{history.replaceState(null,"",location.pathname)}catch(e){}if(!$("soon").innerHTML&&!$("gp").innerHTML)loadHome()});
 $("go").addEventListener("click",cerca);
 $("q").addEventListener("keydown",e=>{if(e.key==="Enter")cerca()});
 {const m=location.hash.match(/^#g(\d+)$/);if(m)loadGame(Number(m[1]));else{show("home");loadHome()}}
