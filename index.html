@@ -111,13 +111,70 @@ button.l{font:inherit;font-weight:600;font-size:1rem;color:var(--film-t);backgro
 @media(prefers-reduced-motion:reduce){.pc img{transition:none}}
 .note{margin-top:28px;font-size:.82rem;color:var(--mut)}
 .link{font:inherit;font-size:.82rem;color:var(--dir-t);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.seg{display:flex;gap:8px;flex-wrap:wrap;margin:10px 2px 0}
+.seg button{font:inherit;font-size:.85rem;padding:5px 14px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--mut);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--acc);color:#3b3510;border-color:var(--acc);font-weight:600}
+.kd{color:var(--mut);font-size:.78rem}
+.chip .kd{margin-left:5px}
+svg{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.n.ctr[data-c]{cursor:pointer}
+body.dlgopen{overflow:hidden}
+.dlg{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px}
+.dlg[hidden]{display:none}
+.dbk{position:absolute;inset:0;background:rgba(5,9,8,.62);backdrop-filter:blur(2px)}
+.dcard{position:relative;width:min(700px,100%);max-height:min(88vh,100%);overflow:auto;background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:22px;box-shadow:0 24px 70px rgba(0,0,0,.6)}
+.dx{position:absolute;top:8px;right:10px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:var(--fg);font-size:1.5rem;line-height:1;cursor:pointer}
+.dx:hover{background:rgba(255,255,255,.16)}
+.dtop{display:flex;gap:18px;align-items:flex-start;padding-right:30px}
+.dposter{flex:none;width:140px;aspect-ratio:2/3;border-radius:10px;object-fit:cover;background:#0a110f;border:1px solid var(--bd)}
+.dposter.ph{display:grid;place-items:center;font-size:1.6rem;font-weight:700;color:var(--fg)}
+.dcard h2{margin:0 0 4px;font-family:Cinzel,"Iowan Old Style",Georgia,serif;font-size:1.5rem}
+.dbio{white-space:pre-line;line-height:1.55}
+.dgo{margin-top:18px;padding:12px 22px}
+@media(prefers-reduced-motion:no-preference){
+.dbk{animation:fade .25s}
+.dcard.grow{animation:grow .34s cubic-bezier(.2,.8,.2,1)}
+@keyframes fade{from{opacity:0}}
+@keyframes grow{from{opacity:0;transform:scale(.12)}}
+@keyframes sheet{from{opacity:0;transform:translateY(45%)}}}
+@media(max-width:700px){
+.dlg{place-items:end center;padding:0}
+.dcard{width:100%;max-height:80vh;border-radius:18px 18px 0 0;padding:18px 16px}
+@media(prefers-reduced-motion:no-preference){.dcard.grow{animation:sheet .3s ease-out}}
+.dposter{width:96px}
+.dcard h2{font-size:1.25rem}
+}
+.seenbtn{margin-left:auto;border-color:var(--hl)!important;color:var(--hl)!important}
+.seenbtn b{font-weight:700}
+.ck{color:var(--hl);font-weight:700;margin-right:4px}
+.dact{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.dact .dgo{margin-top:0}
+.go.alt{background:transparent;border:2px solid var(--hl);color:var(--hl)}
+.go.alt.on{background:var(--hl);color:#14251f}
+.sl li{align-items:center}
+.sl .fa{width:36px;height:52px}
+.rm{flex:none;margin-left:auto;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:var(--mut);font-size:1rem;cursor:pointer}
+.rm:hover{background:rgba(255,255,255,.18);color:var(--fg)}
+.sw{position:relative;flex:1;min-width:0}
+.sug{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:30;margin:0;padding:6px;list-style:none;background:var(--card);border:1px solid var(--bd);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.6);max-height:min(60vh,420px);overflow:auto}
+.sug[hidden]{display:none}
+.sug li{display:flex;gap:12px;align-items:center;padding:6px 8px;border:0;border-radius:10px;cursor:pointer}
+.sug li:hover,.sug li[aria-selected="true"]{background:rgba(255,255,255,.09)}
+.sug .fa{width:30px;height:44px;font-size:.7rem}
+.sug .pa{width:34px;height:34px;margin:0;flex:none}
+.sug .st{font-weight:600;line-height:1.25}
+.dposter.logo{aspect-ratio:1;object-fit:contain;background:#f3efdc;padding:14px;border:3px solid var(--dir)}
+.dposter.gen{display:grid;place-items:center;aspect-ratio:1;background:var(--gen);border:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);border-radius:0}
+.dposter.gen svg{width:62%;height:62%;min-width:0}
+.dbio{white-space:pre-line}
 </style>
 </head>
 <body>
 <main>
 <h1>GiocoLegami</h1>
 <p class="sub">Scopri i collegamenti tra i videogiochi</p>
-<div class="row"><input id="q" placeholder="Scrivi il titolo di un videogioco" autocomplete="off" aria-label="Titolo del videogioco"><button id="go" class="go" type="button">Cerca</button></div>
+<div class="row"><div class="sw"><input id="q" placeholder="Cerca un videogioco, uno studio o un editore" autocomplete="off" aria-label="Cosa vuoi cercare" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list"><ul id="sug" class="sug" role="listbox" hidden></ul></div><button id="go" class="go" type="button">Cerca</button></div>
+<div id="seg" class="seg" role="group" aria-label="Cosa cercare"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="game" aria-pressed="false">Giochi</button><button type="button" data-fl="company" aria-pressed="false">Studi ed editori</button><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri l'elenco dei giochi giocati">✓ Giocati <b id="seenn">0</b></button></div>
 <p id="msg" role="status" aria-live="polite"></p>
 <div id="res"></div>
 <section id="home" hidden>
@@ -129,7 +186,6 @@ button.l{font:inherit;font-weight:600;font-size:1rem;color:var(--film-t);backgro
 <div id="film" hidden>
 <button id="back" class="link" type="button">← Novità</button>
 <div class="box"><svg id="g" viewBox="0 0 980 660" role="img" aria-label="Grafo dei collegamenti"></svg></div>
-<p id="cap" class="cap" hidden></p>
 <div class="leg">
 <span><b class="pa ini" style="width:14px;height:14px;margin:0"></b>Studio di sviluppo</span>
 <span><b class="pa pub ini" style="width:14px;height:14px;margin:0"></b>Editore</span>
@@ -141,6 +197,7 @@ button.l{font:inherit;font-weight:600;font-size:1rem;color:var(--film-t);backgro
 </div>
 <p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni sono tradotte automaticamente dall'inglese.</p>
 </main>
+<div id="dlg" class="dlg" hidden><div class="dbk"></div><div class="dcard" role="dialog" aria-modal="true" aria-labelledby="dt"><button class="dx" type="button" aria-label="Chiudi">×</button><div id="dbody"></div></div></div>
 <script>
 const MOB=()=>window.matchMedia&&matchMedia("(max-width:700px)").matches;
 const $=i=>document.getElementById(i),PI=Math.PI,CX=490,CY=330;
@@ -148,7 +205,8 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 // Indirizzo del servizio Cloudflare che nasconde le credenziali di IGDB
 const API="https://giocolegami.mariomautone1.workers.dev";
 const NOW=Math.floor(Date.now()/1000),DAY=86400;
-let aT=0,cur=null,sel=null,tok=0,last=0;
+let aT=0,cur=null,sel=null,selF=null,hasSel=false,tok=0,last=0;
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 const cache=new Map();
 async function api(ep,body){
 const ck=ep+"|"+body;if(cache.has(ck))return cache.get(ck);
@@ -170,7 +228,6 @@ const setMsg=t=>{$("msg").textContent=t||""};
 const tags=a=>a.filter(Boolean).map(t=>`<span class="tag">${esc(t)}</span>`).join("");
 const pa=(e,big)=>{const c="pa "+ecl(e)+(big?" big":"");if(e.k==="g")return `<b class="${c}"><svg viewBox="-10 -10 20 20" aria-hidden="true">${gIcon(e.id)}</svg></b>`;return e.logo?`<img class="${c}" src="${logo(e.logo)}" alt="">`:`<b class="${c} ini">${esc(ini(e.name))}</b>`};
 const ch=e=>`<button class="chip" data-e="${e.key}">${pa(e)}${esc(e.name)}</button>`;
-const fc=f=>`<button class="chip" data-f="${f.id}">${cv(f)?`<img class="po" src="${cov(cv(f),"cover_small")}" alt="">`:""}${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}</button>`;
 const poster=(id,t,big)=>id?`<img class="fa${big?" big":""}" src="${cov(id,big?"cover_big":"cover_small")}" alt="">`:`<span class="fa${big?" big":""}">${esc(ini(t))}</span>`;
 const cut=(s,n)=>s&&s.length>n?s.slice(0,n).replace(/\s+\S*$/,"")+"…":(s||"");
 
@@ -187,13 +244,39 @@ const trC=new Map();
 async function tr(t){if(!t)return"";if(trC.has(t))return trC.get(t);
 try{const r=await fetch(API+"/traduci",{method:"POST",body:t});if(!r.ok)return"";const j=await r.json();const x=j.testo||"";if(x)trC.set(t,x);return x}catch(e){return""}}
 async function trInto(elId,t,n){const x=await tr(t);const el=$(elId);if(x&&el&&el.dataset.src===t)el.textContent=cut(x,n)}
+// ---- elenco dei giochi giocati (salvato solo su questo dispositivo) ----
+let SEEN=[];try{SEEN=JSON.parse(store.get("gl_played")||"[]")}catch(e){}if(!Array.isArray(SEEN))SEEN=[];
+const isSeen=id=>SEEN.some(x=>x.id===id);
+const ckm=id=>isSeen(id)?'<span class="ck" title="Giocato">✓</span>':"";
+function updSeen(){const n=$("seenn");if(n)n.textContent=SEEN.length}
+function toggleSeen(f){const i=SEEN.findIndex(x=>x.id===f.id);
+if(i>=0)SEEN.splice(i,1);else SEEN.unshift({id:f.id,t:f.name,y:yr(f),c:cv(f),d:Date.now()});
+if(SEEN.length>2000)SEEN.length=2000;
+store.set("gl_played",JSON.stringify(SEEN));updSeen();if(cur&&!$("film").hidden)R()}
+const fc=f=>`<button class="chip" data-f="${f.id}">${ckm(f.id)}${cv(f)?`<img class="po" src="${cov(cv(f),"cover_small")}" alt="">`:""}${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}</button>`;
+
+const COUNTRY={392:"Giappone",840:"Stati Uniti",826:"Regno Unito",124:"Canada",250:"Francia",276:"Germania",616:"Polonia",752:"Svezia",380:"Italia",410:"Corea del Sud",156:"Cina",158:"Taiwan",246:"Finlandia",724:"Spagna",56:"Belgio",528:"Paesi Bassi",36:"Australia",203:"Repubblica Ceca",643:"Russia",804:"Ucraina",208:"Danimarca",578:"Norvegia",348:"Ungheria",642:"Romania",620:"Portogallo",76:"Brasile",554:"Nuova Zelanda",756:"Svizzera",40:"Austria",372:"Irlanda",703:"Slovacchia",688:"Serbia",100:"Bulgaria",792:"Turchia",376:"Israele",356:"India",702:"Singapore",484:"Messico",32:"Argentina"};
+const roleOf=(dev,pub)=>dev&&pub?"Studio ed editore":dev?"Studio":"Editore";
+const XF=p=>GF.split(",").map(x=>p+"."+x).join(",");
+
+// giochi di una casa o di un genere (per le schede e per i legami)
+async function knownOf(e,skipId,gids){
+if(e.k==="c"){const x=(await api("companies",`fields description,${XF("developed")},${XF("published")}; where id = ${e.id};`))[0]||{};
+e.desc=e.desc||x.description||"";const m=new Map();
+(x.developed||[]).forEach(f=>{if(f&&f.name&&f.id!==skipId)m.set(f.id,Object.assign({},f,{dev:1}))});
+(x.published||[]).forEach(f=>{if(f&&f.name&&f.id!==skipId){const o=m.get(f.id);if(o)o.pub=1;else m.set(f.id,Object.assign({},f,{pub:1}))}});
+return[...m.values()].sort((a,b)=>(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
+const x=await api("games",`fields ${GF},genres; where genres = (${e.id})${skipId?" & id != "+skipId:""} & version_parent = null & cover != null & total_rating_count > 15; sort total_rating_count desc; limit 40;`);
+const sh=f=>gids?(f.genres||[]).filter(g=>gids.includes(g)).length:0;
+return x.slice().sort((a,b)=>sh(b)-sh(a)||(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
+
 async function loadGame(id){
-const my=++tok;setMsg("Carico il gioco…");
+const my=++tok;setMsg("Carico il gioco…");closeDlg();
 try{
-const base="name,first_release_date,summary,total_rating,cover.image_id,genres.name,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
+const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
 const r=await tryApi("games",[
-`fields ${base},involved_companies.company.logo.image_id,similar_games.${GF.split(",").join(",similar_games.")}; where id = ${id};`,
-`fields ${base},similar_games.${GF.split(",").join(",similar_games.")}; where id = ${id};`,
+`fields ${base},involved_companies.company.logo.image_id,${XF("similar_games")}; where id = ${id};`,
+`fields ${base},${XF("similar_games")}; where id = ${id};`,
 `fields ${base}; where id = ${id};`]);
 const d=r[0];if(!d)throw{code:"http"};
 // case: prima gli studi, poi gli editori; al massimo 4. Generi: al massimo 3.
@@ -202,30 +285,64 @@ const cm=new Map();
 const m=cm.get(c.id)||{id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,dev:false,pub:false};
 m.dev=m.dev||!!ic.developer;m.pub=m.pub||!!ic.publisher;cm.set(c.id,m)});
 const comps=[...cm.values()].filter(c=>c.dev||c.pub).sort((a,b)=>(b.dev-a.dev)||(a.pub-b.pub)).slice(0,4)
-.map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:c.dev&&c.pub?"Studio ed editore":c.dev?"Studio":"Editore"}));
+.map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:roleOf(c.dev,c.pub)}));
 const gens=(d.genres||[]).slice(0,3).map(g=>({key:"g"+g.id,id:g.id,k:"g",name:GIT[g.id]||g.name,role:"Genere"}));
 const E=[...comps,...gens],gids=gens.map(g=>g.id);
-const res=await Promise.all(E.map(e=>e.k==="c"
-?api("companies",`fields description,developed.${GF.split(",").join(",developed.")},published.${GF.split(",").join(",published.")}; where id = ${e.id};`).catch(()=>null)
-:api("games",`fields ${GF},genres; where genres = (${e.id}) & id != ${d.id} & version_parent = null & cover != null & total_rating_count > 15; sort total_rating_count desc; limit 40;`).catch(()=>null)));
+const res=await Promise.all(E.map(e=>knownOf(e,d.id,gids).catch(()=>[])));
 if(my!==tok)return;
 const known={},L=new Map();
 const link=(f,key,sim)=>{const o=L.get(f.id)||{f,who:[],sim:false};if(key&&!o.who.includes(key))o.who.push(key);if(sim)o.sim=true;L.set(f.id,o)};
-E.forEach((e,i)=>{const x=res[i];let list=[];
-if(e.k==="c"&&x&&x[0]){e.desc=x[0].description||"";const m=new Map();[...(x[0].developed||[]),...(x[0].published||[])].forEach(f=>{if(f&&f.id!==d.id&&f.name)m.set(f.id,f)});
-list=[...m.values()].sort((a,b)=>(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
-if(e.k==="g"&&Array.isArray(x)){const sh=f=>(f.genres||[]).filter(g=>gids.includes(g)).length;list=x.slice().sort((a,b)=>sh(b)-sh(a)||(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
-known[e.key]=list;list.slice(0,e.k==="c"?8:6).forEach(f=>link(f,e.key))});
+E.forEach((e,i)=>{known[e.key]=res[i];res[i].slice(0,e.k==="c"?8:6).forEach(f=>link(f,e.key))});
 const sims=(d.similar_games||[]).filter(f=>f&&f.name);
 sims.slice(0,6).forEach(f=>link(f,null,true));
-cur={id:d.id,title:d.name,year:yr(d),rating:d.total_rating?Math.round(d.total_rating):0,summary:d.summary,cover:cv(d),E,known,sims,links:[...L.values()]};
-sel=null;$("q").value=d.name;setMsg("");show("film");R(true);
+const W={id:d.id,name:d.name,first_release_date:d.first_release_date,cover:d.cover,total_rating_count:d.total_rating_count};
+cur={kind:"game",id:d.id,w:W,title:d.name,year:yr(d),rating:d.total_rating?Math.round(d.total_rating):0,summary:d.summary,cover:cv(d),E,known,sims,links:[...L.values()]};
+sel=null;selF=null;$("q").value=d.name;setMsg("");show("film");R(true);
 try{history.replaceState(null,"","#g"+d.id)}catch(e){}
 }catch(e){if(my===tok)showErr(e)}}
 
+// una casa al centro: i suoi giochi, i partner più frequenti e i generi principali
+async function loadCompany(id){
+const my=++tok;setMsg("Carico la casa…");closeDlg();
+try{
+const r=await tryApi("companies",[
+`fields name,description,start_date,country,logo.image_id,${XF("developed")},${XF("published")}; where id = ${id};`,
+`fields name,description,start_date,country,${XF("developed")},${XF("published")}; where id = ${id};`]);
+const d=r[0];if(!d)throw{code:"http"};
+const C={key:"c"+d.id,id:d.id,k:"c",name:d.name,logo:d.logo&&d.logo.image_id,desc:d.description||""};
+const games=await knownOf(C,null);
+const nd=(d.developed||[]).length,np=(d.published||[]).length;C.role=roleOf(nd>0,np>0);
+const top=games.slice(0,10).map(f=>f.id);
+let det=[];
+if(top.length)det=await tryApi("games",[
+`fields genres,involved_companies.developer,involved_companies.publisher,involved_companies.company.name,involved_companies.company.logo.image_id; where id = (${top.join(",")}); limit 20;`,
+`fields genres,involved_companies.developer,involved_companies.publisher,involved_companies.company.name; where id = (${top.join(",")}); limit 20;`]).catch(()=>[]);
+if(my!==tok)return;
+const pc=new Map(),gc=new Map(),inG=new Map();
+det.forEach(g=>{const ks=new Set();
+(g.involved_companies||[]).forEach(ic=>{const c=ic.company;if(!c||!c.id||c.id===d.id||!(ic.developer||ic.publisher))return;
+const e=pc.get(c.id)||{id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,n:0,dev:0,pub:0};
+if(!ks.has("c"+c.id))e.n++;if(ic.developer)e.dev++;if(ic.publisher)e.pub++;pc.set(c.id,e);ks.add("c"+c.id)});
+(g.genres||[]).forEach(x=>{gc.set(x,(gc.get(x)||0)+1);ks.add("g"+x)});
+inG.set(g.id,ks)});
+const partners=[...pc.values()].sort((a,b)=>b.n-a.n).slice(0,4).map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:roleOf(c.dev>0,c.pub>0)}));
+const gens=[...gc.entries()].sort((a,b)=>b[1]-a[1]).slice(0,2).map(([g])=>({key:"g"+g,id:g,k:"g",name:GIT[g]||"Genere",role:"Genere"}));
+const E=[...partners,...gens],L=new Map();
+games.forEach(f=>{const ks=inG.get(f.id)||new Set();L.set(f.id,{f,who:E.filter(e=>ks.has(e.key)).map(e=>e.key),sim:false,dir:true})});
+const facts=[C.role,d.start_date?"Fondata nel "+new Date(d.start_date*1000).getUTCFullYear():"",COUNTRY[d.country]||""];
+cur={kind:"company",id:d.id,center:C,title:d.name,year:C.role,facts,summary:C.desc,cover:"",E,known:{[C.key]:games},sims:[],links:[...L.values()]};
+sel=null;selF=null;$("q").value=d.name;setMsg("");show("film");R(true);
+try{history.replaceState(null,"","#c"+d.id)}catch(e){}
+}catch(e){if(my===tok)showErr(e)}}
+async function ensureKnown(e){const my=cur;
+try{const l=await knownOf(e,cur.kind==="game"?cur.id:null);if(cur!==my)return;cur.known[e.key]=l}
+catch(x){if(cur!==my)return;cur.known[e.key]=[]}
+if(cur===my&&sel===e.key)R()}
+function centre(key){closeDlg();$("res").innerHTML="";if(key[0]==="c")loadCompany(Number(key.slice(1)));else if(key[0]==="f")loadGame(Number(key.slice(1)))}
+
 const show=v=>{$("home").hidden=v!=="home";$("film").hidden=v!=="film"};
 const fmtD=t=>new Date(t*1000).toLocaleDateString("it-IT",{day:"numeric",month:"short"});
-const pc=(f,soon)=>`<button class="pc" data-f="${f.id}"><img src="${cov(cv(f),"cover_big")}" alt="" loading="lazy"><span class="pt">${esc(f.name)}</span><span class="pd">${f.first_release_date?(soon?"dal ":"uscito il ")+esc(fmtD(f.first_release_date)):""}</span></button>`;
+const pc=(f,soon)=>`<button class="pc" data-f="${f.id}"><img src="${cov(cv(f),"cover_big")}" alt="" loading="lazy"><span class="pt">${ckm(f.id)}${esc(f.name)}</span><span class="pd">${f.first_release_date?(soon?"dal ":"uscito il ")+esc(fmtD(f.first_release_date)):""}</span></button>`;
 const getJ=async p=>{const r=await fetch(API+"/"+p);if(!r.ok)throw{code:"http"};const j=await r.json();if(!Array.isArray(j))throw{code:"http"};return j};
 // schede di Game Pass e Steam: si aprono cercando il titolo su IGDB
 const px=(x,sub)=>`<button class="pc" data-s="${esc(x.nome)}">${x.img?`<img src="${esc(x.img)}" alt="" loading="lazy" data-alt="${esc(x.ripiego||"")}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else this.style.opacity=0">`:`<span class="ph"></span>`}<span class="pt">${esc(x.nome)}</span><span class="pd">${esc(sub||"")}</span></button>`;
@@ -245,10 +362,11 @@ fill("s-now","now",n.map(f=>pc(f,false)).join(""),"Nessun gioco trovato.")})()];
 const r=await Promise.allSettled(jobs);
 setMsg("");
 if(r.every(x=>x.status==="rejected")){if(!cur)startDefault();else setMsg("Le novità non sono disponibili al momento.")}}
+const qs=s=>String(s).replace(/["\\]/g," ");
 async function openByName(n){
 const t=String(n).replace(/[™®©]/g,"").replace(/\s+[-–:]\s+(Complete|Definitive|Deluxe|Ultimate|Standard|Gold|Game of the Year|GOTY)\b.*$/i,"").replace(/\s*\((PC|Xbox[^)]*|Windows)\)\s*$/i,"").trim();
 setMsg("Cerco "+t+"…");
-try{const L=await api("games",`search "${t.replace(/["\\]/g," ")}"; fields name; where version_parent = null; limit 1;`);
+try{const L=await api("games",`search "${qs(t)}"; fields name; where version_parent = null; limit 1;`);
 if(L[0])loadGame(L[0].id);else setMsg("Non trovo «"+t+"» nel database dei giochi.")}catch(e){showErr(e)}}
 async function startDefault(){try{const r=await api("games",'search "Elden Ring"; fields name; where version_parent = null; limit 1;');if(r[0])loadGame(r[0].id)}catch(e){showErr(e)}}
 
@@ -293,80 +411,228 @@ gen:`<path d="M-6.5 -6.5H0.5L7 0L0 7L-6.5 0.5Z" fill="#0a110f" stroke-linejoin="
 film:`<rect x="-8" y="-4.5" width="16" height="9" rx="4.5" fill="#0a110f"/><path d="M-5.3 0h3.6M-3.5 -1.8v3.6" stroke="var(--film)" stroke-width="1.4"/><circle cx="3" cy="-0.9" r="1.1" fill="var(--film)"/><circle cx="5.1" cy="1.2" r="1.1" fill="var(--film)"/>`};
 const bdg=(x,y,c,r)=>`<g class="bd" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(r/12).toFixed(2)})"><circle r="12" fill="var(--${c})" stroke="#0a110f" stroke-width="2"/>${IC[c]}</g>`;
 const hx=(x,y,R)=>[0,1,2,3,4,5].map(k=>(x+R*Math.cos(PI/6+k*PI/3)).toFixed(1)+","+(y+R*Math.sin(PI/6+k*PI/3)).toFixed(1)).join(" ");
-function pn(e,q,i){const G=e.k==="g",on=e.key===sel,r=on?31:26,id="ce"+i,R=G?r*1.18:r,c=`var(--${ecn(e)})`;
+function pn(e,q,i,ctr,hi,dim){const G=e.k==="g",r=ctr?42:(hi?31:26),id="ce"+(ctr?"c":i),R=G?r*1.18:r,c=`var(--${ecn(e)})`;
 const shp=at=>G?`<polygon points="${hx(q[0],q[1],R)}" ${at}/>`:`<circle cx="${q[0]}" cy="${q[1]}" r="${r}" ${at}/>`;
-const inner=e.logo&&!G?`<clipPath id="${id}">${shp("")}</clipPath>${shp('fill="#f3efdc"')}<image href="${logo(e.logo)}" x="${(q[0]-R*.7).toFixed(1)}" y="${(q[1]-R*.7).toFixed(1)}" width="${(R*1.4).toFixed(1)}" height="${(R*1.4).toFixed(1)}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${id})"/>`:G?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11.5).toFixed(2)})">${gIcon(e.id)}</g>`:`<text class="in" x="${q[0]}" y="${q[1]+5}" text-anchor="middle">${esc(ini(e.name))}</text>`;
-return `<g class="n${on?" on":""}" style="--i:${i}" data-e="${e.key}" tabindex="0" role="button" aria-label="${esc(e.name)}, ${esc(e.role.toLowerCase())}"><title>${esc(e.name)} (${esc(e.role.toLowerCase())})</title><circle cx="${q[0]}" cy="${q[1]}" r="${r+9}" fill="transparent"/>${shp(`fill="${c}"`)}${inner}${shp(`fill="none" stroke="${on?"var(--fg)":c}" stroke-width="4" stroke-linejoin="round"`)}${bdg(q[0]+R*.82,q[1]-R*.82,ecn(e),12)}</g>`}
+const inner=e.logo&&!G?`<clipPath id="${id}">${shp("")}</clipPath>${shp('fill="#f3efdc"')}<image href="${logo(e.logo)}" x="${(q[0]-R*.7).toFixed(1)}" y="${(q[1]-R*.7).toFixed(1)}" width="${(R*1.4).toFixed(1)}" height="${(R*1.4).toFixed(1)}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${id})"/>`:G?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11.5).toFixed(2)})">${gIcon(e.id)}</g>`:`<text class="in" x="${q[0]}" y="${q[1]+5}" text-anchor="middle"${ctr?' style="font-size:20px"':""}>${esc(ini(e.name))}</text>`;
+return `<g class="n${ctr?" ctr":""}${hi&&!ctr?" on":""}" style="--i:${i}${dim?";opacity:.4":""}" ${ctr?'data-c="1"':`data-e="${e.key}"`} tabindex="0" role="button" aria-label="${esc(e.name)}, ${esc(e.role.toLowerCase())}"><title>${esc(e.name)} (${esc(e.role.toLowerCase())})</title><circle cx="${q[0]}" cy="${q[1]}" r="${r+9}" fill="transparent"/>${shp(`fill="${c}"`)}${inner}${shp(`fill="none" stroke="${hi&&!ctr?"var(--fg)":c}" stroke-width="4" stroke-linejoin="round"`)}${bdg(q[0]+R*.82,q[1]-R*.82,ecn(e),12)}</g>`}
 function fn(f,q,k,go,i,x){x=x||{};const w=17*k,h=24*k,id="cf"+(go?f.id:"c"),c=cv(f);
 const inner=c?`<clipPath id="${id}"><rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6"/></clipPath><image href="${cov(c,"cover_big")}" x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`:`<text class="in f" x="${q[0]}" y="${q[1]+5}" text-anchor="middle">${esc(ini(f.name))}</text>`;
-return `<g class="n${go?"":" ctr"}${x.on?" on":""}" style="--i:${i}${x.dim?";opacity:.35":""}" ${go?`data-f="${f.id}" tabindex="0" role="button" aria-label="${esc(f.name)}"`:""}><title>${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}${x.names?", in comune: "+esc(x.names):""}${x.sim?" (simile secondo IGDB)":""}</title>${go?`<rect x="${q[0]-w-8}" y="${q[1]-h-8}" width="${2*w+16}" height="${2*h+16}" fill="transparent"/>`:""}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="var(--film)"/>${inner}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="none" stroke="${x.on?"var(--hl)":"#0a110f"}" stroke-width="3"/>${bdg(q[0]+w*.9,q[1]-h*.9,"film",go?10:12)}</g>`}
-const sortedLinks=()=>[...cur.links].sort((a,b)=>((b.who.includes(sel)?1:0)-(a.who.includes(sel)?1:0))||b.who.length-a.who.length||(b.sim-a.sim)||(b.f.total_rating_count||0)-(a.f.total_rating_count||0));
+const seen=isSeen(f.id)?`<g class="bd" transform="translate(${(q[0]+w*.9).toFixed(1)} ${(q[1]+h*.9).toFixed(1)}) scale(${go?.83:1})"><circle r="12" fill="var(--hl)" stroke="#0a110f" stroke-width="2"/><path d="M-5 0.5l3.5 3.5 6.5-7.5" stroke="#0a110f" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`:"";
+return `<g class="n${go?"":" ctr"}${x.on?" on":""}" style="--i:${i}${x.dim?";opacity:.35":""}" ${go?`data-f="${f.id}"`:'data-c="1"'} tabindex="0" role="button" aria-label="${esc(f.name)}"><title>${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}${x.names?", in comune: "+esc(x.names):""}${x.sim?" (simile secondo IGDB)":""}</title>${go?`<rect x="${q[0]-w-8}" y="${q[1]-h-8}" width="${2*w+16}" height="${2*h+16}" fill="transparent"/>`:""}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="var(--film)"/>${inner}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="none" stroke="${x.on?"var(--hl)":"#0a110f"}" stroke-width="3"/>${bdg(q[0]+w*.9,q[1]-h*.9,"film",go?10:12)}${seen}</g>`}
+const sortedLinks=()=>[...cur.links].sort((a,b)=>b.who.length-a.who.length||(b.sim-a.sim)||(b.f.total_rating_count||0)-(a.f.total_rating_count||0));
 const DEFS=`<defs><radialGradient id="gl"><stop offset="0" stop-color="#F4E285" stop-opacity=".2"/><stop offset=".55" stop-color="#F4A259" stop-opacity=".06"/><stop offset="1" stop-color="#F4A259" stop-opacity="0"/></radialGradient></defs><circle cx="${CX}" cy="${CY}" r="330" fill="url(#gl)"/><circle cx="${CX}" cy="${CY}" r="125" fill="none" stroke="#2a3b34" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/><circle cx="${CX}" cy="${CY}" r="258" fill="none" stroke="#2a3b34" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/>`;
-const eg=(a,b,on,i,bend)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,qx=mx+(CX-mx)*bend,qy=my+(CY-my)*bend,d=`M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${qx.toFixed(1)} ${qy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`,hi=sel&&on;
-return `<path class="e" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"var(--hl)":"var(--edge)"}" stroke-width="${hi?4:1.5}" stroke-linecap="round" opacity="${sel?(on?1:.18):.6}"/>`+(sel&&!on?"":`<path class="ef${hi?" on":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"#fff":"var(--acc)"}" stroke-width="${hi?3:2.2}" stroke-linecap="round" opacity="${hi?.95:.8}"/>`)};
+const eg=(a,b,on,i,bend)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,qx=mx+(CX-mx)*bend,qy=my+(CY-my)*bend,d=`M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${qx.toFixed(1)} ${qy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`,hi=hasSel&&on;
+return `<path class="e" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"var(--hl)":"var(--edge)"}" stroke-width="${hi?4:1.5}" stroke-linecap="round" opacity="${hasSel?(on?1:.18):.6}"/>`+(hasSel&&!on?"":`<path class="ef${hi?" on":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"#fff":"var(--acc)"}" stroke-width="${hi?3:2.2}" stroke-linecap="round" opacity="${hi?.95:.8}"/>`)};
 // collegamento "simile secondo IGDB": tratteggio dorato dal centro
-const es=(a,b,dim)=>`<path d="M${a[0].toFixed(1)} ${a[1].toFixed(1)}L${b[0].toFixed(1)} ${b[1].toFixed(1)}" fill="none" stroke="var(--acc)" stroke-width="1.6" stroke-dasharray="3 7" stroke-linecap="round" opacity="${dim?.15:.55}"/>`;
+const es=(a,b,on)=>`<path d="M${a[0].toFixed(1)} ${a[1].toFixed(1)}L${b[0].toFixed(1)} ${b[1].toFixed(1)}" fill="none" stroke="${hasSel&&on?"var(--hl)":"var(--acc)"}" stroke-width="${hasSel&&on?3:1.6}" stroke-dasharray="3 7" stroke-linecap="round" opacity="${hasSel?(on?.95:.15):.55}"/>`;
 
 function R(first){
 if(!cur)return;
-const P=cur.E,n=P.length,L=sortedLinks(),Og=L.slice(0,12),pp={},fp={},c=[CX,CY];let s=DEFS,k=0;
+const P=cur.E,n=P.length,L=sortedLinks(),Og=L.slice(0,12),pp={},fp={},c=[CX,CY],isC=cur.kind==="company";let s=DEFS,k=0;
+const fsel=selF?cur.links.find(o=>o.f.id===selF):null;
+const hiP=new Set(sel?[sel]:fsel?fsel.who:[]),hiF=new Set(sel?cur.links.filter(o=>o.who.includes(sel)).map(o=>o.f.id):fsel?[fsel.f.id]:[]);
+hasSel=!!(sel||fsel);
 P.forEach((e,i)=>pp[e.key]=lay(-PI/2+i*2*PI/Math.max(n,1),125));
 Og.forEach((o,j)=>fp[o.f.id]=lay(-PI/2+(j+.5)*2*PI/Og.length,258));
-P.forEach(e=>s+=eg(c,pp[e.key],e.key===sel,k++,0));
-Og.forEach(o=>{if(!o.who.length)s+=es(c,fp[o.f.id],!!sel);o.who.forEach(key=>s+=eg(pp[key],fp[o.f.id],key===sel,k++,.22))});
-P.forEach((e,i)=>{const rr=e.key===sel?31:26;s+='<g class="u">'+pn(e,pp[e.key],i)+lab(pp[e.key],e.name,36,e.key===sel,false,rr*2.6,rr*2.6,e.key===sel)+'</g>'});
-Og.forEach((o,j)=>{const on=!!sel&&o.who.includes(sel),kk=Math.min(1.6,1+.2*Math.max(0,o.who.length-1)),names=o.who.map(key=>(P.find(x=>x.key===key)||{}).name).filter(Boolean).join(", ");
-s+='<g class="u">'+fn(o.f,fp[o.f.id],kk,1,n+j,{on,dim:!!sel&&!on,names,sim:o.sim})+lab(fp[o.f.id],o.f.name,Math.round(12+24*kk),false,!!sel&&!on,17*kk*2.2,24*kk*2.2,on)+'</g>'});
-s+=fn({name:cur.title,cover:{image_id:cur.cover}},c,1.7,0,0)+`<text class="ttl" x="28" y="46" font-weight="700" font-size="27">${esc(cut(cur.title,32))}</text>${cur.year?`<text class="ttl" x="28" y="72" font-size="18" style="fill:var(--mut)">${esc(cur.year)}</text>`:""}`;
-$("g").setAttribute("class",first?"a":"");$("g").setAttribute("viewBox",MOB()?"180 20 620 620":"0 0 980 660");$("cap").hidden=true;
-{const se=P.find(x=>x.key===sel);if(se&&MOB()){$("cap").innerHTML=`<b>${esc(se.name)}</b> (${esc(se.role.toLowerCase())}). Le linee verdi portano ai suoi giochi.`;$("cap").hidden=false}}
+P.forEach(e=>s+=eg(c,pp[e.key],hiP.has(e.key),k++,0));
+Og.forEach(o=>{const on=hiF.has(o.f.id);
+if(isC&&!o.who.length)s+=eg(c,fp[o.f.id],on,k++,0);
+else if(!o.who.length)s+=es(c,fp[o.f.id],on);
+o.who.forEach(key=>s+=eg(pp[key],fp[o.f.id],hiP.has(key)&&on,k++,.22))});
+P.forEach((e,i)=>{const hi=hiP.has(e.key),rr=hi?31:26;s+='<g class="u">'+pn(e,pp[e.key],i,0,hi,hasSel&&!hi)+lab(pp[e.key],e.name,36,hi,false,rr*2.6,rr*2.6,hi)+'</g>'});
+Og.forEach((o,j)=>{const on=hiF.has(o.f.id),kk=Math.min(1.6,1+.2*Math.max(0,o.who.length-1)),names=o.who.map(key=>(P.find(x=>x.key===key)||{}).name).filter(Boolean).join(", ");
+s+='<g class="u">'+fn(o.f,fp[o.f.id],kk,1,n+j,{on,dim:hasSel&&!on,names,sim:o.sim})+lab(fp[o.f.id],o.f.name,Math.round(12+24*kk),false,hasSel&&!on,17*kk*2.2,24*kk*2.2,on)+'</g>'});
+s+=(isC?pn(cur.center,c,0,1):fn(cur.w,c,1.7,0,0))+`<text class="ttl" x="28" y="46" font-weight="700" font-size="27">${esc(cut(cur.title,32))}</text>${cur.year?`<text class="ttl" x="28" y="72" font-size="18" style="fill:var(--mut)">${esc(cur.year)}</text>`:""}`;
+$("g").setAttribute("class",first?"a":"");$("g").setAttribute("viewBox",MOB()?"180 20 620 620":"0 0 980 660");
 clearTimeout(aT);if(first)aT=setTimeout(()=>$("g").setAttribute("class",""),2300);
 $("g").innerHTML=s;
-const dev=P.filter(e=>e.k==="c"&&e.role!=="Editore"),pub=P.filter(e=>e.k==="c"&&e.role!=="Studio"),gen=P.filter(e=>e.k==="g");
-let i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h2>${esc(cur.title)}</h2>${tags([cur.year,cur.rating&&"Voto "+cur.rating+"/100",...gen.map(g=>g.name)])}</div></div>`+
+const dev=P.filter(e=>e.k==="c"&&e.role!=="Editore"),pub=P.filter(e=>e.k==="c"&&e.role!=="Studio"),gen=P.filter(e=>e.k==="g"),comp=P.filter(e=>e.k==="c");
+let i;
+if(!isC){
+i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h2>${esc(cur.title)}</h2>${tags([cur.year,cur.rating&&"Voto "+cur.rating+"/100",...gen.map(g=>g.name)])}</div></div>`+
 (cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
 (dev.length?`<div class="k">Sviluppo</div>${dev.map(ch).join("")}`:"")+
 (pub.length?`<div class="k">Edizione</div>${pub.map(ch).join("")}`:"")+
 (gen.length?`<div class="k">Genere</div>${gen.map(ch).join("")}`:"")+
 (cur.sims.length?`<div class="k">Simili secondo IGDB</div><div>${cur.sims.slice(0,10).map(fc).join("")}</div>`:"")+
-`<div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}</section>`;
+`<div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}<div class="dact"><button class="go alt${isSeen(cur.id)?" on":""}" type="button" data-seenc="1">${isSeen(cur.id)?"✓ Giocato":"Segna come giocato"}</button></div></section>`}
+else{const kn=cur.known[cur.center.key]||[];
+i=`<section class="card p ${ecl(cur.center)}"><div class="hd">${pa(cur.center,1)}<div><h2>${esc(cur.title)}</h2>${tags(cur.facts)}</div></div>`+
+(cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
+`<div class="k">Partner frequenti</div>${comp.map(ch).join("")||'<span class="kd">nessuno trovato</span>'}`+
+(gen.length?`<div class="k">Generi principali</div>${gen.map(ch).join("")}`:"")+
+`<div class="k">Giochi più noti</div><div>${kn.slice(0,10).map(fc).join("")}</div></section>`}
 const e=P.find(x=>x.key===sel);
-if(e){const kn=cur.known[e.key]||[];
+if(e){const kn=cur.known[e.key];
 i=`<section class="card p ${ecl(e)}"><div class="hd">${pa(e,1)}<div><h2>${esc(e.name)}</h2>${tags([e.role])}</div></div>`+
 (e.desc?`<p class="ov" id="edesc" data-src="${esc(e.desc)}">${esc(cut(trC.get(e.desc)||e.desc,320))}</p>`:"")+
-`<div class="k">${e.k==="g"?"Giochi simili per tipologia":"Altri giochi di "+esc(e.name)}</div><div>${kn.slice(0,10).map(fc).join("")||"Nessun altro gioco trovato."}</div></section>`+i}
+`<div class="k">${e.k==="g"?"Giochi simili per tipologia":"Altri giochi di "+esc(e.name)}</div><div>${kn?(kn.slice(0,10).map(fc).join("")||"Nessun altro gioco trovato."):"Carico…"}</div>`+
+`<div class="dact"><button class="go dgo" type="button" data-det="${e.key}">Dettagli</button>${e.k==="c"?`<button class="go dgo alt" type="button" data-go="${e.key}">Scopri i legami</button>`:""}</div></section>`+i;
+if(!kn)ensureKnown(e)}
+if(fsel){const com=fsel.who.map(key=>P.find(x=>x.key===key)).filter(Boolean);
+i=`<section class="card"><div class="hd">${poster(cv(fsel.f),fsel.f.name,1)}<div><h2>${ckm(fsel.f.id)}${esc(fsel.f.name)}</h2>${tags([yr(fsel.f),fsel.sim&&"Simile secondo IGDB"])}</div></div>`+
+(com.length?`<div class="k">In comune</div>${com.map(ch).join("")}`:"")+
+`<div class="dact"><button class="go dgo" type="button" data-det="f${fsel.f.id}">Dettagli</button><button class="go dgo alt" type="button" data-go="f${fsel.f.id}">Scopri i legami</button></div></section>`+i}
 $("info").innerHTML=i;
 if(cur.summary&&!trC.has(cur.summary))trInto("sum",cur.summary,320);
 if(e&&e.desc&&!trC.has(e.desc))trInto("edesc",e.desc,320);
-$("p").innerHTML=`<h2>Giochi collegati a ${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.sim?'<span class="tag sim">Simile secondo IGDB</span>':""}</div></div></li>`).join("")+"</ul>"}
+$("p").innerHTML=`<h2>${isC?"Giochi di ":"Giochi collegati a "}${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${ckm(o.f.id)}${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.sim?'<span class="tag sim">Simile secondo IGDB</span>':""}</div></div></li>`).join("")+"</ul>"}
 
+// ---- ricerca: filtri, risultati e suggerimenti mentre si scrive ----
+let FILT="all",lastQ="";
+async function fetchResults(v){
+const gq=()=>api("games",`search "${qs(v)}"; fields name,first_release_date,cover.image_id; where version_parent = null; limit 10;`).then(r=>r.map(f=>({t:"f",f})));
+const cq=()=>tryApi("companies",[`fields name,logo.image_id,developed,published; where name ~ *"${qs(v)}"*; limit 40;`,`fields name,developed,published; where name ~ *"${qs(v)}"*; limit 40;`])
+.then(r=>r.map(c=>({t:"c",id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,nd:(c.developed||[]).length,np:(c.published||[]).length})).filter(c=>c.nd+c.np>0)
+.sort((a,b)=>((b.name.toLowerCase()===v.toLowerCase())-(a.name.toLowerCase()===v.toLowerCase()))||(b.nd+b.np)-(a.nd+a.np)).slice(0,8));
+if(FILT==="game")return gq();
+if(FILT==="company")return cq();
+const[g,c]=await Promise.all([gq().catch(()=>[]),cq().catch(()=>[])]);
+const exact=c.filter(x=>x.name.toLowerCase()===v.toLowerCase());
+return[...exact,...g.slice(0,8),...c.filter(x=>!exact.includes(x)).slice(0,3)]}
+const cEnt=e=>({key:"c"+e.id,id:e.id,k:"c",name:e.name,logo:e.logo,role:roleOf(e.nd>0,e.np>0)});
+const sc=e=>e.t==="c"?`<button class="chip" data-go="c${e.id}">${pa(cEnt(e))}${esc(e.name)} <span class="kd">· ${roleOf(e.nd>0,e.np>0)}</span></button>`:fc(e.f);
 async function cerca(){
 const v=$("q").value.trim();if(!v)return;
-const b=$("go");b.disabled=true;setMsg("Cerco…");
-try{const L=await api("games",`search "${v.replace(/["\\]/g," ")}"; fields name,first_release_date,cover.image_id; where version_parent = null; limit 8;`);
-if(!L.length){setMsg("Nessun gioco trovato per «"+v+"».");$("res").innerHTML="";return}
-$("res").innerHTML=L.length>1?`<div class="k">Intendevi un altro gioco?</div><div>${L.slice(1,6).map(fc).join("")}</div>`:"";
-await loadGame(L[0].id)}catch(e){showErr(e)}finally{b.disabled=false}}
+lastQ=v;sugKill();const btn=$("go");btn.disabled=true;setMsg("Cerco…");
+try{const L=await fetchResults(v);
+if(!L.length){setMsg("Nessun risultato per «"+v+"».");$("res").innerHTML="";return}
+$("res").innerHTML=L.length>1?`<div class="k">Intendevi altro?</div><div>${L.slice(1,7).map(sc).join("")}</div>`:"";
+const e=L[0];if(e.t==="c")await loadCompany(e.id);else await loadGame(e.f.id)}
+catch(e){showErr(e)}finally{btn.disabled=false}}
 
 document.addEventListener("click",e=>{
+if(!e.target.closest(".sw"))sugHide();
+if(e.target.closest("#g")||e.target.closest("#dlg"))return;
 const sn=e.target.closest("[data-s]");if(sn){openByName(sn.dataset.s);return}
+const gd=e.target.closest("[data-det]");if(gd){const r=gd.getBoundingClientRect();lastFocus=gd;openDetail(gd.dataset.det,{x:r.left+r.width/2,y:r.top+r.height/2},true);return}
+const gg=e.target.closest("[data-go]");if(gg){centre(gg.dataset.go);return}
+if(e.target.closest("[data-seenc]")){if(cur&&cur.w)toggleSeen(cur.w);return}
 const f=e.target.closest("[data-f]"),p=e.target.closest("[data-e]");
-if(f&&MOB()&&f.closest("#g")&&!f.classList.contains("ctr")){const id=Number(f.dataset.f),o=sortedLinks().find(x=>x.f.id===id);
-$("g").querySelectorAll(".tap").forEach(x=>{x.classList.remove("tap");if(x.nextElementSibling)x.nextElementSibling.classList.remove("sel")});
-const lb=f.nextElementSibling;f.classList.add("tap");if(lb&&lb.classList)lb.classList.add("sel");
-if(o){$("cap").innerHTML=`<b>${esc(o.f.name)}</b>${yr(o.f)?" ("+yr(o.f)+")":""} <button class="l" data-f="${id}" type="button">Apri questo gioco →</button>`;$("cap").hidden=false}}
-else if(f){$("res").innerHTML="";loadGame(Number(f.dataset.f))}
-else if(p){const k=p.dataset.e;sel=sel===k?null:k;R()}});
-$("g").addEventListener("pointerover",e=>{const n=e.target.closest&&e.target.closest(".n");if(!n||n.classList.contains("ctr"))return;
+if(f)centre("f"+f.dataset.f);
+else if(p){const k=p.dataset.e;if(cur&&cur.E.some(x=>x.key===k)){selF=null;sel=sel===k?null:k;R()}else if(k[0]==="c")centre(k);else{const r=p.getBoundingClientRect();openDetail(k,{x:r.left+r.width/2,y:r.top+r.height/2})}}});
+$("g").addEventListener("pointerover",e=>{if(e.buttons)return;const n=e.target.closest&&e.target.closest(".n");if(!n||n.classList.contains("ctr"))return;
 if($("g").getAttribute("class"))$("g").setAttribute("class","");
 const u=n.parentNode;if(u&&u.classList&&u.classList.contains("u")&&u.parentNode.lastElementChild!==u)u.parentNode.appendChild(u)});
-$("g").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-f],[data-e]");
-if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();const pe=t.dataset.e;t.dispatchEvent(new MouseEvent("click",{bubbles:true}));
-if(pe){const nn=$("g").querySelector('[data-e="'+pe+'"]');if(nn)nn.focus()}}});
+// un tocco: evidenzia i collegamenti; due tocchi ravvicinati: finestra dei dettagli
+const DBL=300;let lastK="",lastT=0;
+const gkey=n=>n.dataset.f?"f"+n.dataset.f:n.dataset.e||"x";
+$("g").addEventListener("click",e=>{
+e.stopPropagation();
+const n=e.target.closest("[data-f],[data-e],[data-c]");
+if(!n){if(sel||selF){sel=null;selF=null;R()}return}
+const key=gkey(n),now=Date.now(),pt={x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2};
+if(key===lastK&&now-lastT<DBL){lastK="";openDetail(key,pt);return}
+lastK=key;lastT=now;
+if(key==="x"){sel=null;selF=null}
+else if(key[0]==="f"){const id=Number(key.slice(1));sel=null;selF=selF===id?null:id}
+else{selF=null;sel=sel===key?null:key}
+R()});
+// tastiera: Invio evidenzia, Invio di nuovo sullo stesso elemento apre i dettagli
+$("g").addEventListener("keydown",e=>{const t=e.target.closest&&e.target.closest("[data-f],[data-e],[data-c]");
+if(t&&(e.key==="Enter"||e.key===" ")){e.preventDefault();
+const key=gkey(t),on=key==="x"||(key[0]==="f"?selF===Number(key.slice(1)):sel===key);
+if(on){const r=t.getBoundingClientRect();openDetail(key,{x:r.left+r.width/2,y:r.top+r.height/2})}
+else{lastK="";t.dispatchEvent(new MouseEvent("click",{bubbles:true}));
+const sk=key[0]==="f"?'[data-f="'+key.slice(1)+'"]':'[data-e="'+key+'"]',nn=$("g").querySelector(sk);if(nn)nn.focus()}}});
+
+// ---- finestra dei dettagli ----
+let dTok=0,lastFocus=null,dW=null;
+function closeDlg(){const d=$("dlg");if(d.hidden)return;d.hidden=true;document.body.classList.remove("dlgopen");dTok++;
+try{if(lastFocus&&lastFocus.focus)lastFocus.focus()}catch(e){}}
+function openDlg(html,pt,keep){const d=$("dlg"),cd=d.querySelector(".dcard"),was=!d.hidden;
+$("dbody").innerHTML=html;d.hidden=false;document.body.classList.add("dlgopen");
+if(!was){cd.classList.remove("grow");const r=cd.getBoundingClientRect();
+if(pt)cd.style.transformOrigin=(pt.x-r.left)+"px "+(pt.y-r.top)+"px";
+void cd.offsetWidth;cd.classList.add("grow");d.querySelector(".dx").focus()}
+if(!keep)cd.scrollTop=0}
+const dec=e=>`<button class="chip" data-d="${e.key}">${pa(e)}${esc(e.name)}</button>`;
+const dfc=f=>`<button class="chip" data-d="f${f.id}">${ckm(f.id)}${cv(f)?`<img class="po" src="${cov(cv(f),"cover_small")}" alt="">`:""}${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}</button>`;
+const fmtLong=t=>new Date(t*1000).toLocaleDateString("it-IT",{day:"numeric",month:"long",year:"numeric"});
+const dtext=(t,none)=>t?`<p class="ov dbio" id="dsum" data-src="${esc(t)}">${esc(trC.get(t)||t)}</p>`:`<p class="ov dbio">${none}</p>`;
+async function openDetail(key,pt,keep){
+if(!keep)lastFocus=document.activeElement;
+const my=++dTok;if(key==="x")key=cur.kind==="company"?cur.center.key:"f"+cur.id;
+openDlg('<p class="ov">Carico…</p>',pt);
+try{
+if(key[0]==="f"){const id=Number(key.slice(1));
+const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,platforms.abbreviation,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
+const d=(await tryApi("games",[`fields ${base},involved_companies.company.logo.image_id,${XF("similar_games")}; where id = ${id};`,`fields ${base},${XF("similar_games")}; where id = ${id};`]))[0];
+if(my!==dTok)return;if(!d)throw{code:"http"};
+dW=d;const here=cur.kind==="game"&&cur.id===id,o=cur.links.find(x=>x.f.id===id);
+const cm=new Map();(d.involved_companies||[]).forEach(ic=>{const c=ic.company;if(!c||!c.id)return;const m=cm.get(c.id)||{id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,dev:0,pub:0};if(ic.developer)m.dev=1;if(ic.publisher)m.pub=1;cm.set(c.id,m)});
+const ce=[...cm.values()].map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:roleOf(c.dev,c.pub)}));
+const devs=ce.filter(c=>c.role!=="Editore"),pubs=ce.filter(c=>c.role!=="Studio");
+const plat=(d.platforms||[]).map(p=>p.abbreviation).filter(Boolean).slice(0,8).join(" · ");
+const rate=d.total_rating?"★ "+Math.round(d.total_rating)+"/100 ("+(d.total_rating_count||0)+" voti)":"";
+const com=o?o.who.map(k=>(cur.E.find(x=>x.key===k)||{}).name).filter(Boolean).join(", "):"";
+openDlg(`<div class="dtop">${cv(d)?`<img class="dposter" src="${cov(cv(d),"cover_big")}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([d.first_release_date?fmtLong(d.first_release_date):"",...(d.genres||[]).map(g=>GIT[g.id]||g.name)])}${rate?`<p class="ov">${esc(rate)}</p>`:""}${plat?`<p class="ov"><span class="kd">Piattaforme:</span> ${esc(plat)}</p>`:""}</div></div>`+
+dtext(d.summary,"Trama non disponibile.")+
+(com?`<p class="ov"><b>In comune:</b> ${esc(com)}</p>`:"")+
+(devs.length?`<div class="k">Sviluppo</div><div>${devs.map(dec).join("")}</div>`:"")+
+(pubs.length?`<div class="k">Edizione</div><div>${pubs.map(dec).join("")}</div>`:"")+
+((d.similar_games||[]).length?`<div class="k">Simili secondo IGDB</div><div>${d.similar_games.filter(f=>f&&f.name).slice(0,8).map(dfc).join("")}</div>`:"")+
+`<div class="dact">${here?"":`<button class="go dgo" type="button" data-go="${key}">Scopri i legami</button>`}<button class="go dgo alt${isSeen(id)?" on":""}" type="button" data-seen="1">${isSeen(id)?"✓ Giocato":"Segna come giocato"}</button></div>`);
+if(d.summary)trInto("dsum",d.summary,5000)}
+else if(key[0]==="c"){const id=Number(key.slice(1));
+const d=(await tryApi("companies",[`fields name,description,start_date,country,logo.image_id,developed,published; where id = ${id};`,`fields name,description,start_date,country,developed,published; where id = ${id};`]))[0];
+if(!d)throw{code:"http"};
+const C={key,id,k:"c",name:d.name,logo:d.logo&&d.logo.image_id,role:roleOf((d.developed||[]).length>0,(d.published||[]).length>0)};
+const games=await knownOf(Object.assign({},C),null);
+if(my!==dTok)return;
+const here=cur.kind==="company"&&cur.id===id;
+openDlg(`<div class="dtop">${C.logo?`<img class="dposter logo" src="${logo(C.logo)}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([C.role,COUNTRY[d.country]])}${d.start_date?`<p class="ov">Fondata il ${esc(fmtLong(d.start_date))}</p>`:""}<p class="ov kd">${(d.developed||[]).length} giochi sviluppati · ${(d.published||[]).length} pubblicati</p></div></div>`+
+dtext(d.description,"Nessuna descrizione disponibile.")+
+`<div class="k">Giochi più noti</div><div>${games.slice(0,10).map(dfc).join("")||'<span class="kd">nessun gioco trovato</span>'}</div>`+
+(here?"":`<div class="dact"><button class="go dgo" type="button" data-go="${key}">Scopri i legami</button></div>`));
+if(d.description)trInto("dsum",d.description,5000)}
+else{const id=Number(key.slice(1)),name=GIT[id]||(cur.E.find(x=>x.key===key)||{}).name||"Genere";
+const games=await knownOf({k:"g",id},null);
+if(my!==dTok)return;
+openDlg(`<div class="dtop"><span class="dposter gen"><svg viewBox="-10 -10 20 20" aria-hidden="true">${gIcon(id)}</svg></span><div><h2 id="dt">${esc(name)}</h2>${tags(["Genere"])}<p class="ov">I giochi di questo genere più votati dalla comunità di IGDB.</p></div></div>`+
+`<div class="k">Giochi più noti</div><div>${games.slice(0,12).map(dfc).join("")||'<span class="kd">nessun gioco trovato</span>'}</div>`)}
+}catch(e){if(my===dTok){closeDlg();showErr(e)}}}
+function openSeen(pt,keep){if(!keep)lastFocus=document.activeElement;dTok++;
+const fmtS=t=>new Date(t).toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric"});
+openDlg(`<h2 id="dt">Giochi giocati</h2>`+(SEEN.length?`<p class="ov">${SEEN.length} ${SEEN.length>1?"giochi":"gioco"}</p><ul class="sl">${SEEN.map(x=>`<li>${poster(x.c,x.t)}<div><button class="l" data-d="f${x.id}">${esc(x.t)}${x.y?" ("+x.y+")":""}</button><div class="kd">segnato il ${fmtS(x.d)}</div></div><button class="rm" type="button" data-unseen="${x.id}" aria-label="Togli ${esc(x.t)} dai giocati">✕</button></li>`).join("")}</ul>`:`<p class="ov">Non hai ancora segnato nessun gioco. Apri un gioco e premi «Segna come giocato»: lo ritroverai qui e nel grafo con una spunta verde.</p>`)+`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo, nel browser o nell'app che stai usando.</p>`,pt,keep)}
+$("seenbtn").addEventListener("click",e=>openSeen({x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2}));
+updSeen();
+$("dlg").addEventListener("click",e=>{
+const sn=e.target.closest("[data-seen]");if(sn&&dW){toggleSeen(dW);const on=isSeen(dW.id);sn.classList.toggle("on",on);sn.textContent=on?"✓ Giocato":"Segna come giocato";return}
+const un=e.target.closest("[data-unseen]");if(un){const i=SEEN.findIndex(x=>x.id===Number(un.dataset.unseen));if(i>=0){SEEN.splice(i,1);store.set("gl_played",JSON.stringify(SEEN));updSeen();if(cur&&!$("film").hidden)R();openSeen(null,true)}return}
+if(e.target.closest(".dx")||e.target.classList.contains("dbk")){closeDlg();return}
+const g=e.target.closest("[data-go]");if(g){centre(g.dataset.go);return}
+const d=e.target.closest("[data-d]");if(d)openDetail(d.dataset.d,{x:e.clientX,y:e.clientY},true)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDlg()});
+
+// ---- suggerimenti mentre si scrive ----
+let sugT=0,sugN=0,sugL=[],sugI=-1;
+function sugHide(){$("sug").hidden=true;$("q").setAttribute("aria-expanded","false");sugI=-1}
+function sugKill(){clearTimeout(sugT);sugN++;sugHide()}
+function sugShow(L){sugL=L;sugI=-1;
+$("sug").innerHTML=L.map((e,i)=>`<li role="option" id="so${i}" data-si="${i}">${e.t==="c"?pa(cEnt(e)):poster(cv(e.f),e.f.name)}<div><div class="st">${e.t==="c"?esc(e.name):ckm(e.f.id)+esc(e.f.name)+(yr(e.f)?" ("+yr(e.f)+")":"")}</div><div class="kd">${e.t==="c"?roleOf(e.nd>0,e.np>0)+" · "+(e.nd+e.np)+" giochi":"Gioco"}</div></div></li>`).join("");
+$("sug").hidden=!L.length;$("q").setAttribute("aria-expanded",String(!!L.length))}
+function sugMark(i){sugI=i;$("sug").querySelectorAll("li").forEach((x,j)=>x.setAttribute("aria-selected",j===i?"true":"false"));
+const el=$("sug").children[i];if(el)el.scrollIntoView({block:"nearest"});$("q").setAttribute("aria-activedescendant",i>=0?"so"+i:"")}
+function sugPick(i){const e=sugL[i];if(!e)return;sugKill();$("res").innerHTML="";$("q").blur();if(e.t==="c")loadCompany(e.id);else loadGame(e.f.id)}
+$("q").addEventListener("input",()=>{clearTimeout(sugT);const v=$("q").value.trim();
+if(v.length<2){sugKill();return}
+sugT=setTimeout(async()=>{const my=++sugN;
+try{const L=(await fetchResults(v)).slice(0,7);if(my!==sugN||$("q").value.trim()!==v)return;sugShow(L)}catch(e){if(my===sugN)sugHide()}},300)});
+$("q").addEventListener("keydown",e=>{const open=!$("sug").hidden;
+if(e.key==="ArrowDown"&&open){e.preventDefault();sugMark((sugI+1)%sugL.length)}
+else if(e.key==="ArrowUp"&&open){e.preventDefault();sugMark(sugI<=0?sugL.length-1:sugI-1)}
+else if(e.key==="Escape"&&open){sugKill()}
+else if(e.key==="Enter"&&open&&sugI>=0){e.preventDefault();e.stopImmediatePropagation();sugPick(sugI)}});
+$("sug").addEventListener("click",e=>{const li=e.target.closest("[data-si]");if(li)sugPick(Number(li.dataset.si))});
+$("seg").addEventListener("click",e=>{const b=e.target.closest("[data-fl]");if(!b)return;FILT=b.dataset.fl;sugKill();
+$("seg").querySelectorAll("button[data-fl]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
+$("q").placeholder={all:"Cerca un videogioco, uno studio o un editore",game:"Cerca un videogioco",company:"Cerca uno studio o un editore"}[FILT];
+if($("q").value.trim()&&$("q").value.trim()===lastQ)cerca()});
 $("back").addEventListener("click",()=>{show("home");try{history.replaceState(null,"",location.pathname)}catch(e){}if(!$("soon").innerHTML&&!$("gp").innerHTML)loadHome()});
 $("go").addEventListener("click",cerca);
 $("q").addEventListener("keydown",e=>{if(e.key==="Enter")cerca()});
-{const m=location.hash.match(/^#g(\d+)$/);if(m)loadGame(Number(m[1]));else{show("home");loadHome()}}
+{const m=location.hash.match(/^#([gc])(\d+)$/);if(m){if(m[1]==="g")loadGame(Number(m[2]));else loadCompany(Number(m[2]))}else{show("home");loadHome()}}
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script>
 </body>

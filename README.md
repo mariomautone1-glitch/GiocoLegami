@@ -1,7 +1,8 @@
 # GiocoLegami
 
 Scegli un videogioco e scopri come è legato ad altri giochi attraverso gli studi di sviluppo, gli editori e i generi che condividono.
-Tocca una casa o un genere per vedere i suoi giochi, tocca un gioco per aprirlo.
+Cerca un gioco, uno studio o un editore. Nel grafo un tocco evidenzia i legami, due tocchi aprono i dettagli.
+Segna i giochi che hai giocato: l'elenco resta salvato sul tuo dispositivo.
 
 - **Sito:** https://mariomautone1-glitch.github.io/giocolegami/
 - **Dati e immagini:** [IGDB.com](https://www.igdb.com), tramite il servizio Cloudflare `giocolegami`, che tiene nascoste le credenziali Twitch.
