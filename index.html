@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GiocoLegami</title>
+<meta name="description" content="Scopri come sono collegati i videogiochi attraverso studi di sviluppo, editori e generi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>
+/* Palette di CineLegami: Olivine, Buff, Sandy Brown, Wintergreen Dream, Bittersweet Shimmer */
+:root{
+--bg:#f6f3e2;--card:#fffdf4;--fg:#1d2a30;--mut:#5a6a66;--bd:#e3dcb6;--grid:#ebe4c4;--edge:#c3cfa8;
+--game:#BC4B51;--stu:#5B8E7D;--edi:#F4A259;--gen:#8CB369;--acc:#F4E285;--hl:#BC4B51;--link:#BC4B51;
+--disp:"Chakra Petch","Arial Narrow",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root{--bg:#121a1f;--card:#1a242a;--fg:#f4eed4;--mut:#a3b3ad;--bd:#2e3d40;--grid:#1f2b30;--edge:#40564f;--hl:#F4E285;--link:#e2787d;color-scheme:dark}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:960px;margin:0 auto;padding-block:24px 44px}
+h1{font-family:var(--disp);font-weight:700;font-size:2.3rem;letter-spacing:.01em;margin:0}
+h1 span{color:var(--game)}
+h2{font-family:var(--disp);font-weight:700;font-size:1.3rem;margin:0;text-wrap:balance}
+h3{font-family:var(--disp);font-size:1.15rem;margin:28px 0 8px}
+p.sub{margin:4px 0 16px;color:var(--mut);max-width:62ch}
+.srch{position:relative}
+.row{display:flex;gap:8px}
+input{flex:1;min-width:0;font:inherit;padding:12px 16px;border:2px solid var(--bd);border-radius:10px;background:var(--card);color:var(--fg)}
+.go{font-family:var(--disp);font-weight:700;font-size:1rem;letter-spacing:.04em;padding:0 22px;border:0;border-radius:10px;background:var(--game);color:#fff;cursor:pointer;box-shadow:0 3px 0 #8a3338}
+.go:active{transform:translateY(2px);box-shadow:0 1px 0 #8a3338}.go:disabled{opacity:.6;cursor:wait}
+input:focus-visible,button:focus-visible,g[role=button]:focus-visible{outline:3px solid var(--stu);outline-offset:2px}
+#res{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:5;background:var(--card);border:1px solid var(--bd);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:6px;max-height:60vh;overflow:auto}
+#res button{display:flex;gap:12px;align-items:center;width:100%;padding:6px 8px;border:0;border-radius:8px;background:none;color:var(--fg);font:inherit;text-align:left;cursor:pointer}
+#res button:hover,#res button:focus-visible{background:var(--grid)}
+#msg{color:var(--mut);min-height:1.5em;font-size:.9rem;margin:6px 2px 0}
+.box{border:1px solid var(--bd);border-radius:14px;margin-top:10px;overflow-x:auto;background-color:var(--card);
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+svg#g{width:100%;min-width:760px;height:auto;display:block}
+svg text{fill:var(--fg);font-size:16px;font-family:var(--body);paint-order:stroke;stroke:var(--card);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+svg text.in{fill:#14251f;stroke:none;font-size:13px;font-weight:700;font-family:var(--disp)}
+svg text.in.w{fill:#fff}
+g.n{transform-box:fill-box;transform-origin:center;transition:transform .18s ease}
+g.n:hover,g.n:focus-visible{transform:scale(1.45)}
+@media (prefers-reduced-motion:reduce){g.n{transition:none}}
+.leg{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:.85rem;color:var(--mut);margin-top:10px}
+.leg span{display:inline-flex;align-items:center;gap:6px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-top:16px}
+.hd{display:flex;gap:16px;align-items:center}
+.hd>div{min-width:0}
+.k{color:var(--mut);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;margin:14px 0 2px}
+.tag{display:inline-block;padding:1px 10px;border-radius:6px;background:var(--acc);color:#3b3510;font-size:.8rem;font-weight:600;margin:4px 6px 0 0}
+.sum{max-width:68ch;margin:6px 0 0;color:var(--fg)}
+.tile{flex:none;display:grid;place-items:center;width:34px;height:46px;border-radius:5px;color:#fff;background:var(--game) center/cover no-repeat;font:700 .8rem var(--disp);overflow:hidden}
+.tile.big{width:84px;height:112px;font-size:1.2rem;border-radius:8px}
+.tile.sm{width:22px;height:30px;font-size:.55rem;margin-right:8px;border-radius:3px}
+.tile.img{color:transparent}
+.dot{display:inline-grid;place-items:center;width:22px;height:22px;color:#14251f;font:700 .6rem var(--disp);margin-right:6px;flex:none}
+.dot.big{width:56px;height:56px;font-size:1.05rem;margin:0}
+.s-c{border-radius:50%}.s-e{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}.s-g{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.chip{display:inline-flex;align-items:center;margin:4px 8px 0 0;padding:2px 12px 2px 2px;border:1px solid var(--bd);border-radius:8px;background:var(--card);font:inherit;font-size:.85rem;color:var(--fg);cursor:pointer}
+.chip:hover{border-color:var(--stu)}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd)}
+li>div{min-width:0}
+button.l{font:700 1rem var(--disp);color:var(--link);background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.note{margin-top:28px;font-size:.82rem;color:var(--mut);max-width:70ch}
+.note a{color:var(--link)}
+@media(max-width:480px){h1{font-size:1.9rem}.tile.big{width:64px;height:86px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Gioco<span>Legami</span></h1>
+<p class="sub">Scegli un videogioco e scopri come è legato ad altri giochi attraverso le case che lo hanno sviluppato e pubblicato e i generi che condividono.</p>
+<div class="srch">
+<div class="row"><input id="q" placeholder="Cerca un videogioco, per esempio Hollow Knight" autocomplete="off" aria-label="Titolo del videogioco"><button id="go" class="go" type="button">Cerca</button></div>
+<div id="res" hidden></div>
+</div>
+<p id="msg" aria-live="polite"></p>
+<div class="box"><svg id="g" viewBox="0 0 1000 700" role="img" aria-label="Grafo dei collegamenti"></svg></div>
+<div class="leg">
+<span><b class="tile" style="width:14px;height:18px;border-radius:3px"></b>Gioco</span>
+<span><b class="dot s-c" style="width:15px;height:15px;margin:0;background:var(--stu)"></b>Studio di sviluppo</span>
+<span><b class="dot s-e" style="width:16px;height:16px;margin:0;background:var(--edi)"></b>Editore</span>
+<span><b class="dot s-g" style="width:16px;height:16px;margin:0;background:var(--gen)"></b>Genere</span>
+<span><svg width="26" height="8" aria-hidden="true"><line x1="0" y1="4" x2="26" y2="4" stroke="var(--mut)" stroke-width="2" stroke-dasharray="4 4"/></svg>Simile secondo IGDB</span>
+</div>
+<p class="sub" style="margin-top:6px">Tocca una casa o un genere per vedere altri suoi giochi, tocca un gioco per aprirlo.</p>
+<div id="info"></div>
+<div id="p"></div>
+<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Le trame sono in inglese, come nel database.</p>
+</main>
+<script>
+// Indirizzo del servizio Cloudflare che nasconde le credenziali di IGDB
+const API="https://giocolegami.mariomautone1.workers.dev";
+
+const G={},CN={},GN={};let cur=null,sel=null,hs=false;
+const $=i=>document.getElementById(i),PI=Math.PI,CX=500,CY=350;
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ST=new Set("il lo la le i gli un una di a the of and e".split(" "));
+const ini=s=>{const w=String(s).replace(/[:.,'’&-]/g," ").split(/\s+/).filter(Boolean),b=w.filter(x=>!ST.has(x.toLowerCase())),u=b.length?b:w;return u.length?(u.length>1?u[0][0]+u[u.length-1][0]:u[0].slice(0,2)).toUpperCase():"?"};
+const cut=(s,n)=>s.length>n?s.slice(0,n-1)+"…":s;
+const img=(id,size)=>id?`https://images.igdb.com/igdb/image/upload/t_${size}/${id}.jpg`:"";
+const uniq=a=>[...new Set(a)];
+const msg=t=>$("msg").textContent=t||"";
+
+async function q(ep,body){
+  const r=await fetch(API+"/"+ep,{method:"POST",headers:{"Content-Type":"text/plain"},body});
+  if(!r.ok)throw new Error("IGDB "+r.status);
+  return r.json();
+}
+const qs=s=>String(s).replace(/["\\]/g," ");
+
+// archivio dei giochi visti finora
+function addGame(o){
+  if(!o||!o.id)return null;
+  const g=G[o.id]||(G[o.id]={id:o.id,n:"",y:"",c:"",rc:0,dev:[],pub:[],gen:[],sim:[]});
+  if(o.name)g.n=o.name;
+  if(o.first_release_date)g.y=String(new Date(o.first_release_date*1000).getUTCFullYear());
+  if(o.cover&&o.cover.image_id)g.c=o.cover.image_id;
+  if(o.total_rating_count)g.rc=o.total_rating_count;
+  if(o.total_rating)g.rt=Math.round(o.total_rating);
+  if(o.summary)g.sum=o.summary;
+  if(Array.isArray(o.genres))o.genres.forEach(x=>{const id=typeof x==="object"?x.id:x;if(typeof x==="object"&&x.name)GN[id]=x.name;if(!g.gen.includes(id))g.gen.push(id)});
+  return g;
+}
+async function loadGame(id){
+  const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
+  let r;
+  try{r=await q("games",`fields ${base},similar_games.name,similar_games.first_release_date,similar_games.cover.image_id,similar_games.genres,similar_games.total_rating_count; where id = ${id};`)}
+  catch(e){r=await q("games",`fields ${base},similar_games; where id = ${id};`)}
+  const o=r[0];if(!o)throw new Error("non trovato");
+  const g=addGame(o);g.dev=[];g.pub=[];
+  (o.involved_companies||[]).forEach(ic=>{const c=ic.company;if(!c||!c.id)return;CN[c.id]=c.name;
+    if(ic.developer&&!g.dev.includes(c.id))g.dev.push(c.id);
+    if(ic.publisher&&!g.pub.includes(c.id))g.pub.push(c.id)});
+  g.sim=(o.similar_games||[]).map(s=>typeof s==="object"?(addGame(s),s.id):s).slice(0,10);
+  g.full=true;return g;
+}
+
+// entità attorno al gioco
+const comp=g=>uniq([...g.dev,...g.pub]);
+const role=(g,id)=>g.dev.includes(id)&&g.pub.includes(id)?"Studio ed editore":g.dev.includes(id)?"Studio":"Editore";
+const ents=g=>[...comp(g).map(id=>({id,k:"c",n:CN[id]||"Casa",r:role(g,id)})),...g.gen.map(id=>({id,k:"g",n:GN[id]||"Genere",r:"Genere"}))];
+const key=e=>e.k+e.id;
+const has=(g,e)=>e.k==="c"?g.dev.includes(e.id)||g.pub.includes(e.id):g.gen.includes(e.id);
+const col=e=>e.k==="g"?"var(--gen)":e.r==="Editore"?"var(--edi)":"var(--stu)";
+const shp=e=>e.k==="g"?"s-g":e.r==="Editore"?"s-e":"s-c";
+const ty=g=>esc(g.n)+(g.y?` (${esc(g.y)})`:"");
+
+// disegno
+let clip=0;
+function node(e,q){const on=hs&&key(e)===sel,r=on?27:22,[x,y]=q;let s;
+  if(e.k==="g"){const R=r*1.15;s=`<polygon points="${[0,1,2,3,4,5].map(i=>{const a=i*PI/3;return(x+R*Math.cos(a)).toFixed(1)+","+(y+R*Math.sin(a)).toFixed(1)}).join(" ")}"`}
+  else if(e.r==="Editore"){const R=r*1.3;s=`<path d="M${x} ${y-R}L${x+R} ${y}L${x} ${y+R}L${x-R} ${y}Z"`}
+  else s=`<circle cx="${x}" cy="${y}" r="${r}"`;
+  return `<g class="n" data-e="${key(e)}" role="button" tabindex="0" aria-label="${esc(e.r+": "+e.n)}" style="cursor:pointer"><title>${esc(e.n)}</title>${s} fill="${col(e)}" stroke="${on?"var(--fg)":"var(--card)"}" stroke-width="4"/><text class="in" x="${x}" y="${y+5}" text-anchor="middle">${esc(ini(e.n))}</text></g>`}
+function cart(g,q,k,go){const w=16*k,h=22*k,[x,y]=q,id="c"+(clip++);
+  const pic=g.c?`<clipPath id="${id}"><rect x="${x-w}" y="${y-h}" width="${2*w}" height="${2*h}" rx="5"/></clipPath><image href="${img(g.c,k>1?"cover_big":"cover_small")}" x="${x-w}" y="${y-h}" width="${2*w}" height="${2*h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`
+    :`<text class="in w" x="${x}" y="${y+6}" text-anchor="middle">${esc(ini(g.n))}</text>`;
+  return `<g ${go?`class="n" data-f="${g.id}" role="button" tabindex="0" aria-label="${esc(g.n)}" style="cursor:pointer"`:""}><title>${esc(g.n)}</title><rect x="${x-w}" y="${y-h}" width="${2*w}" height="${2*h}" rx="5" fill="var(--game)"/>${pic}<rect x="${x-w}" y="${y-h}" width="${2*w}" height="${2*h}" rx="5" fill="none" stroke="var(--card)" stroke-width="3"/></g>`}
+const ln=(a,b,on,dash)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${hs&&on?"var(--hl)":dash?"var(--mut)":"var(--edge)"}" stroke-width="${hs&&on?4:1.6}"${dash?' stroke-dasharray="5 5"':""} opacity="${hs&&!on?.18:dash?.6:1}"/>`;
+function lab(p,txt,off,bold){const dx=p[0]-CX,dy=p[1]-CY,m=Math.abs(dx)<30;
+  return `<text x="${(p[0]+(m?0:dx>0?off:-off)).toFixed(1)}" y="${(p[1]+(m?(dy>0?off+16:-off):6)).toFixed(1)}" text-anchor="${m?"middle":dx>0?"start":"end"}"${bold?' font-weight="700"':""}>${esc(txt)}</text>`}
+const ech=(e,extra)=>`<button class="chip" data-e="${key(e)}"><b class="dot ${shp(e)}" style="background:${col(e)}">${esc(ini(e.n))}</b>${esc(e.n)}${extra?` <span style="color:var(--mut)">&nbsp;${esc(extra)}</span>`:""}</button>`;
+const tile=(g,cls)=>g.c?`<b class="tile img ${cls||""}" style="background-image:url('${img(g.c,cls==="big"?"cover_big":"cover_small")}')" aria-hidden="true">${esc(ini(g.n))}</b>`:`<b class="tile ${cls||""}" aria-hidden="true">${esc(ini(g.n))}</b>`;
+const gch=g=>`<button class="chip" data-f="${g.id}">${tile(g,"sm")}${ty(g)}</button>`;
+const tags=a=>a.filter(Boolean).map(t=>`<span class="tag">${esc(t)}</span>`).join("");
+
+function R(){
+  if(!cur)return;clip=0;
+  const E=ents(cur);hs=!!sel&&E.some(e=>key(e)===sel);
+  const pos=(a,r)=>[CX+r*Math.cos(a),CY+r*Math.sin(a)],c=[CX,CY];
+  const hasSel=o=>o.s.some(e=>key(e)===sel)?1:0;
+  const O=Object.values(G).filter(g=>g!==cur&&g.n).map(g=>{const s=E.filter(e=>has(g,e)),sim=cur.sim.includes(g.id);
+    return{g,s,sim,w:s.reduce((a,e)=>a+(e.k==="c"?3:1),0)+(sim?2:0)}}).filter(o=>o.s.length||o.sim)
+    .sort((a,b)=>(hasSel(b)-hasSel(a))||b.w-a.w||(b.g.rc-a.g.rc));
+  const Og=O.slice(0,12),ep={},fp={};let s="";
+  E.forEach((e,i)=>ep[key(e)]=pos(-PI/2+i*2*PI/Math.max(E.length,1),140));
+  Og.forEach((o,j)=>fp[o.g.id]=pos(-PI/2+(j+.5)*2*PI/Og.length,275));
+  E.forEach(e=>s+=ln(c,ep[key(e)],key(e)===sel));
+  Og.forEach(o=>{o.s.forEach(e=>s+=ln(ep[key(e)],fp[o.g.id],key(e)===sel));if(!o.s.length)s+=ln(c,fp[o.g.id],false,true)});
+  E.forEach(e=>{const k=key(e);s+=node(e,ep[k])+lab(ep[k],cut(e.n,26),34,hs&&k===sel)});
+  Og.forEach(o=>s+=cart(o.g,fp[o.g.id],1,1)+lab(fp[o.g.id],cut(o.g.n,24),28));
+  s+=cart(cur,c,1.6,0)+`<text x="${CX}" y="${CY+62}" text-anchor="middle" font-weight="700" style="font-size:18px">${esc(cut(cur.n,34))}${cur.y?` (${esc(cur.y)})`:""}</text>`;
+  $("g").innerHTML=s;
+  const cE=E.filter(e=>e.k==="c"),gE=E.filter(e=>e.k==="g"),sims=cur.sim.map(id=>G[id]).filter(g=>g&&g.n);
+  let i=`<section class="card"><div class="hd">${tile(cur,"big")}<div><h2>${esc(cur.n)}</h2>${tags([cur.y,cur.rt&&("Voto medio "+cur.rt+"/100")])}</div></div>`+
+    (cur.sum?`<div class="k">Trama (in inglese)</div><p class="sum">${esc(cut(cur.sum,600))}</p>`:"")+
+    (cur.dev.length?`<div class="k">Sviluppo</div>${cur.dev.map(id=>ech(cE.find(e=>e.id===id))).join("")}`:"")+
+    (cur.pub.length?`<div class="k">Edizione</div>${cur.pub.map(id=>ech(cE.find(e=>e.id===id))).join("")}`:"")+
+    (gE.length?`<div class="k">Genere</div>${gE.map(e=>ech(e)).join("")}`:"")+
+    (sims.length?`<div class="k">Simili secondo IGDB</div><div>${sims.map(gch).join("")}</div>`:"")+`</section>`;
+  if(sel){const e=E.find(x=>key(x)===sel)||selE;
+    if(e){const A=Object.values(G).filter(g=>g!==cur&&g.n&&has(g,e));
+      if(e.k==="c"){A.sort((a,b)=>b.rc-a.rc);
+        const nd=A.filter(g=>g.dev.includes(e.id)).length,np=A.filter(g=>g.pub.includes(e.id)).length;
+        i=`<section class="card" style="border-color:${col(e)}"><div class="hd"><b class="dot big ${shp(e)}" style="background:${col(e)}">${esc(ini(e.n))}</b><div><h2>${esc(e.n)}</h2>${tags([e.r])}</div></div>`+
+          `<div class="k">Altri suoi giochi più noti</div><div>${A.slice(0,16).map(gch).join("")||"<span style='color:var(--mut)'>Sto cercando…</span>"}</div>`+
+          (A.length?`<p class="sub" style="margin:8px 0 0">${nd} come studio, ${np} come editore, tra quelli caricati.</p>`:"")+`</section>`+i}
+      else{const sh=g=>g.gen.filter(x=>cur.gen.includes(x)).length;A.sort((a,b)=>sh(b)-sh(a)||b.rc-a.rc);
+        i=`<section class="card" style="border-color:var(--gen)"><div class="hd"><b class="dot big s-g" style="background:var(--gen)">${esc(ini(e.n))}</b><div><h2>${esc(e.n)}</h2>${tags(["Genere"])}</div></div>`+
+          `<div class="k">Giochi simili per tipologia</div><div>${A.slice(0,16).map(gch).join("")||"<span style='color:var(--mut)'>Sto cercando…</span>"}</div></section>`+i}}}
+  $("info").innerHTML=i;
+  $("p").innerHTML=`<h3>Giochi collegati a ${esc(cur.n)}</h3>${O.length>12?`<p class="sub">Nel grafo compaiono i 12 più collegati, prima quelli che condividono una casa: qui l'elenco completo.</p>`:""}<ul>`+
+    O.map(o=>`<li>${tile(o.g)}<div><button class="l" data-f="${o.g.id}">${ty(o.g)}</button><div>${o.s.map(e=>ech(e)).join("")}${o.sim?tags(["Simile secondo IGDB"]):""}</div></div></li>`).join("")+"</ul>";
+}
+let selE=null;
+
+// azioni
+async function open(id){
+  sel=null;selE=null;msg("Carico il gioco…");
+  try{const g=G[id]&&G[id].full?G[id]:await loadGame(id);cur=g;msg("");R();
+    try{history.replaceState(null,"","#g"+id)}catch(e){}
+    $("q").value="";window.scrollTo({top:0,behavior:"smooth"})}
+  catch(e){msg("Non riesco a caricare questo gioco. Controlla la connessione e riprova.")}
+}
+const DONE=new Set();
+async function more(e){
+  const id=e.k==="g"?key(e)+"|"+cur.id:key(e);if(DONE.has(id))return;DONE.add(id);
+  msg(e.k==="c"?`Cerco altri giochi di ${e.n}…`:`Cerco giochi simili per genere…`);
+  try{
+    if(e.k==="c"){const f="name,first_release_date,cover.image_id,total_rating_count,genres";
+      const r=await q("companies",`fields developed.${f.split(",").join(",developed.")},published.${f.split(",").join(",published.")}; where id = ${e.id};`);
+      const o=r[0]||{};
+      (o.developed||[]).forEach(x=>{const g=addGame(x);if(g&&!g.dev.includes(e.id))g.dev.push(e.id)});
+      (o.published||[]).forEach(x=>{const g=addGame(x);if(g&&!g.pub.includes(e.id))g.pub.push(e.id)});}
+    else{const others=cur.gen.filter(x=>x!==e.id);
+      const r=await q("games",`fields name,first_release_date,cover.image_id,total_rating_count,genres; where genres = (${e.id}) & id != ${cur.id} & total_rating_count > 30 & version_parent = null; sort total_rating_count desc; limit 40;`);
+      r.forEach(addGame);}
+    msg("");R();
+  }catch(x){DONE.delete(id);msg("Ricerca non riuscita. Tocca di nuovo per riprovare.")}
+}
+async function cerca(){
+  const v=$("q").value.trim();if(!v)return;
+  const b=$("go");b.disabled=true;msg("Cerco…");
+  try{const r=await q("games",`search "${qs(v)}"; fields name,first_release_date,cover.image_id; where version_parent = null; limit 10;`);
+    msg(r.length?"":"Nessun gioco trovato con questo titolo.");
+    const box=$("res");
+    box.innerHTML=r.map(o=>{const g=addGame(o);return `<button type="button" data-f="${g.id}">${tile(g)}<span>${ty(g)}</span></button>`}).join("");
+    box.hidden=!r.length;
+  }catch(e){msg("Ricerca non riuscita. Riprova tra poco.")}
+  finally{b.disabled=false}
+}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]"),p=e.target.closest("[data-e]");
+  if(!e.target.closest(".srch"))$("res").hidden=true;
+  if(f){$("res").hidden=true;open(Number(f.dataset.f))}
+  else if(p){const k=p.dataset.e;
+    if(sel===k){sel=null;selE=null;R();return}
+    sel=k;selE=ents(cur).find(x=>key(x)===k)||null;
+    if(!selE){const kind=k[0],id=Number(k.slice(1));selE={id,k:kind,n:kind==="c"?CN[id]:GN[id],r:kind==="c"?"Casa":"Genere"}}
+    R();more(selE);}
+});
+document.addEventListener("keydown",e=>{const t=e.target;
+  if((e.key==="Enter"||e.key===" ")&&t.matches&&t.matches("g[role=button]")){e.preventDefault();t.dispatchEvent(new MouseEvent("click",{bubbles:true}))}
+  if(e.key==="Escape")$("res").hidden=true});
+$("go").addEventListener("click",cerca);
+$("q").addEventListener("keydown",e=>{if(e.key==="Enter")cerca()});
+
+// avvio: gioco nell'indirizzo, altrimenti Elden Ring
+(async()=>{
+  const m=location.hash.match(/^#g(\d+)$/);
+  if(m)return open(Number(m[1]));
+  msg("Carico il primo gioco…");
+  try{const r=await q("games",`search "Elden Ring"; fields name; where version_parent = null; limit 1;`);
+    if(r[0])open(r[0].id);else msg("Cerca un gioco per iniziare.")}
+  catch(e){msg("Il servizio dei dati non risponde. Riprova tra qualche minuto.")}
+})();
+</script>
+</body>
+</html>
