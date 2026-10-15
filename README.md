@@ -10,7 +10,17 @@ Segna i giochi che hai giocato: l'elenco resta salvato sul tuo dispositivo.
 ## File
 
 - `index.html`: tutto il sito. L'indirizzo del servizio Cloudflare è alla riga `const API=...`.
+- `logo-scritta.png` e `logo-simbolo.png`: il logo.
 - `manifest.webmanifest`, `sw.js` e le tre icone: servono per installare il sito sul telefono come un'app.
+- `giocolegami-supabase.sql`: crea nel database le tabelle per giocati, voti e recensioni (da eseguire una volta).
+
+## Account, voti e recensioni
+
+GiocoLegami usa lo stesso progetto Supabase di CineLegami: un solo account vale per entrambi i siti.
+
+1. Supabase, SQL Editor, New query: incolla `giocolegami-supabase.sql` e premi Run.
+2. Supabase, Authentication, URL Configuration, Redirect URLs: aggiungi `https://mariomautone1-glitch.github.io/giocolegami/`.
+   Serve perché i link delle email (conferma e nuova password) riportino su GiocoLegami.
 
 Il servizio risponde solo alle richieste che arrivano da `https://mariomautone1-glitch.github.io`.
 

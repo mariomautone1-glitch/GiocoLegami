@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d1512">
+<meta name="theme-color" content="#0d0d0e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -11,17 +11,18 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="GiocoLegami">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.igdb.com https://store-images.s-microsoft.com https://*.steamstatic.com; connect-src 'self' https://giocolegami.mariomautone1.workers.dev https://*.supabase.co; worker-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>GiocoLegami</title>
 <meta name="description" content="Scopri i collegamenti tra i videogiochi: studi di sviluppo, editori e generi.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#0d1512;--card:#15211d;--fg:#f3efdc;--mut:#9fb2a8;--bd:#2a3b34;--film:#BC4B51;--film-t:#E8858A;--dir:#5B8E7D;--dir-t:#93cbb8;--act:#F4A259;--gen:#8CB369;--hl:#8CB369;--acc:#F4E285;--edge:#3f564b}
+:root{color-scheme:dark;--bg:#0d0d0e;--card:#18181b;--fg:#f6f0e6;--mut:#a69f94;--bd:#2d2c30;--film:#f94632;--film-t:#ff8a73;--dir:#25a0e6;--dir-t:#7cc6f2;--act:#9d65e6;--gen:#36d277;--hl:#26c0c4;--acc:#fac022;--edge:#4a4850}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}
 main{max-width:900px;margin:0 auto;padding:max(22px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
-h1{font-family:Cinzel,"Iowan Old Style","Palatino Linotype",Georgia,serif;font-weight:800;font-size:3rem;letter-spacing:.07em;text-align:center;color:var(--acc);text-shadow:0 0 22px rgba(244,226,133,.28);margin:6px 0 4px}
-h2{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;font-size:1.2rem;margin:26px 0 6px}
+h1{margin:6px 0 4px;text-align:center;line-height:0}
+.logo{width:min(80vw,380px);height:auto}
+h2{font-weight:800;font-size:1.2rem;margin:26px 0 6px}
 p.sub{margin:0 0 18px;color:var(--mut);text-align:center}
 h2+p.sub,#p p.sub{text-align:left}
 a{color:var(--dir-t)}
@@ -31,10 +32,10 @@ input:focus-visible,button:focus-visible{outline:3px solid var(--dir);outline-of
 .go{font:inherit;font-weight:600;padding:0 22px;border:0;border-radius:999px;background:var(--film);color:#fff;cursor:pointer}
 .go:disabled{opacity:.6;cursor:wait}
 #msg{color:var(--mut);min-height:1.4em;font-size:.9rem;margin:6px 4px 0}
-.box{border:1px solid var(--bd);border-radius:16px;margin-top:12px;overflow-x:auto;background:#0a110f}
+.box{border:1px solid var(--bd);border-radius:16px;margin-top:12px;overflow-x:auto;background:#09090a}
 svg{width:100%;min-width:760px;height:auto;display:block}
-svg text{fill:var(--fg);font-size:17px;paint-order:stroke;stroke:#0a110f;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
-svg text.in{fill:#14251f;stroke:none;font-size:14px;font-weight:700}
+svg text{fill:var(--fg);font-size:17px;paint-order:stroke;stroke:#09090a;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+svg text.in{fill:#121014;stroke:none;font-size:14px;font-weight:700}
 svg text.in.f{fill:#fff}
 .n{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .2s}
 .n[data-e]:focus-visible{transform:scale(2.6)}
@@ -46,7 +47,7 @@ svg text.in.f{fill:#fff}
 .n:hover + .lb,.n:focus-visible + .lb{transform:translate(var(--sx,0px),var(--sy,0px));opacity:1}
 @media(prefers-reduced-motion:reduce){.n,.lb{transition:none}}
 .n.on{filter:drop-shadow(0 0 9px var(--hl))}
-.n.ctr{cursor:default;filter:drop-shadow(0 0 18px rgba(244,226,133,.38))}
+.n.ctr{cursor:default;filter:drop-shadow(0 0 18px rgba(250,192,34,.38))}
 .n.ctr:hover{transform:none}
 g[tabindex]:focus-visible{outline:3px solid var(--acc);outline-offset:4px;border-radius:8px}
 @media(prefers-reduced-motion:no-preference){
@@ -61,7 +62,6 @@ g[tabindex]:focus-visible{outline:3px solid var(--acc);outline-offset:4px;border
 .n.tap{filter:drop-shadow(0 0 8px var(--acc))}
 @media(max-width:700px){
 main{padding:max(16px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(32px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}
-h1{font-size:2.1rem;letter-spacing:.05em}
 .box{overflow:hidden}
 svg{min-width:0}
 svg .ttl{display:none}
@@ -84,14 +84,14 @@ li{gap:10px}
 .hd h2{margin:0}
 .k{color:var(--mut);font-size:.82rem;margin:14px 0 2px}
 .ov{margin:10px 0 0;font-size:.92rem}
-.tag{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--acc);color:#3b3510;font-size:.8rem;font-weight:600;margin:4px 6px 0 0}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--acc);color:#3a2806;font-size:.8rem;font-weight:600;margin:4px 6px 0 0}
 .tag.sim{background:none;color:var(--acc);border:1px dashed var(--acc)}
 ul{list-style:none;margin:0;padding:0}
 li{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--bd)}
 li>div{min-width:0}
 .fa{flex:none;display:grid;place-items:center;width:40px;height:56px;border-radius:6px;color:#fff;background:var(--film);font-size:.8rem;font-weight:700;object-fit:cover}
 .fa.big{width:66px;height:94px;font-size:1rem}
-.pa{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#14251f;font-size:.62rem;font-weight:700;margin-right:6px;object-fit:contain;background:#f3efdc;border:2px solid var(--dir);flex:none}
+.pa{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;color:#121014;font-size:.62rem;font-weight:700;margin-right:6px;object-fit:contain;background:#f6f0e6;border:2px solid var(--dir);flex:none}
 .pa.ini{background:var(--dir)}
 .pa.pub{border-color:var(--act)}.pa.pub.ini{background:var(--act)}
 .pa.gen{border-color:var(--gen);background:var(--gen);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);border-radius:0}
@@ -113,7 +113,7 @@ button.l{font:inherit;font-weight:600;font-size:1rem;color:var(--film-t);backgro
 .link{font:inherit;font-size:.82rem;color:var(--dir-t);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 .seg{display:flex;gap:8px;flex-wrap:wrap;margin:10px 2px 0}
 .seg button{font:inherit;font-size:.85rem;padding:5px 14px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--mut);cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--acc);color:#3b3510;border-color:var(--acc);font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--acc);color:#3a2806;border-color:var(--acc);font-weight:600}
 .kd{color:var(--mut);font-size:.78rem}
 .chip .kd{margin-left:5px}
 svg{touch-action:manipulation;-webkit-user-select:none;user-select:none}
@@ -126,9 +126,9 @@ body.dlgopen{overflow:hidden}
 .dx{position:absolute;top:8px;right:10px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:var(--fg);font-size:1.5rem;line-height:1;cursor:pointer}
 .dx:hover{background:rgba(255,255,255,.16)}
 .dtop{display:flex;gap:18px;align-items:flex-start;padding-right:30px}
-.dposter{flex:none;width:140px;aspect-ratio:2/3;border-radius:10px;object-fit:cover;background:#0a110f;border:1px solid var(--bd)}
+.dposter{flex:none;width:140px;aspect-ratio:2/3;border-radius:10px;object-fit:cover;background:#09090a;border:1px solid var(--bd)}
 .dposter.ph{display:grid;place-items:center;font-size:1.6rem;font-weight:700;color:var(--fg)}
-.dcard h2{margin:0 0 4px;font-family:Cinzel,"Iowan Old Style",Georgia,serif;font-size:1.5rem}
+.dcard h2{margin:0 0 4px;font-family:inherit;font-weight:800;font-size:1.5rem}
 .dbio{white-space:pre-line;line-height:1.55}
 .dgo{margin-top:18px;padding:12px 22px}
 @media(prefers-reduced-motion:no-preference){
@@ -150,7 +150,7 @@ body.dlgopen{overflow:hidden}
 .dact{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .dact .dgo{margin-top:0}
 .go.alt{background:transparent;border:2px solid var(--hl);color:var(--hl)}
-.go.alt.on{background:var(--hl);color:#14251f}
+.go.alt.on{background:var(--hl);color:#121014}
 .sl li{align-items:center}
 .sl .fa{width:36px;height:52px}
 .rm{flex:none;margin-left:auto;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:var(--mut);font-size:1rem;cursor:pointer}
@@ -163,18 +163,73 @@ body.dlgopen{overflow:hidden}
 .sug .fa{width:30px;height:44px;font-size:.7rem}
 .sug .pa{width:34px;height:34px;margin:0;flex:none}
 .sug .st{font-weight:600;line-height:1.25}
-.dposter.logo{aspect-ratio:1;object-fit:contain;background:#f3efdc;padding:14px;border:3px solid var(--dir)}
+.dposter.logo{aspect-ratio:1;object-fit:contain;background:#f6f0e6;padding:14px;border:3px solid var(--dir)}
 .dposter.gen{display:grid;place-items:center;aspect-ratio:1;background:var(--gen);border:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);border-radius:0}
 .dposter.gen svg{width:62%;height:62%;min-width:0}
 .dbio{white-space:pre-line}
+.pc{position:relative}
+.rk{position:absolute;top:6px;left:6px;z-index:1;min-width:26px;height:26px;padding:0 6px;display:grid;place-items:center;border-radius:13px;background:rgba(9,9,10,.85);border:1px solid var(--acc);color:var(--acc);font-size:.8rem;font-weight:700}
+.wh{margin-top:2px}
+.wr{margin-top:8px}
+.wl{display:block;color:var(--mut);font-size:.8rem;margin-bottom:2px}
+.pv{display:inline-flex;align-items:center;gap:6px;margin:4px 8px 0 0;padding:3px 12px 3px 3px;border:1px solid var(--bd);border-radius:999px;font-size:.85rem;background:var(--card)}
+.pv img{width:26px;height:26px;border-radius:50%;object-fit:cover}
+.pv:not(:has(img)){padding-left:12px}
+.top{display:flex;justify-content:flex-end;min-height:30px}
+.accb{font:inherit;font-size:.85rem;max-width:60vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 14px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--fg);cursor:pointer}
+.accb[hidden]{display:none}
+.mark{display:none;width:min(44vw,190px);height:auto;margin:0 auto 4px}
+main:has(#home:not([hidden])) .mark,main:has(#seenview:not([hidden])) .mark{display:block}
+.os{display:inline-flex;flex-direction:row-reverse;vertical-align:middle;gap:2px;--oh:24px}
+.os.big{--oh:32px;gap:4px}.os.sm{--oh:15px}
+.os svg{display:block;height:var(--oh);width:var(--oh);fill:none;stroke:#6f695f;stroke-width:1.5;stroke-linejoin:round}
+.os button{background:none;border:0;padding:2px;margin:0;cursor:pointer;line-height:0;border-radius:6px}
+.os button.on svg,.os.rw button:hover svg,.os.rw button:hover~button svg{fill:var(--acc);stroke:#b97f12}
+.os.rw button:focus-visible{outline:2px solid var(--hl)}
+.os.ro{flex-direction:row}
+.os1{position:relative;display:inline-block}
+.osf{position:absolute;left:0;top:0;bottom:0;overflow:hidden}
+.osf svg{fill:var(--acc);stroke:#b97f12}
+.cm-sum{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cm-me{margin-top:8px}
+.cm-me textarea,.delin{display:block;width:100%;margin-top:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;font-size:1rem;resize:vertical}
+.rv{margin-top:8px}.rv li{align-items:flex-start}
+.rt{margin:4px 0 0;font-size:.92rem;white-space:pre-wrap;overflow-wrap:anywhere}
+.fl{display:block;margin-top:12px;font-size:.85rem;color:var(--mut)}
+.fl input:not([type=checkbox]){display:block;width:100%;margin-top:4px;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;font-size:1rem}
+.fl.ckb{display:flex;gap:8px;align-items:flex-start}.fl.ckb input{flex:none;width:20px;height:20px;padding:0;margin-top:1px;border-radius:5px;accent-color:var(--acc)}
+.err{color:#ff8a73;min-height:1.3em;font-size:.88rem;margin:8px 0}
+.svg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:12px}
+.svc{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.svp{padding:0;border:0;background:none;cursor:pointer;display:block}
+.svp img,.svp .ph{display:grid;place-items:center;width:100%;aspect-ratio:2/3;object-fit:cover;background:var(--bg);color:var(--mut);font-weight:700}
+.svb{padding:10px;display:flex;flex-direction:column;gap:4px;flex:1}
+.svr{margin:2px 0 0;font-size:.82rem;color:var(--mut);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.sva{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px}
+.svx{background:none;border:0;color:var(--mut);cursor:pointer;font-size:1rem;padding:4px 6px}
+.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--card);border:1px solid var(--hl);color:var(--fg);padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:.25s;z-index:80;max-width:90vw}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+#seenview[hidden]{display:none}
+@media(max-width:700px){.os.big{--oh:30px}}
+.av{width:var(--s,28px);height:var(--s,28px);border-radius:50%;object-fit:cover;vertical-align:middle;display:inline-grid;place-items:center;flex:none}
+.av.ph{background:var(--dir);color:#121014;font-weight:700;font-size:calc(var(--s,28px)*.5)}
+.accb .av{margin:-3px 4px -3px -8px}
+.phd{display:flex;gap:16px;align-items:center;margin-top:12px}
+#profview[hidden]{display:none}
+.rv.mine li{align-items:flex-start}
+.os svg,.top svg,.accb svg{min-width:0}
+a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-color:var(--acc)}
+.pv .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--bd);font-size:.65rem;font-weight:800}
 </style>
 </head>
 <body>
 <main>
-<h1>GiocoLegami</h1>
+<div class="top"><button id="accb" class="accb" type="button" hidden>Accedi</button></div>
+<img src="logo-simbolo.png" alt="" class="mark" width="440" height="439">
+<h1><img src="logo-scritta.png" alt="GiocoLegami" class="logo" width="760" height="144"></h1>
 <p class="sub">Scopri i collegamenti tra i videogiochi</p>
 <div class="row"><div class="sw"><input id="q" placeholder="Cerca un videogioco, uno studio o un editore" autocomplete="off" aria-label="Cosa vuoi cercare" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list"><ul id="sug" class="sug" role="listbox" hidden></ul></div><button id="go" class="go" type="button">Cerca</button></div>
-<div id="seg" class="seg" role="group" aria-label="Cosa cercare"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="game" aria-pressed="false">Giochi</button><button type="button" data-fl="company" aria-pressed="false">Studi ed editori</button><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri l'elenco dei giochi giocati">✓ Giocati <b id="seenn">0</b></button></div>
+<div id="seg" class="seg" role="group" aria-label="Cosa cercare"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="game" aria-pressed="false">Giochi</button><button type="button" data-fl="company" aria-pressed="false">Studi ed editori</button><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri i miei giocati">✓ Giocati <b id="seenn">0</b></button></div>
 <p id="msg" role="status" aria-live="polite"></p>
 <div id="res"></div>
 <section id="home" hidden>
@@ -182,7 +237,13 @@ body.dlgopen{overflow:hidden}
 <div id="s-gp"><h2>Novità Game Pass</h2><p class="sub">Aggiunti di recente al catalogo Xbox Game Pass</p><div id="gp" class="rail"></div></div>
 <div id="s-top"><h2>I più venduti</h2><p class="sub">La classifica di Steam in Italia, aggiornata ogni ora</p><div id="top" class="rail"></div></div>
 <div id="s-now"><h2>Usciti di recente</h2><div id="now" class="rail"></div></div>
+<h2>Di tendenza su PlayStation</h2><div id="t-ps" class="rail"></div>
+<h2>Di tendenza su Xbox</h2><div id="t-xbox" class="rail"></div>
+<h2>Di tendenza su Nintendo Switch</h2><div id="t-switch" class="rail"></div>
+<h2>Di tendenza su PC</h2><div id="t-pc" class="rail"></div>
 </section>
+<section id="seenview" hidden></section>
+<section id="profview" hidden></section>
 <div id="film" hidden>
 <button id="back" class="link" type="button">← Novità</button>
 <div class="box"><svg id="g" viewBox="0 0 980 660" role="img" aria-label="Grafo dei collegamenti"></svg></div>
@@ -195,8 +256,10 @@ body.dlgopen{overflow:hidden}
 <div id="info"></div>
 <div id="p"></div>
 </div>
-<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni sono tradotte automaticamente dall'inglese.</p>
+<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni sono tradotte automaticamente dall'inglese. Classifiche: Steam, Xbox Game Pass e IGDB. <button class="link" type="button" data-priv id="privl" hidden>Privacy</button></p>
 </main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="cup" viewBox="0 0 24 24"><path d="M7 3.5h10v5.2c0 3-2.2 5.4-5 5.4s-5-2.4-5-5.4z"/><path d="M7 5.2H4.2v1.6c0 2 1.4 3.6 3.3 3.9M17 5.2h2.8v1.6c0 2-1.4 3.6-3.3 3.9"/><path d="M10.6 14v3h2.8v-3"/><path d="M8.2 17.2h7.6l.8 3.3H7.4z"/></symbol></svg>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="dlg" class="dlg" hidden><div class="dbk"></div><div class="dcard" role="dialog" aria-modal="true" aria-labelledby="dt"><button class="dx" type="button" aria-label="Chiudi">×</button><div id="dbody"></div></div></div>
 <script>
 const MOB=()=>window.matchMedia&&matchMedia("(max-width:700px)").matches;
@@ -206,7 +269,9 @@ const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 const API="https://giocolegami.mariomautone1.workers.dev";
 const NOW=Math.floor(Date.now()/1000),DAY=86400;
 let aT=0,cur=null,sel=null,selF=null,hasSel=false,tok=0,last=0;
-const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+// collegamenti con la parte account (più in basso): restano vuoti se gli account sono spenti
+const AUTHHASH=location.hash;let seenHook=()=>{},fillComm=null;
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const cache=new Map();
 async function api(ep,body){
 const ck=ep+"|"+body;if(cache.has(ck))return cache.get(ck);
@@ -252,7 +317,7 @@ function updSeen(){const n=$("seenn");if(n)n.textContent=SEEN.length}
 function toggleSeen(f){const i=SEEN.findIndex(x=>x.id===f.id);
 if(i>=0)SEEN.splice(i,1);else SEEN.unshift({id:f.id,t:f.name,y:yr(f),c:cv(f),d:Date.now()});
 if(SEEN.length>2000)SEEN.length=2000;
-store.set("gl_played",JSON.stringify(SEEN));updSeen();if(cur&&!$("film").hidden)R()}
+store.set("gl_played",JSON.stringify(SEEN));updSeen();if(cur&&!$("film").hidden)R();seenHook()}
 const fc=f=>`<button class="chip" data-f="${f.id}">${ckm(f.id)}${cv(f)?`<img class="po" src="${cov(cv(f),"cover_small")}" alt="">`:""}${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}</button>`;
 
 const COUNTRY={392:"Giappone",840:"Stati Uniti",826:"Regno Unito",124:"Canada",250:"Francia",276:"Germania",616:"Polonia",752:"Svezia",380:"Italia",410:"Corea del Sud",156:"Cina",158:"Taiwan",246:"Finlandia",724:"Spagna",56:"Belgio",528:"Paesi Bassi",36:"Australia",203:"Repubblica Ceca",643:"Russia",804:"Ucraina",208:"Danimarca",578:"Norvegia",348:"Ungheria",642:"Romania",620:"Portogallo",76:"Brasile",554:"Nuova Zelanda",756:"Svizzera",40:"Austria",372:"Irlanda",703:"Slovacchia",688:"Serbia",100:"Bulgaria",792:"Turchia",376:"Israele",356:"India",702:"Singapore",484:"Messico",32:"Argentina"};
@@ -340,12 +405,13 @@ catch(x){if(cur!==my)return;cur.known[e.key]=[]}
 if(cur===my&&sel===e.key)R()}
 function centre(key){closeDlg();$("res").innerHTML="";if(key[0]==="c")loadCompany(Number(key.slice(1)));else if(key[0]==="f")loadGame(Number(key.slice(1)))}
 
-const show=v=>{$("home").hidden=v!=="home";$("film").hidden=v!=="film"};
+const show=v=>{$("home").hidden=v!=="home";$("film").hidden=v!=="film";$("seenview").hidden=v!=="seen";$("profview").hidden=v!=="prof"};
+function goHome(){show("home");try{history.replaceState(null,"",location.pathname)}catch(e){}if(!$("soon").innerHTML&&!$("gp").innerHTML)loadHome()}
 const fmtD=t=>new Date(t*1000).toLocaleDateString("it-IT",{day:"numeric",month:"short"});
-const pc=(f,soon)=>`<button class="pc" data-f="${f.id}"><img src="${cov(cv(f),"cover_big")}" alt="" loading="lazy"><span class="pt">${ckm(f.id)}${esc(f.name)}</span><span class="pd">${f.first_release_date?(soon?"dal ":"uscito il ")+esc(fmtD(f.first_release_date)):""}</span></button>`;
+const pc=(f,soon,rk)=>`<button class="pc" data-f="${f.id}">${rk?`<span class="rk">${rk}</span>`:""}<img src="${cov(cv(f),"cover_big")}" alt="" loading="lazy"><span class="pt">${ckm(f.id)}${esc(f.name)}</span><span class="pd">${f.first_release_date?(soon?"dal ":"uscito il ")+esc(fmtD(f.first_release_date)):""}</span></button>`;
 const getJ=async p=>{const r=await fetch(API+"/"+p);if(!r.ok)throw{code:"http"};const j=await r.json();if(!Array.isArray(j))throw{code:"http"};return j};
 // schede di Game Pass e Steam: si aprono cercando il titolo su IGDB
-const px=(x,sub)=>`<button class="pc" data-s="${esc(x.nome)}">${x.img?`<img src="${esc(x.img)}" alt="" loading="lazy" data-alt="${esc(x.ripiego||"")}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else this.style.opacity=0">`:`<span class="ph"></span>`}<span class="pt">${esc(x.nome)}</span><span class="pd">${esc(sub||"")}</span></button>`;
+const px=(x,sub,rk)=>`<button class="pc" data-s="${esc(x.nome)}">${rk?`<span class="rk">${rk}</span>`:""}${x.img?`<img src="${esc(x.img)}" alt="" loading="lazy" data-alt="${esc(x.ripiego||"")}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else this.style.opacity=0">`:`<span class="ph"></span>`}<span class="pt">${esc(x.nome)}</span><span class="pd">${esc(sub||"")}</span></button>`;
 function fill(sec,el,html,empty){$(el).innerHTML=html||`<p class="sub">${empty}</p>`;$(sec).hidden=false}
 async function loadHome(){
 setMsg("Carico le novità…");
@@ -354,14 +420,36 @@ const jobs=[
 api("games",`fields ${F}; where first_release_date > ${NOW} & first_release_date < ${NOW+240*DAY} & cover != null & version_parent = null & hypes > 5; sort first_release_date asc; limit 20;`)
 .then(u=>fill("s-soon","soon",u.map(f=>pc(f,true)).join(""),"Nessuna uscita in programma trovata.")),
 getJ("gamepass").then(l=>fill("s-gp","gp",l.map(x=>px(x,x.editore)).join(""),"Nessuna novità trovata.")),
-getJ("piu-venduti").then(l=>fill("s-top","top",l.map((x,i)=>px(x,(i+1)+"º posto")).join(""),"Classifica non disponibile.")),
+getJ("piu-venduti").then(l=>fill("s-top","top",l.map((x,i)=>px(x,"Steam",i+1)).join(""),"Classifica non disponibile.")),
 (async()=>{let n=await api("games",`fields ${F}; where first_release_date >= ${NOW-60*DAY} & first_release_date <= ${NOW} & cover != null & version_parent = null & hypes > 3; sort first_release_date desc; limit 20;`);
 if(n.length<6)n=await api("games",`fields ${F}; where first_release_date >= ${NOW-60*DAY} & first_release_date <= ${NOW} & cover != null & version_parent = null & hypes > 0; sort first_release_date desc; limit 20;`);
 fill("s-now","now",n.map(f=>pc(f,false)).join(""),"Nessun gioco trovato.")})()];
 ["s-soon","s-gp","s-top","s-now"].forEach(id=>$(id).hidden=true);
+loadTrends();
 const r=await Promise.allSettled(jobs);
 setMsg("");
 if(r.every(x=>x.status==="rejected")){if(!cur)startDefault();else setMsg("Le novità non sono disponibili al momento.")}}
+// Di tendenza per piattaforma: i giochi più visitati su IGDB, filtrati per piattaforma (servizio Cloudflare)
+function loadTrends(){["ps","xbox","switch","pc"].forEach(p=>{
+getJ("tendenza?p="+p).then(l=>{$("t-"+p).innerHTML=l.map((f,i)=>pc(f,false,i+1)).join("")||'<p class="sub">Nessun gioco trovato.</p>'})
+.catch(()=>{$("t-"+p).innerHTML='<p class="sub">Non disponibile al momento.</p>'})})}
+// Dove giocarlo: piattaforme e negozi ufficiali (link da IGDB)
+const STORES=[[/store\.steampowered\.com|steamcommunity\.com\/app/,"Steam"],[/epicgames\.com/,"Epic Games Store"],[/gog\.com/,"GOG"],[/store\.playstation\.com|playstation\.com\/.*games/,"PlayStation Store"],[/xbox\.com|microsoft\.com\/.*store|apps\.microsoft\.com/,"Microsoft Store"],[/nintendo\.(com|co\.|de|it|fr|es)/,"Nintendo eShop"],[/apps\.apple\.com|itunes\.apple\.com/,"App Store"],[/play\.google\.com/,"Google Play"],[/itch\.io/,"itch.io"]];
+const whc=new Map();
+async function whereHtml(id){
+const d=(await tryApi("games",[`fields platforms.name,websites.url,websites.category; where id = ${id};`,`fields platforms.name,websites.url; where id = ${id};`]))[0]||{};
+const pl=(d.platforms||[]).map(p=>p.name).filter(Boolean);
+const seen=new Set(),st=[];let off="";
+(d.websites||[]).forEach(w=>{const u=String(w.url||"");if(!/^https:\/\//.test(u))return;
+const m=STORES.find(([re])=>re.test(u));if(m&&!seen.has(m[1])){seen.add(m[1]);st.push([m[1],u])}else if(!m&&w.category===1&&!off)off=u});
+const a=(lab,u)=>`<a class="pv" href="${esc(u)}" target="_blank" rel="noopener noreferrer"><span class="ic" aria-hidden="true">${esc(lab[0])}</span>${esc(lab)}</a>`;
+if(!pl.length&&!st.length&&!off)return'<p class="kd">Nessuna informazione su piattaforme e negozi per questo gioco.</p>';
+return(pl.length?`<div class="wr"><span class="wl">Piattaforme</span>${tags(pl.slice(0,10))}</div>`:"")+
+(st.length?`<div class="wr"><span class="wl">Dove comprarlo</span>${st.map(([n,u])=>a(n,u)).join("")}</div>`:"")+
+(off?`<div class="wr"><span class="wl">Sito ufficiale</span>${a("Sito ufficiale",off)}</div>`:"")+
+'<p class="kd" style="margin-top:8px">Link ai negozi dal database IGDB: controlla prezzo e disponibilità sul negozio.</p>'}
+function fillWhere(elId,id,ok){if(whc.has(id)){const e=$(elId);if(e)e.innerHTML=whc.get(id);return}
+whereHtml(id).then(h=>{whc.set(id,h);const e=$(elId);if(e&&(!ok||ok()))e.innerHTML=h}).catch(()=>{const e=$(elId);if(e&&(!ok||ok()))e.innerHTML='<p class="kd">Informazioni non disponibili al momento.</p>'})}
 const qs=s=>String(s).replace(/["\\]/g," ");
 async function openByName(n){
 const t=String(n).replace(/[™®©]/g,"").replace(/\s+[-–:]\s+(Complete|Definitive|Deluxe|Ultimate|Standard|Gold|Game of the Year|GOTY)\b.*$/i,"").replace(/\s*\((PC|Xbox[^)]*|Windows)\)\s*$/i,"").trim();
@@ -371,7 +459,7 @@ if(L[0])loadGame(L[0].id);else setMsg("Non trovo «"+t+"» nel database dei gioc
 async function startDefault(){try{const r=await api("games",'search "Elden Ring"; fields name; where version_parent = null; limit 1;');if(r[0])loadGame(r[0].id)}catch(e){showErr(e)}}
 
 // icone dei generi IGDB (per numero di genere; se manca, un'etichetta)
-const S=d=>`<path d="${d}" fill="none" stroke="#14251f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`,F=d=>`<path d="${d}" fill="#14251f"/>`,O=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#14251f"/>`;
+const S=d=>`<path d="${d}" fill="none" stroke="#121014" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`,F=d=>`<path d="${d}" fill="#121014"/>`,O=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#121014"/>`;
 const RING="M0 -7.5A7.5 7.5 0 1 1 0 7.5A7.5 7.5 0 1 1 0 -7.5";
 const burst=[...Array(16)].map((_,k)=>{const a=-PI/2+k*PI/8,r=k%2?3.6:8.5;return(r*Math.cos(a)).toFixed(1)+" "+(r*Math.sin(a)).toFixed(1)}).join("L");
 const ROOK="M-6 8V5H-4V-2H-6V-7H-3.5V-5H-1.2V-7H1.2V-5H3.5V-7H6V-2H4V5H6V8Z";
@@ -405,22 +493,22 @@ const sx=m?0:(dx>0?1:-1)*Math.max(0,Math.round((ex||0)+10-off)),sy=m?(dy>0?1:-1)
 return `<text class="lb${sl?" sel":""}" style="--sx:${sx}px;--sy:${sy}px" x="${(p[0]+(m?0:dx>0?off:-off)).toFixed(1)}" y="${(p[1]+(m?(dy>0?off+16:-off):6)).toFixed(1)}" text-anchor="${m?"middle":dx>0?"start":"end"}"${bold?' font-weight="700"':""}${dim?' opacity=".4"':""}>${esc(cut(txt,26))}</text>`}
 // icone dei badge: codice (studio), scatola (editore), etichetta (genere), joypad (gioco)
 const IC={
-dir:`<path d="M-3 -5L-7.5 0L-3 5M3 -5L7.5 0L3 5" fill="none" stroke="#0a110f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,
-act:`<path d="M-6 -2.5L0 -6L6 -2.5L6 4L0 7.5L-6 4Z" fill="#0a110f"/><path d="M-6 -2.5L0 1L6 -2.5M0 1V7.5" fill="none" stroke="var(--act)" stroke-width="1.3" stroke-linejoin="round"/>`,
-gen:`<path d="M-6.5 -6.5H0.5L7 0L0 7L-6.5 0.5Z" fill="#0a110f" stroke-linejoin="round"/><circle cx="-3" cy="-3" r="1.6" fill="var(--gen)"/>`,
-film:`<rect x="-8" y="-4.5" width="16" height="9" rx="4.5" fill="#0a110f"/><path d="M-5.3 0h3.6M-3.5 -1.8v3.6" stroke="var(--film)" stroke-width="1.4"/><circle cx="3" cy="-0.9" r="1.1" fill="var(--film)"/><circle cx="5.1" cy="1.2" r="1.1" fill="var(--film)"/>`};
-const bdg=(x,y,c,r)=>`<g class="bd" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(r/12).toFixed(2)})"><circle r="12" fill="var(--${c})" stroke="#0a110f" stroke-width="2"/>${IC[c]}</g>`;
+dir:`<path d="M-3 -5L-7.5 0L-3 5M3 -5L7.5 0L3 5" fill="none" stroke="#09090a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+act:`<path d="M-6 -2.5L0 -6L6 -2.5L6 4L0 7.5L-6 4Z" fill="#09090a"/><path d="M-6 -2.5L0 1L6 -2.5M0 1V7.5" fill="none" stroke="var(--act)" stroke-width="1.3" stroke-linejoin="round"/>`,
+gen:`<path d="M-6.5 -6.5H0.5L7 0L0 7L-6.5 0.5Z" fill="#09090a" stroke-linejoin="round"/><circle cx="-3" cy="-3" r="1.6" fill="var(--gen)"/>`,
+film:`<rect x="-8" y="-4.5" width="16" height="9" rx="4.5" fill="#09090a"/><path d="M-5.3 0h3.6M-3.5 -1.8v3.6" stroke="var(--film)" stroke-width="1.4"/><circle cx="3" cy="-0.9" r="1.1" fill="var(--film)"/><circle cx="5.1" cy="1.2" r="1.1" fill="var(--film)"/>`};
+const bdg=(x,y,c,r)=>`<g class="bd" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(r/12).toFixed(2)})"><circle r="12" fill="var(--${c})" stroke="#09090a" stroke-width="2"/>${IC[c]}</g>`;
 const hx=(x,y,R)=>[0,1,2,3,4,5].map(k=>(x+R*Math.cos(PI/6+k*PI/3)).toFixed(1)+","+(y+R*Math.sin(PI/6+k*PI/3)).toFixed(1)).join(" ");
 function pn(e,q,i,ctr,hi,dim){const G=e.k==="g",r=ctr?42:(hi?31:26),id="ce"+(ctr?"c":i),R=G?r*1.18:r,c=`var(--${ecn(e)})`;
 const shp=at=>G?`<polygon points="${hx(q[0],q[1],R)}" ${at}/>`:`<circle cx="${q[0]}" cy="${q[1]}" r="${r}" ${at}/>`;
-const inner=e.logo&&!G?`<clipPath id="${id}">${shp("")}</clipPath>${shp('fill="#f3efdc"')}<image href="${logo(e.logo)}" x="${(q[0]-R*.7).toFixed(1)}" y="${(q[1]-R*.7).toFixed(1)}" width="${(R*1.4).toFixed(1)}" height="${(R*1.4).toFixed(1)}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${id})"/>`:G?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11.5).toFixed(2)})">${gIcon(e.id)}</g>`:`<text class="in" x="${q[0]}" y="${q[1]+5}" text-anchor="middle"${ctr?' style="font-size:20px"':""}>${esc(ini(e.name))}</text>`;
+const inner=e.logo&&!G?`<clipPath id="${id}">${shp("")}</clipPath>${shp('fill="#f6f0e6"')}<image href="${logo(e.logo)}" x="${(q[0]-R*.7).toFixed(1)}" y="${(q[1]-R*.7).toFixed(1)}" width="${(R*1.4).toFixed(1)}" height="${(R*1.4).toFixed(1)}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${id})"/>`:G?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11.5).toFixed(2)})">${gIcon(e.id)}</g>`:`<text class="in" x="${q[0]}" y="${q[1]+5}" text-anchor="middle"${ctr?' style="font-size:20px"':""}>${esc(ini(e.name))}</text>`;
 return `<g class="n${ctr?" ctr":""}${hi&&!ctr?" on":""}" style="--i:${i}${dim?";opacity:.4":""}" ${ctr?'data-c="1"':`data-e="${e.key}"`} tabindex="0" role="button" aria-label="${esc(e.name)}, ${esc(e.role.toLowerCase())}"><title>${esc(e.name)} (${esc(e.role.toLowerCase())})</title><circle cx="${q[0]}" cy="${q[1]}" r="${r+9}" fill="transparent"/>${shp(`fill="${c}"`)}${inner}${shp(`fill="none" stroke="${hi&&!ctr?"var(--fg)":c}" stroke-width="4" stroke-linejoin="round"`)}${bdg(q[0]+R*.82,q[1]-R*.82,ecn(e),12)}</g>`}
 function fn(f,q,k,go,i,x){x=x||{};const w=17*k,h=24*k,id="cf"+(go?f.id:"c"),c=cv(f);
 const inner=c?`<clipPath id="${id}"><rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6"/></clipPath><image href="${cov(c,"cover_big")}" x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`:`<text class="in f" x="${q[0]}" y="${q[1]+5}" text-anchor="middle">${esc(ini(f.name))}</text>`;
-const seen=isSeen(f.id)?`<g class="bd" transform="translate(${(q[0]+w*.9).toFixed(1)} ${(q[1]+h*.9).toFixed(1)}) scale(${go?.83:1})"><circle r="12" fill="var(--hl)" stroke="#0a110f" stroke-width="2"/><path d="M-5 0.5l3.5 3.5 6.5-7.5" stroke="#0a110f" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`:"";
-return `<g class="n${go?"":" ctr"}${x.on?" on":""}" style="--i:${i}${x.dim?";opacity:.35":""}" ${go?`data-f="${f.id}"`:'data-c="1"'} tabindex="0" role="button" aria-label="${esc(f.name)}"><title>${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}${x.names?", in comune: "+esc(x.names):""}${x.sim?" (simile secondo IGDB)":""}</title>${go?`<rect x="${q[0]-w-8}" y="${q[1]-h-8}" width="${2*w+16}" height="${2*h+16}" fill="transparent"/>`:""}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="var(--film)"/>${inner}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="none" stroke="${x.on?"var(--hl)":"#0a110f"}" stroke-width="3"/>${bdg(q[0]+w*.9,q[1]-h*.9,"film",go?10:12)}${seen}</g>`}
+const seen=isSeen(f.id)?`<g class="bd" transform="translate(${(q[0]+w*.9).toFixed(1)} ${(q[1]+h*.9).toFixed(1)}) scale(${go?.83:1})"><circle r="12" fill="var(--hl)" stroke="#09090a" stroke-width="2"/><path d="M-5 0.5l3.5 3.5 6.5-7.5" stroke="#09090a" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`:"";
+return `<g class="n${go?"":" ctr"}${x.on?" on":""}" style="--i:${i}${x.dim?";opacity:.35":""}" ${go?`data-f="${f.id}"`:'data-c="1"'} tabindex="0" role="button" aria-label="${esc(f.name)}"><title>${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}${x.names?", in comune: "+esc(x.names):""}${x.sim?" (simile secondo IGDB)":""}</title>${go?`<rect x="${q[0]-w-8}" y="${q[1]-h-8}" width="${2*w+16}" height="${2*h+16}" fill="transparent"/>`:""}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="var(--film)"/>${inner}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="none" stroke="${x.on?"var(--hl)":"#09090a"}" stroke-width="3"/>${bdg(q[0]+w*.9,q[1]-h*.9,"film",go?10:12)}${seen}</g>`}
 const sortedLinks=()=>[...cur.links].sort((a,b)=>b.who.length-a.who.length||(b.sim-a.sim)||(b.f.total_rating_count||0)-(a.f.total_rating_count||0));
-const DEFS=`<defs><radialGradient id="gl"><stop offset="0" stop-color="#F4E285" stop-opacity=".2"/><stop offset=".55" stop-color="#F4A259" stop-opacity=".06"/><stop offset="1" stop-color="#F4A259" stop-opacity="0"/></radialGradient></defs><circle cx="${CX}" cy="${CY}" r="330" fill="url(#gl)"/><circle cx="${CX}" cy="${CY}" r="125" fill="none" stroke="#2a3b34" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/><circle cx="${CX}" cy="${CY}" r="258" fill="none" stroke="#2a3b34" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/>`;
+const DEFS=`<defs><radialGradient id="gl"><stop offset="0" stop-color="#fac022" stop-opacity=".2"/><stop offset=".55" stop-color="#f94632" stop-opacity=".06"/><stop offset="1" stop-color="#f94632" stop-opacity="0"/></radialGradient></defs><circle cx="${CX}" cy="${CY}" r="330" fill="url(#gl)"/><circle cx="${CX}" cy="${CY}" r="125" fill="none" stroke="#2d2c30" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/><circle cx="${CX}" cy="${CY}" r="258" fill="none" stroke="#2d2c30" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/>`;
 const eg=(a,b,on,i,bend)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,qx=mx+(CX-mx)*bend,qy=my+(CY-my)*bend,d=`M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${qx.toFixed(1)} ${qy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`,hi=hasSel&&on;
 return `<path class="e" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"var(--hl)":"var(--edge)"}" stroke-width="${hi?4:1.5}" stroke-linecap="round" opacity="${hasSel?(on?1:.18):.6}"/>`+(hasSel&&!on?"":`<path class="ef${hi?" on":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"#fff":"var(--acc)"}" stroke-width="${hi?3:2.2}" stroke-linecap="round" opacity="${hi?.95:.8}"/>`)};
 // collegamento "simile secondo IGDB": tratteggio dorato dal centro
@@ -455,7 +543,7 @@ i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h
 (pub.length?`<div class="k">Edizione</div>${pub.map(ch).join("")}`:"")+
 (gen.length?`<div class="k">Genere</div>${gen.map(ch).join("")}`:"")+
 (cur.sims.length?`<div class="k">Simili secondo IGDB</div><div>${cur.sims.slice(0,10).map(fc).join("")}</div>`:"")+
-`<div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}<div class="dact"><button class="go alt${isSeen(cur.id)?" on":""}" type="button" data-seenc="1">${isSeen(cur.id)?"✓ Giocato":"Segna come giocato"}</button></div></section>`}
+`<div class="k">Dove giocarlo</div><div id="wh" class="wh">Carico…</div><div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}<div class="dact"><button class="go alt${isSeen(cur.id)?" on":""}" type="button" data-seenc="1">${isSeen(cur.id)?"✓ Giocato":"Segna come giocato"}</button></div></section>`}
 else{const kn=cur.known[cur.center.key]||[];
 i=`<section class="card p ${ecl(cur.center)}"><div class="hd">${pa(cur.center,1)}<div><h2>${esc(cur.title)}</h2>${tags(cur.facts)}</div></div>`+
 (cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
@@ -475,6 +563,7 @@ i=`<section class="card"><div class="hd">${poster(cv(fsel.f),fsel.f.name,1)}<div
 `<div class="dact"><button class="go dgo" type="button" data-det="f${fsel.f.id}">Dettagli</button><button class="go dgo alt" type="button" data-go="f${fsel.f.id}">Scopri i legami</button></div></section>`+i}
 $("info").innerHTML=i;
 if(cur.summary&&!trC.has(cur.summary))trInto("sum",cur.summary,320);
+if(!isC&&$("wh")){const ck=cur;fillWhere("wh",cur.id,()=>cur===ck)}
 if(e&&e.desc&&!trC.has(e.desc))trInto("edesc",e.desc,320);
 $("p").innerHTML=`<h2>${isC?"Giochi di ":"Giochi collegati a "}${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${ckm(o.f.id)}${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.sim?'<span class="tag sim">Simile secondo IGDB</span>':""}</div></div></li>`).join("")+"</ul>"}
 
@@ -552,14 +641,14 @@ const fmtLong=t=>new Date(t*1000).toLocaleDateString("it-IT",{day:"numeric",mont
 const dtext=(t,none)=>t?`<p class="ov dbio" id="dsum" data-src="${esc(t)}">${esc(trC.get(t)||t)}</p>`:`<p class="ov dbio">${none}</p>`;
 async function openDetail(key,pt,keep){
 if(!keep)lastFocus=document.activeElement;
-const my=++dTok;if(key==="x")key=cur.kind==="company"?cur.center.key:"f"+cur.id;
+const my=++dTok;if(key==="x"&&cur)key=cur.kind==="company"?cur.center.key:"f"+cur.id;
 openDlg('<p class="ov">Carico…</p>',pt);
 try{
 if(key[0]==="f"){const id=Number(key.slice(1));
 const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,platforms.abbreviation,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
 const d=(await tryApi("games",[`fields ${base},involved_companies.company.logo.image_id,${XF("similar_games")}; where id = ${id};`,`fields ${base},${XF("similar_games")}; where id = ${id};`]))[0];
 if(my!==dTok)return;if(!d)throw{code:"http"};
-dW=d;const here=cur.kind==="game"&&cur.id===id,o=cur.links.find(x=>x.f.id===id);
+dW=Object.assign({},d,{id});const here=!!cur&&cur.kind==="game"&&cur.id===id,o=cur&&cur.links?cur.links.find(x=>x.f.id===id):null;
 const cm=new Map();(d.involved_companies||[]).forEach(ic=>{const c=ic.company;if(!c||!c.id)return;const m=cm.get(c.id)||{id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,dev:0,pub:0};if(ic.developer)m.dev=1;if(ic.publisher)m.pub=1;cm.set(c.id,m)});
 const ce=[...cm.values()].map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:roleOf(c.dev,c.pub)}));
 const devs=ce.filter(c=>c.role!=="Editore"),pubs=ce.filter(c=>c.role!=="Studio");
@@ -572,34 +661,30 @@ dtext(d.summary,"Trama non disponibile.")+
 (devs.length?`<div class="k">Sviluppo</div><div>${devs.map(dec).join("")}</div>`:"")+
 (pubs.length?`<div class="k">Edizione</div><div>${pubs.map(dec).join("")}</div>`:"")+
 ((d.similar_games||[]).length?`<div class="k">Simili secondo IGDB</div><div>${d.similar_games.filter(f=>f&&f.name).slice(0,8).map(dfc).join("")}</div>`:"")+
+`<div class="k">Dove giocarlo</div><div id="whd" class="wh">Carico…</div><div class="k">Community</div><div id="comm" class="comm">Carico…</div>`+
 `<div class="dact">${here?"":`<button class="go dgo" type="button" data-go="${key}">Scopri i legami</button>`}<button class="go dgo alt${isSeen(id)?" on":""}" type="button" data-seen="1">${isSeen(id)?"✓ Giocato":"Segna come giocato"}</button></div>`);
-if(d.summary)trInto("dsum",d.summary,5000)}
+if(d.summary)trInto("dsum",d.summary,5000);fillWhere("whd",id,()=>my===dTok);if(typeof fillComm==="function")fillComm(Object.assign({},d,{id}),()=>my===dTok)}
 else if(key[0]==="c"){const id=Number(key.slice(1));
 const d=(await tryApi("companies",[`fields name,description,start_date,country,logo.image_id,developed,published; where id = ${id};`,`fields name,description,start_date,country,developed,published; where id = ${id};`]))[0];
 if(!d)throw{code:"http"};
 const C={key,id,k:"c",name:d.name,logo:d.logo&&d.logo.image_id,role:roleOf((d.developed||[]).length>0,(d.published||[]).length>0)};
 const games=await knownOf(Object.assign({},C),null);
 if(my!==dTok)return;
-const here=cur.kind==="company"&&cur.id===id;
+const here=!!cur&&cur.kind==="company"&&cur.id===id;
 openDlg(`<div class="dtop">${C.logo?`<img class="dposter logo" src="${logo(C.logo)}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([C.role,COUNTRY[d.country]])}${d.start_date?`<p class="ov">Fondata il ${esc(fmtLong(d.start_date))}</p>`:""}<p class="ov kd">${(d.developed||[]).length} giochi sviluppati · ${(d.published||[]).length} pubblicati</p></div></div>`+
 dtext(d.description,"Nessuna descrizione disponibile.")+
 `<div class="k">Giochi più noti</div><div>${games.slice(0,10).map(dfc).join("")||'<span class="kd">nessun gioco trovato</span>'}</div>`+
 (here?"":`<div class="dact"><button class="go dgo" type="button" data-go="${key}">Scopri i legami</button></div>`));
 if(d.description)trInto("dsum",d.description,5000)}
-else{const id=Number(key.slice(1)),name=GIT[id]||(cur.E.find(x=>x.key===key)||{}).name||"Genere";
+else{const id=Number(key.slice(1)),name=GIT[id]||(cur&&cur.E.find(x=>x.key===key)||{}).name||"Genere";
 const games=await knownOf({k:"g",id},null);
 if(my!==dTok)return;
 openDlg(`<div class="dtop"><span class="dposter gen"><svg viewBox="-10 -10 20 20" aria-hidden="true">${gIcon(id)}</svg></span><div><h2 id="dt">${esc(name)}</h2>${tags(["Genere"])}<p class="ov">I giochi di questo genere più votati dalla comunità di IGDB.</p></div></div>`+
 `<div class="k">Giochi più noti</div><div>${games.slice(0,12).map(dfc).join("")||'<span class="kd">nessun gioco trovato</span>'}</div>`)}
 }catch(e){if(my===dTok){closeDlg();showErr(e)}}}
-function openSeen(pt,keep){if(!keep)lastFocus=document.activeElement;dTok++;
-const fmtS=t=>new Date(t).toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric"});
-openDlg(`<h2 id="dt">Giochi giocati</h2>`+(SEEN.length?`<p class="ov">${SEEN.length} ${SEEN.length>1?"giochi":"gioco"}</p><ul class="sl">${SEEN.map(x=>`<li>${poster(x.c,x.t)}<div><button class="l" data-d="f${x.id}">${esc(x.t)}${x.y?" ("+x.y+")":""}</button><div class="kd">segnato il ${fmtS(x.d)}</div></div><button class="rm" type="button" data-unseen="${x.id}" aria-label="Togli ${esc(x.t)} dai giocati">✕</button></li>`).join("")}</ul>`:`<p class="ov">Non hai ancora segnato nessun gioco. Apri un gioco e premi «Segna come giocato»: lo ritroverai qui e nel grafo con una spunta verde.</p>`)+`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo, nel browser o nell'app che stai usando.</p>`,pt,keep)}
-$("seenbtn").addEventListener("click",e=>openSeen({x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2}));
 updSeen();
 $("dlg").addEventListener("click",e=>{
 const sn=e.target.closest("[data-seen]");if(sn&&dW){toggleSeen(dW);const on=isSeen(dW.id);sn.classList.toggle("on",on);sn.textContent=on?"✓ Giocato":"Segna come giocato";return}
-const un=e.target.closest("[data-unseen]");if(un){const i=SEEN.findIndex(x=>x.id===Number(un.dataset.unseen));if(i>=0){SEEN.splice(i,1);store.set("gl_played",JSON.stringify(SEEN));updSeen();if(cur&&!$("film").hidden)R();openSeen(null,true)}return}
 if(e.target.closest(".dx")||e.target.classList.contains("dbk")){closeDlg();return}
 const g=e.target.closest("[data-go]");if(g){centre(g.dataset.go);return}
 const d=e.target.closest("[data-d]");if(d)openDetail(d.dataset.d,{x:e.clientX,y:e.clientY},true)});
@@ -629,11 +714,196 @@ $("seg").addEventListener("click",e=>{const b=e.target.closest("[data-fl]");if(!
 $("seg").querySelectorAll("button[data-fl]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
 $("q").placeholder={all:"Cerca un videogioco, uno studio o un editore",game:"Cerca un videogioco",company:"Cerca uno studio o un editore"}[FILT];
 if($("q").value.trim()&&$("q").value.trim()===lastQ)cerca()});
-$("back").addEventListener("click",()=>{show("home");try{history.replaceState(null,"",location.pathname)}catch(e){}if(!$("soon").innerHTML&&!$("gp").innerHTML)loadHome()});
+$("back").addEventListener("click",goHome);
 $("go").addEventListener("click",cerca);
 $("q").addEventListener("keydown",e=>{if(e.key==="Enter")cerca()});
-{const m=location.hash.match(/^#([gc])(\d+)$/);if(m){if(m[1]==="g")loadGame(Number(m[2]));else loadCompany(Number(m[2]))}else{show("home");loadHome()}}
+{const m=AUTHHASH.match(/^#([gc])(\d+)$/);if(/access_token|error_description/.test(AUTHHASH)){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+if(m){if(m[1]==="g")loadGame(Number(m[2]));else loadCompany(Number(m[2]))}else{show("home");loadHome()}}
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+<script>
+// ===== Account, giocati con voto a coppe e recensioni (stesso progetto Supabase di CineLegami) =====
+// Le tabelle dei giochi si creano una volta sola con giocolegami-supabase.sql. Se questi due valori restano vuoti, account e recensioni restano spenti.
+const SB_URL="https://ezswtznereojtyphdbfh.supabase.co",SB_KEY="sb_publishable_Wf5ItERbGV2aw1C0MzZCUA_fDZ3NruZ";
+const CONTACT="";   // email di contatto per la privacy (facoltativa, appare nell'informativa)
+const SB_ON=!!(SB_URL&&SB_KEY);
+let SESS=null,ME=null,MYR={},CLOUD=null,COMM=null,cTok=0,tT=0,busy=false;
+try{SESS=JSON.parse(store.get("gl_sess")||"null")}catch(e){}
+if(SESS&&!(SESS.at&&SESS.rt))SESS=null;
+const nowS=()=>Math.floor(Date.now()/1000);
+const SITE=()=>location.origin+location.pathname;
+function toast(t){const el=$("toast");el.textContent=t;el.classList.add("on");clearTimeout(tT);tT=setTimeout(()=>el.classList.remove("on"),4000)}
+async function sb(path,o){o=o||{};const hd={apikey:SB_KEY,"Content-Type":"application/json"};
+const useTok=o.auth!==false&&SESS;
+if(useTok){if(SESS.exp-60<nowS())await refreshSess();if(SESS)hd.Authorization="Bearer "+SESS.at}
+const r=await fetch(SB_URL.replace(/\/$/,"")+path,{method:o.method||"GET",headers:Object.assign(hd,o.headers||{}),body:o.body===undefined?undefined:JSON.stringify(o.body)});
+const t=await r.text();let j=null;if(t){try{j=JSON.parse(t)}catch(e){}}
+if(!r.ok){const er=new Error((j&&(j.msg||j.error_description||j.message||j.error))||"errore");er.status=r.status;throw er}
+return j}
+let rP=null;
+function refreshSess(){if(!SESS)return Promise.resolve();if(rP)return rP;
+rP=(async()=>{try{const j=await sb("/auth/v1/token?grant_type=refresh_token",{method:"POST",auth:false,body:{refresh_token:SESS.rt}});setSess(j)}catch(e){if(e.status>=400&&e.status<500)clearSess()}finally{rP=null}})();return rP}
+function setSess(j){SESS={at:j.access_token,rt:j.refresh_token,exp:j.expires_at||nowS()+(j.expires_in||3600)};store.set("gl_sess",JSON.stringify(SESS))}
+function clearSess(){SESS=null;ME=null;MYR={};CLOUD=null;store.del("gl_sess");uiAcc();refreshViews()}
+function aerr(e){const m=String(e&&e.message||"").toLowerCase(),s=e&&e.status;
+if(e instanceof TypeError)return"Connessione non riuscita. Controlla internet e riprova.";
+if(m.includes("invalid login"))return"Email o password non corretti.";
+if(m.includes("not confirmed"))return"Prima devi confermare l'email: controlla la posta (anche lo spam).";
+if(m.includes("password")&&(m.includes("least")||m.includes("short")||m.includes("weak")||m.includes("known")))return"Password troppo debole: usa almeno 8 caratteri, meglio se non banali.";
+if(s===409||m.includes("duplicate")||m.includes("unique"))return"Questo nome è già in uso: scegline un altro.";
+if(m.includes("database error")||m.includes("nickname"))return"Nickname non valido o già in uso.";
+if(m.includes("not authorized"))return"Impossibile inviare l'email in questo momento. Riprova più tardi.";
+if(s===429||m.includes("rate limit")||m.includes("too many"))return"Troppi tentativi ravvicinati: riprova tra qualche minuto.";
+if(s===401||s===403)return"Sessione scaduta: accedi di nuovo.";
+if(s===404||m.includes("game_"))return"Voti e recensioni dei giochi non sono ancora attivi. Riprova più tardi.";
+return"Qualcosa non ha funzionato. Riprova tra poco."}
+// ---- account: bottone e finestre ----
+function uiAcc(){const pl=$("privl");if(pl)pl.hidden=!SB_ON;const b=$("accb");if(!b)return;b.hidden=!SB_ON;b.innerHTML=ME?avt(ME.nick,ME.avatar,22)+" "+esc(ME.nick):"Accedi";b.setAttribute("aria-label",ME?"Il tuo account":"Accedi o registrati")}
+function avt(n,a,s){s=s||28;return a&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(a)?`<img class="av" style="--s:${s}px" src="${a}" alt="">`:`<span class="av ph" style="--s:${s}px" aria-hidden="true">${esc(String(n||"?").slice(0,1).toUpperCase())}</span>`}
+function refreshViews(){if(!$("seenview").hidden)renderSeen();if(!$("profview").hidden){if(ME)renderProfile();else show("home")}}
+function authDlg(mode,msg){lastFocus=document.activeElement;const up=mode==="up";
+openDlg(`<h2 id="dt">${up?"Crea il tuo account":"Accedi"}</h2><div class="seg" style="margin:8px 0 0"><button type="button" data-at="in" aria-pressed="${!up}">Accedi</button><button type="button" data-at="up" aria-pressed="${up}">Registrati</button></div><p class="ov">${esc(msg||"Con un account puoi dare voti in coppe, scrivere recensioni e ritrovare i tuoi giocati su ogni dispositivo. Lo stesso account vale anche su CineLegami.")}</p>`+
+`<form id="af" novalidate data-m="${mode}"><label class="fl">Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>`+
+(up?`<label class="fl">Nickname pubblico (3-20 caratteri: lettere, numeri, . _ -)<input name="nick" autocomplete="nickname" maxlength="20" required></label>`:"")+
+`<label class="fl">Password${up?" (almeno 8 caratteri)":""}<input name="pw" type="password" autocomplete="${up?"new-password":"current-password"}" maxlength="72" required></label>`+
+(up?`<label class="fl ckb"><input type="checkbox" name="ok"><span>Ho letto l'<button type="button" class="link" data-priv>informativa privacy</button> e so che nickname e recensioni saranno pubblici.</span></label>`:"")+
+`<p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">${up?"Registrati":"Accedi"}</button>${up?"":'<button type="button" class="link" data-forgot style="margin-left:14px">Password dimenticata?</button>'}</form>`)}
+function privDlg(){lastFocus=lastFocus||document.activeElement;
+openDlg(`<h2 id="dt">Privacy</h2><p class="ov"><b>Che dati raccogliamo.</b> Solo se crei un account: email, password (conservata in forma cifrata, nessuno può leggerla), nickname, foto del profilo se la aggiungi, i giochi che segni come giocati, i tuoi voti e le tue recensioni.</p><p class="ov"><b>Cosa è pubblico.</b> Nickname, foto, voti e testo delle recensioni. L'email e l'elenco dei giocati sono privati: li vedi solo tu.</p><p class="ov"><b>Un account per due siti.</b> GiocoLegami e CineLegami usano lo stesso account: nickname e foto sono gli stessi su entrambi.</p><p class="ov"><b>A cosa servono.</b> Solo per far funzionare account, giocati e recensioni. Non vendiamo né cediamo i dati e non facciamo pubblicità.</p><p class="ov"><b>Dove sono.</b> I dati sono conservati da Supabase, con connessione cifrata. Le regole di accesso sono applicate direttamente dal database.</p><p class="ov"><b>I tuoi diritti.</b> Puoi eliminare in qualsiasi momento account, giocati e recensioni dalla pagina del tuo profilo.${CONTACT?" Per altre richieste scrivi a "+esc(CONTACT)+".":""}</p><p class="ov"><b>Senza account</b> l'elenco dei giocati resta solo nel tuo dispositivo e non lo riceviamo.</p><button class="go dgo alt" type="button" data-authopen>Indietro</button>`)}
+function newPwDlg(){lastFocus=document.activeElement;
+openDlg(`<h2 id="dt">Scegli una nuova password</h2><form id="rf" novalidate><label class="fl">Nuova password (almeno 8 caratteri)<input name="pw" type="password" autocomplete="new-password" maxlength="72" required></label><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva password</button></form>`)}
+async function loadMe(){try{const u=await sb("/auth/v1/user");const p=await sb("/rest/v1/profiles?select=nickname,avatar&id=eq."+encodeURIComponent(u.id));
+ME={id:u.id,email:u.email,nick:(p&&p[0]&&p[0].nickname)||"utente",avatar:(p&&p[0]&&p[0].avatar)||null};uiAcc();
+try{await loadMine()}catch(e){}await syncSeen();refreshViews();if(cur&&!$("film").hidden)R()}
+catch(e){if(e.status===401||e.status===403)clearSess()}}
+async function loadMine(){MYR={};const rows=await sb("/rest/v1/game_reviews?select=game_id,rating,body,title,year,cover,updated_at&user_id=eq."+encodeURIComponent(ME.id)+"&limit=1000");(rows||[]).forEach(r=>{MYR[r.game_id]=r})}
+async function nickFree(n){const r=await sb("/rest/v1/profiles?select=id&nickname=ilike."+encodeURIComponent(n.replace(/[\\_%]/g,"\\$&")),{auth:false});return!(r&&r.length)}
+async function submitAuth(f){const m=f.dataset.m,v=n=>(f.elements[n]?f.elements[n].value:"").trim(),em=v("email"),pw=f.elements.pw.value,out=$("amsg");
+const bad=t=>{out.textContent=t;return false};
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em))return bad("Inserisci un'email valida.");
+if(m==="up"){const nk=v("nick");if(!/^[A-Za-z0-9_.-]{3,20}$/.test(nk))return bad("Nickname non valido: 3-20 caratteri tra lettere, numeri, punto, trattino e underscore.");
+if(pw.length<8)return bad("La password deve avere almeno 8 caratteri.");
+if(!f.elements.ok.checked)return bad("Per registrarti devi confermare di aver letto l'informativa privacy.");
+if(!await nickFree(nk))return bad("Questo nickname è già in uso.");
+const j=await sb("/auth/v1/signup?redirect_to="+encodeURIComponent(SITE()),{method:"POST",auth:false,body:{email:em,password:pw,data:{nickname:nk}}});
+if(j&&j.access_token){setSess(j);closeDlg();toast("Benvenuto, "+nk+"!");await loadMe()}
+else openDlg(`<h2 id="dt">Controlla la posta</h2><p class="ov">Ti abbiamo scritto a <b>${esc(em)}</b>. Clicca il link nell'email per attivare l'account (guarda anche nello spam), poi torna qui e accedi.</p>`)}
+else{if(!pw)return bad("Inserisci la password.");
+const j=await sb("/auth/v1/token?grant_type=password",{method:"POST",auth:false,body:{email:em,password:pw}});setSess(j);closeDlg();await loadMe();toast("Bentornato, "+(ME?ME.nick:"")+"!")}
+return true}
+async function forgot(){const f=$("af");if(!f)return;const em=f.elements.email.value.trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){$("amsg").textContent="Scrivi prima la tua email qui sopra.";return}
+try{await sb("/auth/v1/recover?redirect_to="+encodeURIComponent(SITE()),{method:"POST",auth:false,body:{email:em}})}catch(e){if(!(e.status<500&&e.status!==429))return void($("amsg").textContent=aerr(e))}
+$("amsg").style.color="var(--hl)";$("amsg").textContent="Se l'email è registrata, riceverai un link per scegliere una nuova password."}
+// ---- giocati sul cloud ----
+const yr4=y=>/^\d{4}$/.test(String(y||""))?String(y):null;
+async function pushSeen(arr){await sb("/rest/v1/game_seen?on_conflict=user_id,game_id",{method:"POST",headers:{Prefer:"resolution=ignore-duplicates,return=minimal"},body:arr.map(x=>({user_id:ME.id,game_id:x.id,title:String(x.t||"").slice(0,200),year:yr4(x.y),cover:x.c||null,seen_at:new Date(x.d||Date.now()).toISOString()}))});arr.forEach(x=>CLOUD.add(x.id))}
+async function syncSeen(){if(!ME)return;try{const rows=await sb("/rest/v1/game_seen?select=game_id,title,year,cover,seen_at&order=seen_at.desc&limit=2000");CLOUD=new Set((rows||[]).map(r=>r.game_id));
+(rows||[]).forEach(r=>{if(!isSeen(r.game_id))SEEN.push({id:r.game_id,t:r.title,y:r.year||"",c:r.cover||"",d:Date.parse(r.seen_at)||Date.now()})});
+SEEN.sort((a,b)=>b.d-a.d);const add=SEEN.filter(x=>!CLOUD.has(x.id));if(add.length)await pushSeen(add);
+store.set("gl_played",JSON.stringify(SEEN));updSeen()}catch(e){}}
+let sct=0;
+function seenChanged(){if(!ME||!CLOUD)return;clearTimeout(sct);sct=setTimeout(async()=>{try{const ids=new Set(SEEN.map(x=>x.id)),add=SEEN.filter(x=>!CLOUD.has(x.id)),del=[...CLOUD].filter(id=>!ids.has(id));
+if(add.length)await pushSeen(add);for(const id of del){await sb("/rest/v1/game_seen?game_id=eq."+Number(id),{method:"DELETE"});CLOUD.delete(id)}}catch(e){}},400)}
+seenHook=function(){seenChanged();refreshViews()};
+// ---- coppe da 1 a 5 ----
+const CUP='<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#cup"/></svg>';
+const cupRW=(id,v,big)=>`<span class="os rw${big?" big":""}" role="radiogroup" aria-label="Il tuo voto, da 1 a 5 coppe">`+[5,4,3,2,1].map(n=>`<button type="button" role="radio" aria-checked="${n===v}" aria-label="${n} ${n>1?"coppe":"coppa"}" data-rate="${n}" data-k="${id}" class="${v&&n<=v?"on":""}">${CUP}</button>`).join("")+`</span>`;
+function cupRO(v,sm){const f=Math.max(0,Math.min(5,Number(v)||0));return`<span class="os ro${sm?" sm":""}" role="img" aria-label="${f.toFixed(1).replace(".",",")} su 5 coppe">`+[0,1,2,3,4].map(i=>`<span class="os1">${CUP}<span class="osf" style="width:${Math.max(0,Math.min(1,f-i))*100}%">${CUP}</span></span>`).join("")+`</span>`}
+const fmtRv=t=>{const d=new Date(t);return isNaN(d)?"":d.toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric"})};
+function metaFor(id){if(COMM&&COMM.m.id===id)return COMM.m;const x=SEEN.find(s=>s.id===id);return x?{id:x.id,t:x.t,y:x.y,c:x.c}:null}
+async function rate(m,n,body){if(!ME){authDlg("in","Accedi o registrati per dare voti e scrivere recensioni.");return false}
+const old=MYR[m.id],row={user_id:ME.id,game_id:m.id,title:String(m.t||"").slice(0,200),year:yr4(m.y),cover:m.c||null,rating:n,body:body===undefined?(old?old.body:null):body};
+await sb("/rest/v1/game_reviews?on_conflict=user_id,game_id",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:row});
+MYR[m.id]={game_id:m.id,rating:n,body:row.body,title:row.title,year:row.year,cover:row.cover,updated_at:new Date().toISOString()};
+if(!isSeen(m.id)){SEEN.unshift({id:m.id,t:m.t,y:m.y||"",c:m.c||"",d:Date.now()});store.set("gl_played",JSON.stringify(SEEN));updSeen();seenChanged()}
+return true}
+// ---- community nella finestra dei dettagli ----
+fillComm=function(d,ok){const el=$("comm");if(!el)return;
+if(!SB_ON){el.innerHTML='<p class="kd">Voti e recensioni della community in arrivo.</p>';return}
+COMM={m:{id:d.id,t:d.name,y:yr(d),c:cv(d)},ok,more:0,draft:null};renderComm()};
+async function renderComm(){const c=COMM,el=$("comm");if(!c||!el)return;const my=++cTok,alive=()=>my===cTok&&COMM===c&&(!c.ok||c.ok())&&$("comm");
+const draft=$("rvt")?$("rvt").value:c.draft;
+try{const id=Number(c.m.id),[st,rv]=await Promise.all([sb("/rest/v1/game_stats?select=n,avg&game_id=eq."+id,{auth:false}),sb("/rest/v1/game_reviews?select=rating,body,updated_at,profiles(nickname,avatar)&game_id=eq."+id+"&body=not.is.null&order=updated_at.desc&limit=11&offset="+c.more,{auth:false})]);
+if(!alive())return;const s=st&&st[0],mine=MYR[id],list=(rv||[]).slice(0,10),more=(rv||[]).length>10;
+c.draft=draft;const txt=draft!=null?draft:(mine&&mine.body)||"";
+el.innerHTML=`<div class="cm-sum">${s&&s.n?`${cupRO(s.avg)} <b>${Number(s.avg).toFixed(1).replace(".",",")}</b> su 5 <span class="kd">· ${s.n} ${s.n>1?"voti":"voto"}</span>`:'<span class="kd">Ancora nessun voto: sii il primo!</span>'}</div>`+
+(ME?`<div class="cm-me"><div class="k">Il tuo voto</div>${cupRW(id,mine?mine.rating:0,1)}<textarea id="rvt" maxlength="1500" rows="3" placeholder="Scrivi la tua recensione (facoltativa). La vedranno tutti." aria-label="La tua recensione">${esc(txt)}</textarea><div class="dact"><button class="go dgo" type="button" data-revsave>${mine&&mine.body?"Aggiorna recensione":"Pubblica recensione"}</button>${mine?'<button class="link" type="button" data-revdel>Elimina il mio voto e la recensione</button>':""}</div><p id="cmsg" class="kd" role="status"></p></div>`
+:`<div class="cm-me"><button class="go dgo alt" type="button" data-authopen>Accedi per votare e recensire</button></div>`)+
+(list.length?`<ul class="rv">${list.map(r=>`<li>${avt(r.profiles&&r.profiles.nickname,r.profiles&&r.profiles.avatar,30)}<div><div><b>${esc((r.profiles&&r.profiles.nickname)||"utente")}</b> ${cupRO(r.rating,1)} <span class="kd">${fmtRv(r.updated_at)}</span></div><p class="rt">${esc(r.body)}</p></div></li>`).join("")}</ul>${more?'<button class="link" type="button" data-more>Mostra altre recensioni</button>':""}`:"")}
+catch(e){if(alive())el.innerHTML='<p class="kd">Recensioni non disponibili al momento.</p>'}}
+// ---- pagina «I miei giocati» ----
+function renderSeen(){const el=$("seenview"),n=SEEN.length;
+const rated=Object.keys(MYR).filter(id=>isSeen(Number(id))).length;
+el.innerHTML=`<button id="sback" class="link" type="button">← Torna alla home</button><h2 style="margin-top:10px">I miei giocati</h2>`+
+(n?`<p class="ov">${n} ${n>1?"giochi":"gioco"}${ME?` · ${rated} con il tuo voto`:""}</p><div class="svg">${SEEN.map(x=>{const r=MYR[x.id];return`<article class="svc"><button class="svp" type="button" data-d="f${x.id}" aria-label="Dettagli di ${esc(x.t)}">${x.c?`<img src="${cov(x.c,"cover_big")}" alt="" loading="lazy">`:`<span class="ph">${esc(ini(x.t))}</span>`}</button><div class="svb"><button class="l" type="button" data-d="f${x.id}">${esc(x.t)}${x.y?" ("+esc(x.y)+")":""}</button>${SB_ON?cupRW(x.id,r?r.rating:0):""}${r&&r.body?`<p class="svr">${esc(r.body)}</p>`:""}<div class="sva">${SB_ON?`<button class="link" type="button" data-d="f${x.id}">${r&&r.body?"Modifica recensione":"Scrivi recensione"}</button>`:"<span></span>"}<button class="svx" type="button" data-unsee="${x.id}" aria-label="Togli ${esc(x.t)} dai giocati">✕</button></div></div></article>`}).join("")}</div>`
+:`<p class="ov">Non hai ancora segnato nessun gioco. Apri un gioco e premi «Segna come giocato»: lo ritroverai qui.</p>`)+
+(SB_ON?(ME?`<p class="kd" style="margin-top:14px">I tuoi giocati sono salvati nel tuo account e sono privati. Voti e recensioni sono pubblici con il tuo nickname.</p>`:`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo. <button class="link" type="button" data-authopen>Accedi o registrati</button> per sincronizzarlo, dare voti in coppe e scrivere recensioni.</p>`):`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo.</p>`)}
+function showSeenView(){lastFocus=document.activeElement;closeDlg();show("seen");$("res").innerHTML="";setMsg("");sugKill();renderSeen();window.scrollTo(0,0)}
+$("seenbtn").addEventListener("click",showSeenView);
+$("accb").addEventListener("click",()=>ME?showProfile():authDlg("in"));
+// ---- pagina profilo ----
+function showProfile(){lastFocus=document.activeElement;closeDlg();show("prof");$("res").innerHTML="";setMsg("");sugKill();renderProfile();window.scrollTo(0,0)}
+function renderProfile(){const el=$("profview");if(!ME){show("home");return}
+const L=Object.values(MYR).sort((a,b)=>String(b.updated_at||"").localeCompare(String(a.updated_at||""))),nv=L.length,nr=L.filter(x=>x.body).length,av=nv?(L.reduce((s,x)=>s+x.rating,0)/nv).toFixed(1).replace(".",","):"";
+el.innerHTML=`<button id="pback" class="link" type="button">← Torna alla home</button>
+<div class="phd">${avt(ME.nick,ME.avatar,88)}<div><h2 style="margin:0">${esc(ME.nick)}</h2><p class="kd" style="margin:2px 0 8px">${esc(ME.email)}</p><button class="go dgo alt" type="button" data-pavatar>${ME.avatar?"Cambia foto":"Aggiungi foto"}</button>${ME.avatar?' <button class="link" type="button" data-pavrm>Rimuovi foto</button>':""}<input id="avf" type="file" accept="image/*" hidden><p id="amsg2" class="err" role="alert"></p></div></div>
+<form id="nf" novalidate><label class="fl">Nome utente (3-20 caratteri: lettere, numeri, . _ -)<input name="nick" value="${esc(ME.nick)}" maxlength="20" autocomplete="nickname"></label><p id="nmsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva nome</button></form>
+<h3 style="margin:26px 0 4px">I miei voti e recensioni</h3>${nv?`<p class="kd">${nv} ${nv>1?"voti":"voto"} · ${nr} ${nr===1?"recensione":"recensioni"} · media ${av} su 5</p><ul class="rv mine">${L.map(r=>`<li>${poster(r.cover,r.title)}<div><button class="l" type="button" data-d="f${r.game_id}">${esc(r.title)}${r.year?" ("+esc(r.year)+")":""}</button><div>${cupRO(r.rating,1)} <span class="kd">${fmtRv(r.updated_at)}</span></div>${r.body?`<p class="rt">${esc(r.body)}</p>`:""}</div></li>`).join("")}</ul>`:'<p class="ov">Non hai ancora dato nessun voto. Apri un gioco dai tuoi giocati e assegna le tue coppe.</p>'}
+<p class="kd" style="margin-top:12px">Nome, foto, voti e recensioni sono pubblici. Email e giocati sono privati. Nome e foto valgono anche su CineLegami.</p>
+<div class="dact" style="margin-top:18px"><button class="go dgo" type="button" data-logout>Esci</button><button class="go dgo alt" type="button" data-delask>Elimina account</button></div><div id="delbox"></div>`}
+function toAvatar(file){return new Promise((ok,ko)=>{if(!file||!/^image\//.test(file.type)||file.size>15e6)return ko(new Error("file"));const fr=new FileReader();fr.onerror=()=>ko(new Error("read"));
+fr.onload=()=>{const im=new Image();im.onerror=()=>ko(new Error("img"));im.onload=()=>{const S=128,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d"),m=Math.min(im.width,im.height);if(!m)return ko(new Error("img"));
+x.fillStyle="#18181b";x.fillRect(0,0,S,S);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,S,S);let q=.85,u=c.toDataURL("image/jpeg",q);while(u.length>25000&&q>.4){q-=.1;u=c.toDataURL("image/jpeg",q)}ok(u)};im.src=fr.result};fr.readAsDataURL(file)})}
+async function patchProfile(o){const r=await sb("/rest/v1/profiles?id=eq."+encodeURIComponent(ME.id),{method:"PATCH",headers:{Prefer:"return=representation"},body:o});if(!r||!r.length)throw new Error("not saved");return r[0]}
+// ---- eventi ----
+document.addEventListener("click",async e=>{const t=e.target;if(!t.closest)return;
+const sv=t.closest("#seenview");
+if(sv){if(t.closest("#sback")){goHome();return}
+const d=t.closest("[data-d]");if(d&&!t.closest("[data-rate]")){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}
+const u=t.closest("[data-unsee]");if(u){const i=SEEN.findIndex(x=>x.id===Number(u.dataset.unsee));if(i>=0){SEEN.splice(i,1);store.set("gl_played",JSON.stringify(SEEN));updSeen();seenHook()}return}}
+const pv=t.closest("#profview");
+if(pv){if(t.closest("#pback")){goHome();return}
+const d=t.closest("[data-d]");if(d){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}
+if(t.closest("[data-pavatar]")){$("avf").click();return}
+if(t.closest("[data-pavrm]")){try{await patchProfile({avatar:null});ME.avatar=null;uiAcc();renderProfile();toast("Foto rimossa")}catch(x){$("amsg2").textContent=aerr(x)}return}}
+const ao=t.closest("[data-authopen]");if(ao){authDlg("in");return}
+const at=t.closest("[data-at]");if(at){authDlg(at.dataset.at);return}
+if(t.closest("[data-priv]")){privDlg();return}
+if(t.closest("[data-forgot]")){forgot();return}
+if(t.closest("[data-logout]")){try{await sb("/auth/v1/logout?scope=local",{method:"POST"})}catch(x){}clearSess();closeDlg();toast("Hai effettuato l'uscita.");return}
+if(t.closest("[data-delask]")){$("delbox").innerHTML=`<p class="ov"><b>Attenzione:</b> l'account è lo stesso di CineLegami. Verranno eliminati per sempre l'account e, su entrambi i siti, i titoli segnati, i voti e le recensioni. Per confermare scrivi <b>ELIMINA</b>.</p><input id="delin" class="delin" autocomplete="off" aria-label="Scrivi ELIMINA per confermare"><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="button" data-delgo>Elimina definitivamente</button>`;$("delin").focus();return}
+if(t.closest("[data-delgo]")){if($("delin").value.trim().toUpperCase()!=="ELIMINA"){$("amsg").textContent="Scrivi ELIMINA per confermare.";return}
+try{await sb("/rest/v1/rpc/delete_my_account",{method:"POST",body:{}});clearSess();closeDlg();toast("Account eliminato.")}catch(x){$("amsg").textContent=aerr(x)}return}
+const rt=t.closest("[data-rate]");if(rt){const id=Number(rt.dataset.k),m=metaFor(id);if(!m)return;
+if(!ME){authDlg("in","Accedi o registrati per dare voti e scrivere recensioni.");return}
+try{if(await rate(m,Number(rt.dataset.rate))){if(COMM&&COMM.m.id===id&&$("comm"))renderComm();refreshViews();toast("Voto salvato")}}catch(x){toast(aerr(x))}return}
+if(t.closest("[data-revsave]")){const id=COMM&&COMM.m.id,mine=id&&MYR[id];if(!mine){$("cmsg").textContent="Prima scegli un voto da 1 a 5 coppe.";return}
+const b=$("rvt").value.trim()||null;try{await rate(COMM.m,mine.rating,b);COMM.draft=null;await renderComm();toast(b?"Recensione pubblicata":"Voto salvato")}catch(x){$("cmsg").textContent=aerr(x)}return}
+if(t.closest("[data-revdel]")){const id=COMM&&COMM.m.id;if(!id||!ME)return;
+try{await sb("/rest/v1/game_reviews?game_id=eq."+Number(id)+"&user_id=eq."+encodeURIComponent(ME.id),{method:"DELETE"});delete MYR[id];COMM.draft=null;await renderComm();refreshViews();toast("Eliminata")}catch(x){toast(aerr(x))}return}
+if(t.closest("[data-more]")&&COMM){COMM.more+=10;COMM.draft=$("rvt")?$("rvt").value:null;renderComm();return}
+});
+$("dlg").addEventListener("submit",async e=>{e.preventDefault();const f=e.target;if(busy)return;
+if(f.id==="af"){busy=true;const b=f.querySelector("[type=submit]");b.disabled=true;$("amsg").style.color="";$("amsg").textContent="";
+try{await submitAuth(f)}catch(x){const a=$("amsg");if(a)a.textContent=aerr(x)}finally{busy=false;b.disabled=false}}
+else if(f.id==="rf"){const pw=f.elements.pw.value;if(pw.length<8){$("amsg").textContent="La password deve avere almeno 8 caratteri.";return}
+busy=true;try{await sb("/auth/v1/user",{method:"PUT",body:{password:pw}});closeDlg();toast("Password aggiornata")}catch(x){$("amsg").textContent=aerr(x)}finally{busy=false}}});
+$("profview").addEventListener("submit",async e=>{e.preventDefault();if(e.target.id!=="nf"||busy||!ME)return;const n=e.target.elements.nick.value.trim(),out=$("nmsg");out.style.color="";
+if(n===ME.nick){out.textContent="";return}
+if(!/^[A-Za-z0-9_.-]{3,20}$/.test(n)){out.textContent="Nome non valido: 3-20 caratteri tra lettere, numeri, punto, trattino e underscore.";return}
+busy=true;try{if(n.toLowerCase()!==ME.nick.toLowerCase()&&!await nickFree(n)){out.textContent="Questo nome è già in uso: scegline un altro.";return}
+await patchProfile({nickname:n});ME.nick=n;uiAcc();renderProfile();toast("Nome aggiornato")}catch(x){out.textContent=aerr(x)}finally{busy=false}});
+$("profview").addEventListener("change",async e=>{if(e.target.id!=="avf"||!ME)return;const f=e.target.files&&e.target.files[0];e.target.value="";if(!f)return;const out=$("amsg2");out.textContent="";
+try{const u=await toAvatar(f);await patchProfile({avatar:u});ME.avatar=u;uiAcc();renderProfile();toast("Foto aggiornata")}catch(x){const o=$("amsg2");if(o)o.textContent=x&&/^(file|read|img)$/.test(x.message)?"Non riesco a leggere questa immagine: prova con un'altra foto (JPG o PNG).":aerr(x)}});
+// ---- avvio: sessione salvata o link ricevuto per email ----
+(async function bootAcc(){uiAcc();if(!SB_ON)return;
+const h=new URLSearchParams(AUTHHASH.replace(/^#/,""));
+if(h.get("access_token")&&h.get("refresh_token")){const ty=h.get("type");setSess({access_token:h.get("access_token"),refresh_token:h.get("refresh_token"),expires_in:Number(h.get("expires_in"))||3600});
+await loadMe();
+if(ty==="recovery")newPwDlg();else toast("Email confermata: sei dentro!")}
+else if(h.get("error_description"))toast("Il link non è più valido: richiedine uno nuovo.");
+else if(SESS)await loadMe()})();
 </script>
 </body>
 </html>
