@@ -218,6 +218,7 @@ main:has(#home:not([hidden])) .mark,main:has(#seenview:not([hidden])) .mark{disp
 #profview[hidden]{display:none}
 .rv.mine li{align-items:flex-start}
 .os svg,.top svg,.accb svg{min-width:0}
+.home{display:block;color:inherit;text-decoration:none;border-radius:14px;transition:opacity .2s}.home:hover{opacity:.85}.home:focus-visible{outline:3px solid var(--acc);outline-offset:4px}
 a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-color:var(--acc)}
 .pv .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--bd);font-size:.65rem;font-weight:800}
 </style>
@@ -225,8 +226,8 @@ a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-c
 <body>
 <main>
 <div class="top"><button id="accb" class="accb" type="button" hidden>Accedi</button></div>
-<img src="logo-simbolo.png" alt="" class="mark" width="440" height="439">
-<h1><img src="logo-scritta.png" alt="GiocoLegami" class="logo" width="760" height="144"></h1>
+<a href="./" class="home" data-home aria-label="GiocoLegami, torna alla pagina iniziale"><img src="logo-simbolo.png" alt="" class="mark" width="440" height="439">
+<h1><img src="logo-scritta.png" alt="GiocoLegami" class="logo" width="760" height="144"></h1></a>
 <p class="sub">Scopri i collegamenti tra i videogiochi</p>
 <div class="row"><div class="sw"><input id="q" placeholder="Cerca un videogioco, uno studio o un editore" autocomplete="off" aria-label="Cosa vuoi cercare" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list"><ul id="sug" class="sug" role="listbox" hidden></ul></div><button id="go" class="go" type="button">Cerca</button></div>
 <div id="seg" class="seg" role="group" aria-label="Cosa cercare"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="game" aria-pressed="false">Giochi</button><button type="button" data-fl="company" aria-pressed="false">Studi ed editori</button><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri i miei giocati">✓ Giocati <b id="seenn">0</b></button></div>
@@ -245,7 +246,6 @@ a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-c
 <section id="seenview" hidden></section>
 <section id="profview" hidden></section>
 <div id="film" hidden>
-<button id="back" class="link" type="button">← Novità</button>
 <div class="box"><svg id="g" viewBox="0 0 980 660" role="img" aria-label="Grafo dei collegamenti"></svg></div>
 <div class="leg">
 <span><b class="pa ini" style="width:14px;height:14px;margin:0"></b>Studio di sviluppo</span>
@@ -714,7 +714,8 @@ $("seg").addEventListener("click",e=>{const b=e.target.closest("[data-fl]");if(!
 $("seg").querySelectorAll("button[data-fl]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
 $("q").placeholder={all:"Cerca un videogioco, uno studio o un editore",game:"Cerca un videogioco",company:"Cerca uno studio o un editore"}[FILT];
 if($("q").value.trim()&&$("q").value.trim()===lastQ)cerca()});
-$("back").addEventListener("click",goHome);
+// il logo riporta alla pagina iniziale
+document.querySelector("[data-home]").addEventListener("click",e=>{e.preventDefault();closeDlg();sugKill();$("res").innerHTML="";setMsg("");$("q").value="";goHome();window.scrollTo({top:0,behavior:"smooth"})});
 $("go").addEventListener("click",cerca);
 $("q").addEventListener("keydown",e=>{if(e.key==="Enter")cerca()});
 {const m=AUTHHASH.match(/^#([gc])(\d+)$/);if(/access_token|error_description/.test(AUTHHASH)){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
@@ -835,7 +836,7 @@ catch(e){if(alive())el.innerHTML='<p class="kd">Recensioni non disponibili al mo
 // ---- pagina «I miei giocati» ----
 function renderSeen(){const el=$("seenview"),n=SEEN.length;
 const rated=Object.keys(MYR).filter(id=>isSeen(Number(id))).length;
-el.innerHTML=`<button id="sback" class="link" type="button">← Torna alla home</button><h2 style="margin-top:10px">I miei giocati</h2>`+
+el.innerHTML=`<h2 style="margin-top:10px">I miei giocati</h2>`+
 (n?`<p class="ov">${n} ${n>1?"giochi":"gioco"}${ME?` · ${rated} con il tuo voto`:""}</p><div class="svg">${SEEN.map(x=>{const r=MYR[x.id];return`<article class="svc"><button class="svp" type="button" data-d="f${x.id}" aria-label="Dettagli di ${esc(x.t)}">${x.c?`<img src="${cov(x.c,"cover_big")}" alt="" loading="lazy">`:`<span class="ph">${esc(ini(x.t))}</span>`}</button><div class="svb"><button class="l" type="button" data-d="f${x.id}">${esc(x.t)}${x.y?" ("+esc(x.y)+")":""}</button>${SB_ON?cupRW(x.id,r?r.rating:0):""}${r&&r.body?`<p class="svr">${esc(r.body)}</p>`:""}<div class="sva">${SB_ON?`<button class="link" type="button" data-d="f${x.id}">${r&&r.body?"Modifica recensione":"Scrivi recensione"}</button>`:"<span></span>"}<button class="svx" type="button" data-unsee="${x.id}" aria-label="Togli ${esc(x.t)} dai giocati">✕</button></div></div></article>`}).join("")}</div>`
 :`<p class="ov">Non hai ancora segnato nessun gioco. Apri un gioco e premi «Segna come giocato»: lo ritroverai qui.</p>`)+
 (SB_ON?(ME?`<p class="kd" style="margin-top:14px">I tuoi giocati sono salvati nel tuo account e sono privati. Voti e recensioni sono pubblici con il tuo nickname.</p>`:`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo. <button class="link" type="button" data-authopen>Accedi o registrati</button> per sincronizzarlo, dare voti in coppe e scrivere recensioni.</p>`):`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo.</p>`)}
@@ -846,8 +847,7 @@ $("accb").addEventListener("click",()=>ME?showProfile():authDlg("in"));
 function showProfile(){lastFocus=document.activeElement;closeDlg();show("prof");$("res").innerHTML="";setMsg("");sugKill();renderProfile();window.scrollTo(0,0)}
 function renderProfile(){const el=$("profview");if(!ME){show("home");return}
 const L=Object.values(MYR).sort((a,b)=>String(b.updated_at||"").localeCompare(String(a.updated_at||""))),nv=L.length,nr=L.filter(x=>x.body).length,av=nv?(L.reduce((s,x)=>s+x.rating,0)/nv).toFixed(1).replace(".",","):"";
-el.innerHTML=`<button id="pback" class="link" type="button">← Torna alla home</button>
-<div class="phd">${avt(ME.nick,ME.avatar,88)}<div><h2 style="margin:0">${esc(ME.nick)}</h2><p class="kd" style="margin:2px 0 8px">${esc(ME.email)}</p><button class="go dgo alt" type="button" data-pavatar>${ME.avatar?"Cambia foto":"Aggiungi foto"}</button>${ME.avatar?' <button class="link" type="button" data-pavrm>Rimuovi foto</button>':""}<input id="avf" type="file" accept="image/*" hidden><p id="amsg2" class="err" role="alert"></p></div></div>
+el.innerHTML=`<div class="phd">${avt(ME.nick,ME.avatar,88)}<div><h2 style="margin:0">${esc(ME.nick)}</h2><p class="kd" style="margin:2px 0 8px">${esc(ME.email)}</p><button class="go dgo alt" type="button" data-pavatar>${ME.avatar?"Cambia foto":"Aggiungi foto"}</button>${ME.avatar?' <button class="link" type="button" data-pavrm>Rimuovi foto</button>':""}<input id="avf" type="file" accept="image/*" hidden><p id="amsg2" class="err" role="alert"></p></div></div>
 <form id="nf" novalidate><label class="fl">Nome utente (3-20 caratteri: lettere, numeri, . _ -)<input name="nick" value="${esc(ME.nick)}" maxlength="20" autocomplete="nickname"></label><p id="nmsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva nome</button></form>
 <h3 style="margin:26px 0 4px">I miei voti e recensioni</h3>${nv?`<p class="kd">${nv} ${nv>1?"voti":"voto"} · ${nr} ${nr===1?"recensione":"recensioni"} · media ${av} su 5</p><ul class="rv mine">${L.map(r=>`<li>${poster(r.cover,r.title)}<div><button class="l" type="button" data-d="f${r.game_id}">${esc(r.title)}${r.year?" ("+esc(r.year)+")":""}</button><div>${cupRO(r.rating,1)} <span class="kd">${fmtRv(r.updated_at)}</span></div>${r.body?`<p class="rt">${esc(r.body)}</p>`:""}</div></li>`).join("")}</ul>`:'<p class="ov">Non hai ancora dato nessun voto. Apri un gioco dai tuoi giocati e assegna le tue coppe.</p>'}
 <p class="kd" style="margin-top:12px">Nome, foto, voti e recensioni sono pubblici. Email e giocati sono privati. Nome e foto valgono anche su CineLegami.</p>
@@ -859,11 +859,11 @@ async function patchProfile(o){const r=await sb("/rest/v1/profiles?id=eq."+encod
 // ---- eventi ----
 document.addEventListener("click",async e=>{const t=e.target;if(!t.closest)return;
 const sv=t.closest("#seenview");
-if(sv){if(t.closest("#sback")){goHome();return}
+if(sv){
 const d=t.closest("[data-d]");if(d&&!t.closest("[data-rate]")){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}
 const u=t.closest("[data-unsee]");if(u){const i=SEEN.findIndex(x=>x.id===Number(u.dataset.unsee));if(i>=0){SEEN.splice(i,1);store.set("gl_played",JSON.stringify(SEEN));updSeen();seenHook()}return}}
 const pv=t.closest("#profview");
-if(pv){if(t.closest("#pback")){goHome();return}
+if(pv){
 const d=t.closest("[data-d]");if(d){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}
 if(t.closest("[data-pavatar]")){$("avf").click();return}
 if(t.closest("[data-pavrm]")){try{await patchProfile({avatar:null});ME.avatar=null;uiAcc();renderProfile();toast("Foto rimossa")}catch(x){$("amsg2").textContent=aerr(x)}return}}
