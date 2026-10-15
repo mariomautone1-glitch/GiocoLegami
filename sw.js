@@ -1,6 +1,6 @@
 // GiocoLegami: salva la pagina sul telefono così si apre subito; i dati dei giochi arrivano sempre dalla rete.
-const V = "giocolegami-v6";
-const SHELL = ["./", "index.html", "manifest.webmanifest", "logo-scritta.png", "logo-simbolo.png", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
+const V = "giocolegami-v7";
+const SHELL = ["./", "index.html", "manifest.webmanifest", "logo-scritta.png?v=7", "logo-simbolo.png?v=7", "icon-192.png?v=7", "icon-512.png?v=7", "apple-touch-icon.png?v=7"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(V).then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -19,7 +19,7 @@ self.addEventListener("fetch", (e) => {
   if (u.origin === location.origin) {
     // pagina e icone: prima la rete (così gli aggiornamenti arrivano), se manca la rete usa la copia salvata
     e.respondWith(
-      fetch(r).then((res) => {
+      fetch(r, { cache: "no-cache" }).then((res) => {
         if (res.ok) { const copy = res.clone(); caches.open(V).then((c) => c.put(r, copy)); }
         return res;
       }).catch(() => caches.match(r).then((m) => m || caches.match("index.html")))
