@@ -1,5 +1,5 @@
 // GiocoLegami: salva la pagina sul telefono così si apre subito; i dati dei giochi arrivano sempre dalla rete.
-const V = "giocolegami-v5";
+const V = "giocolegami-v6";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "logo-scritta.png", "logo-simbolo.png", "icon-192.png", "icon-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", (e) => {
