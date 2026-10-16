@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mariomautone1-glitch.github.io/giocolegami/sitemap.xml
