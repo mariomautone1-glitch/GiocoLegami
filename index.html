@@ -359,14 +359,30 @@ body.dlgopen .recobtn{animation:none}
 .smv.go{min-height:34px;padding:6px 12px;font-size:.8rem}
 .simbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
 .simbar .kd{flex:1 1 220px}
+/* ===== passaggio CineLegami / GiocoLegami ===== */
+main{position:relative}
+.sitesw{position:absolute;top:10px;left:12px;z-index:5;display:flex;gap:6px;padding:4px;border-radius:999px;background:rgba(24,24,27,.72);border:1px solid var(--bd);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.sitesw a{--c:#f2b447;--cr:242,180,71;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:.8rem;font-weight:600;line-height:1;color:var(--mut);text-decoration:none;border:1px solid transparent;transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .25s,color .25s,box-shadow .3s,border-color .25s}
+.sitesw a+a{--c:#a98be0;--cr:169,139,224}
+.sitesw a::before{content:"";flex:none;width:15px;height:15px;background:var(--c);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.sitesw a:first-child{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM5 5v2h2V5H5zm0 4v2h2V9H5zm0 4v2h2v-2H5zm0 4v2h2v-2H5zM17 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2zM9 5v14h6V5H9z'/%3E%3C/svg%3E")}.sitesw a+a{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M6.5 7h11a4.5 4.5 0 0 1 4.4 5.4l-.9 4.2a2.8 2.8 0 0 1-4.7 1.4L14.4 16.5H9.6l-1.9 1.5a2.8 2.8 0 0 1-4.7-1.4l-.9-4.2A4.5 4.5 0 0 1 6.5 7zM7 10v1.5H5.5v1.4H7v1.5h1.4v-1.5h1.5v-1.4H8.4V10H7zm9.3.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zm2.4 2.4a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z'/%3E%3C/svg%3E")}
+.sitesw a[aria-current=page]{color:#1a1204;background:linear-gradient(180deg,var(--c),rgba(var(--cr),.78));box-shadow:0 0 14px rgba(var(--cr),.45)}
+.sitesw a[aria-current=page]::before{background:#1a1204}
+@media(hover:hover){.sitesw a:not([aria-current]):hover{color:var(--fg);border-color:rgba(var(--cr),.55);background:rgba(var(--cr),.12);box-shadow:0 0 14px rgba(var(--cr),.3);transform:translateY(-1px)}.sitesw a:not([aria-current]):hover::before{transform:scale(1.2) rotate(-10deg)}}
+.sitesw a:active{transform:scale(.94)}
+@media(max-width:480px){.sitesw a span{display:none}.sitesw a{padding:7px 9px}.sitesw a::before{width:17px;height:17px}}
+@media(max-width:480px){.top{padding-left:96px;gap:6px}.top button{padding:6px 10px}}
+body.leaving main{opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
 </style>
 </head>
 <body>
 <main>
+<nav class="sitesw" aria-label="Cambia sito"><a href="https://cinelegami.it/" aria-label="Vai a CineLegami: film, serie e anime"><span>Film</span></a><a href="https://giocolegami.it/" aria-current="page" aria-label="GiocoLegami: i videogiochi"><span>Giochi</span></a></nav>
 <div class="top"><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri I miei giochi">I miei giochi <b id="seenn">0</b></button><button id="accb" class="accb" type="button" hidden>Accedi</button></div>
 <a href="./" class="home" data-home aria-label="GiocoLegami, torna alla pagina iniziale"><img src="logo-simbolo.png?v=7" alt="" class="mark" width="440" height="444">
 <h1><img src="logo-scritta.png?v=7" alt="GiocoLegami" class="logo" width="760" height="144"></h1></a>
 <p class="infol"><a href="info.html">Cos'è GiocoLegami e chi c'è dietro</a></p>
+<p class="infol"><a href="https://cinelegami.it/">Film e serie? Prova CineLegami</a></p>
 <p class="sub">Scopri i collegamenti tra i videogiochi</p>
 <div class="row"><div class="sw"><input id="q" placeholder="Cerca un videogioco, uno studio o un editore" autocomplete="off" aria-label="Cosa vuoi cercare" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list"><ul id="sug" class="sug" role="listbox" hidden></ul></div><button id="go" class="go" type="button">Cerca</button></div>
 <div id="seg" class="seg" role="group" aria-label="Cosa mostrare nella pagina principale"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="ps" aria-pressed="false">PlayStation</button><button type="button" data-fl="xbox" aria-pressed="false">Xbox</button><button type="button" data-fl="switch" aria-pressed="false">Nintendo</button><button type="button" data-fl="pc" aria-pressed="false">PC</button><i class="brk" aria-hidden="true"></i><button type="button" id="recobtn" class="recobtn">Consigli dalla community</button></div>
@@ -1016,6 +1032,9 @@ $("go").addEventListener("click",cerca);
 $("q").addEventListener("keydown",e=>{if(e.key==="Enter")cerca()});
 {const m=AUTHHASH.match(/^#([gc])(\d+)$/);if(/access_token|error_description/.test(AUTHHASH)){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
 if(m){if(m[1]==="g")loadGame(Number(m[2]));else loadCompany(Number(m[2]))}else{show("home");loadHome()}}
+document.querySelector(".sitesw").addEventListener("click",e=>{const a=e.target.closest("a");if(!a||a.hasAttribute("aria-current")||e.metaKey||e.ctrlKey||e.shiftKey||e.button>0)return;
+if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;e.preventDefault();document.body.classList.add("leaving");setTimeout(()=>{location.href=a.href},190)});
+addEventListener("pageshow",ev=>{if(ev.persisted)document.body.classList.remove("leaving")});
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script>
 <script>
