@@ -262,6 +262,7 @@ a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-c
 #recoview[hidden]{display:none}
 .rn{font-size:.82rem;color:var(--sim)}
 .rsec{margin:22px 0 0;font-size:1.05rem}
+.src{margin:4px 0 0}.src a{color:var(--mut)}
 /* ===== pulsanti luminosi (vetro scuro + bagliore colorato) ===== */
 :is(.seg,.top) button,.go,.accb{--c:#f6c445;--c2:#e0a417;--cr:250,192,34;--on:#1a1204;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:.92rem;line-height:1.1;min-height:42px;padding:9px 18px;border-radius:999px;color:var(--fg);cursor:pointer;-webkit-tap-highlight-color:transparent;
 border:1.5px solid rgba(var(--cr),.6);
@@ -386,7 +387,7 @@ body.dlgopen .recobtn{animation:none}
 <div id="info"></div>
 <div id="p"></div>
 </div>
-<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni sono tradotte automaticamente dall'inglese. Classifiche: Steam, Xbox Game Pass e IGDB. <button class="link" type="button" data-priv id="privl" hidden>Privacy</button> <a href="info.html">Info</a></p>
+<p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni in italiano da Wikipedia (licenza CC BY-SA) o da Steam; quando mancano, sono tradotte automaticamente dall'inglese. Classifiche: Steam, Xbox Game Pass e IGDB. <button class="link" type="button" data-priv id="privl" hidden>Privacy</button> <a href="info.html">Info</a></p>
 <p class="note copy">Copyright © 2026 Mario Mautone – Tutti i diritti riservati</p>
 </main>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="cup" viewBox="0 0 24 24"><path d="M7 3.5h10v5.2c0 3-2.2 5.4-5 5.4s-5-2.4-5-5.4z"/><path d="M7 5.2H4.2v1.6c0 2 1.4 3.6 3.3 3.9M17 5.2h2.8v1.6c0 2-1.4 3.6-3.3 3.9"/><path d="M10.6 14v3h2.8v-3"/><path d="M8.2 17.2h7.6l.8 3.3H7.4z"/></symbol></svg>
@@ -441,6 +442,23 @@ const trC=new Map();
 async function tr(t){if(!t)return"";if(trC.has(t))return trC.get(t);
 try{const r=await fetch(API+"/traduci",{method:"POST",body:t});if(!r.ok)return"";const j=await r.json();const x=j.testo||"";if(x)trC.set(t,x);return x}catch(e){return""}}
 async function trInto(elId,t,n){const x=await tr(t);const el=$(elId);if(x&&el&&el.dataset.src===t)el.textContent=cut(x,n)}
+// testi in italiano veri (Wikipedia o Steam) tramite il servizio Cloudflare; se mancano, traduzione automatica
+const ITC=new Map(),ITD=new Map();
+const qG=(id,slug,name)=>"g="+Number(id)+"&slug="+encodeURIComponent(slug||"")+"&nome="+encodeURIComponent(name||"");
+const qC=(id,name)=>"c="+Number(id)+"&nome="+encodeURIComponent(name||"");
+function itText(q){if(!ITC.has(q))ITC.set(q,(async()=>{try{const r=await fetch(API+"/testo-it?"+q);if(!r.ok)return null;const j=await r.json();return j&&j.testo?j:null}catch(e){return null}})());return ITC.get(q)}
+const srcNote=j=>j.fonte==="wikipedia"?`<p class="kd src">Testo da <a href="${esc(j.url)}" target="_blank" rel="noopener">Wikipedia</a> · licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener">CC BY-SA 4.0</a></p>`:`<p class="kd src">Descrizione ufficiale da <a href="${esc(j.url)}" target="_blank" rel="noopener">Steam</a></p>`;
+function txtHtml(id,q,src,n,none,big){const cl="ov"+(big?" dbio":""),j=ITD.get(q);
+if(j)return`<p class="${cl}" id="${id}">${esc(cut(j.testo,n))}</p>${srcNote(j)}`;
+const t=src?(trC.get(src)||src):"";
+if(!t&&ITD.has(q))return none?`<p class="${cl}">${none}</p>`:"";
+return`<p class="${cl}" id="${id}" data-q="${esc(q)}" data-src="${esc(src||"")}">${t?esc(cut(t,n)):(none?"Carico…":"")}</p>`}
+async function txtFill(id,q,src,n,none){
+if(ITD.has(q)){if(!ITD.get(q)&&src&&!trC.has(src))trInto(id,src,n);return}
+const j=await itText(q);ITD.set(q,j);const e=$(id);if(!e||e.dataset.q!==q)return;
+if(j){e.textContent=cut(j.testo,n);e.removeAttribute("data-src");e.removeAttribute("data-q");e.insertAdjacentHTML("afterend",srcNote(j))}
+else if(src){if(trC.has(src))e.textContent=cut(trC.get(src),n);else trInto(id,src,n)}
+else if(none)e.textContent=none;else e.remove()}
 // ---- elenco dei giochi giocati (salvato solo su questo dispositivo) ----
 let SEEN=[];try{SEEN=JSON.parse(store.get("gl_played")||"[]")}catch(e){}if(!Array.isArray(SEEN))SEEN=[];
 const isSeen=id=>SEEN.some(x=>x.id===id);
@@ -470,7 +488,7 @@ return x.slice().sort((a,b)=>sh(b)-sh(a)||(b.total_rating_count||0)-(a.total_rat
 async function loadGame(id){
 const my=++tok;setMsg("Carico il gioco…");closeDlg();
 try{
-const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
+const base="name,slug,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
 const r=await tryApi("games",[
 `fields ${base},involved_companies.company.logo.image_id,${XF("similar_games")}; where id = ${id};`,
 `fields ${base},${XF("similar_games")}; where id = ${id};`,
@@ -496,7 +514,7 @@ const link=(f,key)=>{const o=L.get(f.id)||{f,who:[],sim:false};if(key&&!o.who.in
 E.forEach((e,i)=>{known[e.key]=res[i];res[i].slice(0,e.k==="c"?8:6).forEach(f=>link(f,e.key))});
 const sims=(d.similar_games||[]).filter(f=>f&&f.name);
 const W={id:d.id,name:d.name,first_release_date:d.first_release_date,cover:d.cover,total_rating_count:d.total_rating_count};
-cur={kind:"game",id:d.id,w:W,title:d.name,year:yr(d),rating:d.total_rating?Math.round(d.total_rating):0,summary:d.summary,cover:cv(d),E,known,igs:sims,sims:[],simAll:[],links:[...L.values()]};
+cur={kind:"game",id:d.id,slug:d.slug,w:W,title:d.name,year:yr(d),rating:d.total_rating?Math.round(d.total_rating):0,summary:d.summary,cover:cv(d),E,known,igs:sims,sims:[],simAll:[],links:[...L.values()]};
 applySims(cur,cs||[]);
 // se la community risponde dopo, il grafo si aggiorna da solo
 if(cs===null){const c=cur;csP.then(r=>{if(cur===c&&r&&r.length){applySims(c,r);R()}})}
@@ -762,7 +780,7 @@ const dev=P.filter(e=>e.k==="c"&&e.role!=="Editore"),pub=P.filter(e=>e.k==="c"&&
 let i;
 if(!isC){
 i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h2>${esc(cur.title)}</h2>${tags([cur.year,cur.rating&&"Voto "+cur.rating+"/100",...gen.map(g=>g.name)])}</div></div>`+
-(cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
+txtHtml("sum",qG(cur.id,cur.slug,cur.title),cur.summary,320)+
 (dev.length?`<div class="k">Sviluppo</div>${dev.map(ch).join("")}`:"")+
 (pub.length?`<div class="k">Edizione</div>${pub.map(ch).join("")}`:"")+
 (gen.length?`<div class="k">Genere</div>${gen.map(ch).join("")}`:"")+
@@ -771,7 +789,7 @@ i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h
 `<div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}<div class="dact"><button class="go alt${isSeen(cur.id)?" on":""}" type="button" data-seenc="1">${isSeen(cur.id)?"✓ Giocato":"Segna come giocato"}</button>${sbOn()?'<button class="go alt rc" type="button" data-recc="1">Consiglia</button>':""}</div></section>`}
 else{const kn=cur.known[cur.center.key]||[];
 i=`<section class="card p ${ecl(cur.center)}"><div class="hd">${pa(cur.center,1)}<div><h2>${esc(cur.title)}</h2>${tags(cur.facts)}</div></div>`+
-(cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
+txtHtml("sum",qC(cur.id,cur.title),cur.summary,320)+
 `<div class="k">Partner frequenti</div>${comp.map(ch).join("")||'<span class="kd">nessuno trovato</span>'}`+
 (gen.length?`<div class="k">Generi principali</div>${gen.map(ch).join("")}`:"")+
 `<div class="k">Giochi più noti</div><div>${kn.slice(0,10).map(fc).join("")}</div></section>`}
@@ -779,7 +797,7 @@ const e=P.find(x=>x.key===sel);
 if(e&&e.k==="s"){i=`<section class="card p sim"><div class="hd">${pa(e,1)}<div><h2>Giochi simili a ${esc(cur.title)}</h2>${tags(["IGDB e community"])}</div></div><p class="ov">Secondo IGDB e i giocatori di GiocoLegami: voti di somiglianza, fan e giocatori in comune.${sbOn()?" Premi «È simile» per dare il tuo voto.":""}</p>${simRows(cur.simAll.slice(0,10),false,cur.w)}${simBar(cur.w)}</section>`+i}
 else if(e){const kn=cur.known[e.key];
 i=`<section class="card p ${ecl(e)}"><div class="hd">${pa(e,1)}<div><h2>${esc(e.name)}</h2>${tags([e.role])}</div></div>`+
-(e.desc?`<p class="ov" id="edesc" data-src="${esc(e.desc)}">${esc(cut(trC.get(e.desc)||e.desc,320))}</p>`:"")+
+(e.k==="c"?txtHtml("edesc",qC(e.id,e.name),e.desc,320):"")+
 `<div class="k">${e.k==="g"?"Giochi simili per tipologia":"Altri giochi di "+esc(e.name)}</div><div>${kn?(kn.slice(0,10).map(fc).join("")||"Nessun altro gioco trovato."):"Carico…"}</div>`+
 `<div class="dact"><button class="go dgo" type="button" data-det="${e.key}">Dettagli</button>${e.k==="c"?`<button class="go dgo alt" type="button" data-go="${e.key}">Scopri i legami</button>`:""}</div></section>`+i;
 if(!kn)ensureKnown(e)}
@@ -788,9 +806,9 @@ i=`<section class="card"><div class="hd">${poster(cv(fsel.f),fsel.f.name,1)}<div
 (com.length?`<div class="k">In comune</div>${com.map(ch).join("")}`:"")+
 `<div class="dact"><button class="go dgo" type="button" data-det="f${fsel.f.id}">Dettagli</button><button class="go dgo alt" type="button" data-go="f${fsel.f.id}">Scopri i legami</button><button class="go dgo alt${isSeen(fsel.f.id)?" on":""}" type="button" data-sk="${fsel.f.id}">${isSeen(fsel.f.id)?"✓ Giocato":"Segna come giocato"}</button>${sbOn()?`<button class="go dgo alt rc" type="button" data-recf="${fsel.f.id}">Consiglia</button>`:""}${fsel.cmv&&sbOn()&&!isC?`<button class="go dgo alt sm${simVoted(cur.id,fsel.f.id)?" on":""}" type="button" data-simv="${fsel.f.id}" data-simb="${cur.id}" aria-pressed="${simVoted(cur.id,fsel.f.id)}">${simVoted(cur.id,fsel.f.id)?"✓ Simile per te":"È simile"}</button>`:""}</div></section>`+i;if(fsel.cmv){SIMO.set(fsel.f.id,fsel.f);SIMO.set(cur.id,cur.w)}}
 $("info").innerHTML=i;
-if(cur.summary&&!trC.has(cur.summary))trInto("sum",cur.summary,320);
+txtFill("sum",isC?qC(cur.id,cur.title):qG(cur.id,cur.slug,cur.title),cur.summary,320);
 if(!isC&&$("wh")){const ck=cur;fillWhere("wh",cur.id,()=>cur===ck)}
-if(e&&e.desc&&!trC.has(e.desc))trInto("edesc",e.desc,320);
+if(e&&e.k==="c")txtFill("edesc",qC(e.id,e.name),e.desc,320);
 $("p").innerHTML=`<h2>${isC?"Giochi di ":"Giochi collegati a "}${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${ckm(o.f.id)}${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.filter(key=>key!=="s").map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.cmv?simTags(o.cmv):""}</div></div></li>`).join("")+"</ul>"}
 
 // ---- ricerca: risultati e suggerimenti mentre si scrive (giochi, studi ed editori insieme) ----
@@ -903,7 +921,7 @@ try{
 if(key==="s"){if(!cur||!cur.simAll){closeDlg();return}
 openDlg(`<div class="dtop"><span class="dposter sim"><svg viewBox="-10 -10 20 20" aria-hidden="true">${SIMI()}</svg></span><div><h2 id="dt">Giochi simili a ${esc(cur.title)}</h2>${tags(["IGDB e community"])}<p class="ov">Secondo IGDB e i giocatori di GiocoLegami: voti di somiglianza, fan e giocatori in comune.</p></div></div>${simRows(cur.simAll.slice(0,16),true,cur.w)}${simBar(cur.w)}`);return}
 if(key[0]==="f"){const id=Number(key.slice(1));
-const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,platforms.abbreviation,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
+const base="name,slug,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,platforms.abbreviation,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
 const d=(await tryApi("games",[`fields ${base},involved_companies.company.logo.image_id,${XF("similar_games")}; where id = ${id};`,`fields ${base},${XF("similar_games")}; where id = ${id};`]))[0];
 if(my!==dTok)return;if(!d)throw{code:"http"};
 dW=Object.assign({},d,{id});const igl=(d.similar_games||[]).filter(f=>f&&f.name);const here=!!cur&&cur.kind==="game"&&cur.id===id,o=cur&&cur.links?cur.links.find(x=>x.f.id===id):null;
@@ -914,7 +932,7 @@ const plat=(d.platforms||[]).map(p=>p.abbreviation).filter(Boolean).slice(0,8).j
 const rate=d.total_rating?"★ "+Math.round(d.total_rating)+"/100 ("+(d.total_rating_count||0)+" voti)":"";
 const com=o?o.who.filter(k=>k!=="s").map(k=>(cur.E.find(x=>x.key===k)||{}).name).filter(Boolean).join(", "):"";
 openDlg(`<div class="dtop">${cv(d)?`<img class="dposter" src="${cov(cv(d),"cover_big")}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([d.first_release_date?fmtLong(d.first_release_date):"",...(d.genres||[]).map(g=>GIT[g.id]||g.name)])}${rate?`<p class="ov">${esc(rate)}</p>`:""}${plat?`<p class="ov"><span class="kd">Piattaforme:</span> ${esc(plat)}</p>`:""}</div></div>`+
-dtext(d.summary,"Trama non disponibile.")+
+txtHtml("dsum",qG(id,d.slug,d.name),d.summary,5000,"Trama non disponibile.",1)+
 (com?`<p class="ov"><b>In comune:</b> ${esc(com)}</p>`:"")+
 (devs.length?`<div class="k">Sviluppo</div><div>${devs.map(dec).join("")}</div>`:"")+
 (pubs.length?`<div class="k">Edizione</div><div>${pubs.map(dec).join("")}</div>`:"")+
@@ -922,7 +940,7 @@ dtext(d.summary,"Trama non disponibile.")+
 `<div class="k">Dove giocarlo</div><div id="whd" class="wh">Carico…</div><div class="k">Community</div><div id="comm" class="comm">Carico…</div>`+(sbOn()?`<div class="k">Consigliato dalla community</div><div id="reco" class="comm">Carico…</div>`:"")+
 `<div class="dact">${here?"":`<button class="go dgo" type="button" data-go="${key}">Scopri i legami</button>`}<button class="go dgo alt${isSeen(id)?" on":""}" type="button" data-seen="1">${isSeen(id)?"✓ Giocato":"Segna come giocato"}</button>${sbOn()?'<button class="go dgo alt rc" type="button" data-recd="1">Consiglia</button>':""}</div>`);
 const dw=Object.assign({},d,{id}),alive=()=>my===dTok;
-if(d.summary)trInto("dsum",d.summary,5000);fillWhere("whd",id,alive);if(typeof fillSimD==="function")fillSimD(dw,igl,alive);if(typeof fillComm==="function"){fillComm(dw,alive);if(typeof fillReco==="function")fillReco(dw,alive)}}
+txtFill("dsum",qG(id,d.slug,d.name),d.summary,5000,"Trama non disponibile.");fillWhere("whd",id,alive);if(typeof fillSimD==="function")fillSimD(dw,igl,alive);if(typeof fillComm==="function"){fillComm(dw,alive);if(typeof fillReco==="function")fillReco(dw,alive)}}
 else if(key[0]==="c"){const id=Number(key.slice(1));
 const d=(await tryApi("companies",[`fields name,description,start_date,country,logo.image_id,developed,published; where id = ${id};`,`fields name,description,start_date,country,developed,published; where id = ${id};`]))[0];
 if(!d)throw{code:"http"};
@@ -931,10 +949,10 @@ const games=await knownOf(Object.assign({},C),null);dAll=await allOf(id).catch((
 if(my!==dTok)return;
 const here=!!cur&&cur.kind==="company"&&cur.id===id;
 openDlg(`<div class="dtop">${C.logo?`<img class="dposter logo" src="${logo(C.logo)}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([C.role,COUNTRY[d.country]])}${d.start_date?`<p class="ov">Fondata il ${esc(fmtLong(d.start_date))}</p>`:""}<p class="ov kd">${(d.developed||[]).length} giochi sviluppati · ${(d.published||[]).length} pubblicati</p></div></div>`+
-dtext(d.description,"Nessuna descrizione disponibile.")+
+txtHtml("dsum",qC(id,d.name),d.description,5000,"Nessuna descrizione disponibile.",1)+
 `<div class="k">Giochi più noti</div><div>${games.slice(0,10).map(dfc).join("")||'<span class="kd">nessun gioco trovato</span>'}</div>`+(dAll.length>Math.min(10,games.length)?`<button class="go dgo alt" type="button" data-all="1" aria-expanded="false">Vedi tutti i giochi (${dAll.length})</button><div id="allw" hidden></div>`:"")+
 (here?"":`<div class="dact"><button class="go dgo" type="button" data-go="${key}">Scopri i legami</button></div>`));
-if(d.description)trInto("dsum",d.description,5000)}
+txtFill("dsum",qC(id,d.name),d.description,5000,"Nessuna descrizione disponibile.")}
 else{const id=Number(key.slice(1)),name=GIT[id]||(cur&&cur.E.find(x=>x.key===key)||{}).name||"Genere";
 const games=await knownOf({k:"g",id},null);
 if(my!==dTok)return;
