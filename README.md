@@ -18,18 +18,25 @@ Segna i giochi che hai giocato nella lista «I miei giochi»: senza account rest
 - `giocolegami-supabase.sql`: crea nel database le tabelle per giochi, voti e recensioni (da eseguire una volta).
 - `giocolegami-supabase-2.sql`: aggiunge segnalazioni e utenti bloccati (da eseguire una volta, dopo il primo).
 - `giocolegami-supabase-3.sql`: aggiunge i consigli alla community e i giochi simili secondo la community (da eseguire una volta, dopo il secondo).
+- `giocolegami-supabase-4.sql`: voto in percentuale (0-100%) al posto delle coppe; i voti già dati diventano 20%, 40%… (da eseguire una volta, dopo il terzo).
 
 ## Account, voti e recensioni
 
 GiocoLegami usa lo stesso progetto Supabase di CineLegami: un solo account vale per entrambi i siti.
 
-1. Supabase, SQL Editor, New query: incolla `giocolegami-supabase.sql` e premi Run. Poi fai lo stesso con `giocolegami-supabase-2.sql` e infine con `giocolegami-supabase-3.sql`.
+1. Supabase, SQL Editor, New query: incolla `giocolegami-supabase.sql` e premi Run. Poi fai lo stesso con `giocolegami-supabase-2.sql` poi con `giocolegami-supabase-3.sql` e infine con `giocolegami-supabase-4.sql`.
 2. Supabase, Authentication, URL Configuration, Redirect URLs: aggiungi `https://giocolegami.it/` e `https://www.giocolegami.it/`.
    Serve perché i link delle email (conferma e nuova password) riportino su GiocoLegami.
 
 Il servizio risponde solo alle richieste che arrivano da `https://giocolegami.it`, `https://www.giocolegami.it` e `https://mariomautone1-glitch.github.io`.
 
 `CNAME` dice a GitHub Pages di usare il dominio giocolegami.it.
+
+## Email degli account (conferma, nuova password)
+
+Le email partono dal servizio Cloudflare `legami-posta` (file `legami-posta.js`), uno solo per i due siti:
+le email di GiocoLegami partono da info@giocolegami.it, quelle di CineLegami da info@cinelegami.it, tramite il server di posta di Aruba.
+Supabase lo chiama con «Send Email Hook» (Authentication > Hooks).
 
 ## Prima di guadagnarci
 
