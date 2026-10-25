@@ -6,7 +6,7 @@ Segna i giochi che hai giocato nella lista «I miei giochi»: senza account rest
 
 - **Sito:** https://giocolegami.it/ (indirizzo di riserva: https://mariomautone1-glitch.github.io/giocolegami/)
 - **Dati e immagini:** [IGDB.com](https://www.igdb.com), tramite il servizio Cloudflare `giocolegami`, che tiene nascoste le credenziali Twitch.
-- **Testi in italiano:** Wikipedia in italiano (trovata con Wikidata tramite il codice IGDB) o la descrizione ufficiale di Steam; se mancano, traduzione automatica. Indirizzo del servizio: `/testo-it`.
+- **Testi in italiano:** Wikipedia in italiano (trovata con Wikidata tramite il codice IGDB) o la descrizione ufficiale di Steam; se mancano, traduzione automatica. Indirizzo del servizio: `/testo-it`. Restituisce anche il voto Metacritic (da Wikidata o, per i giochi PC, da Steam).
 
 ## File
 
