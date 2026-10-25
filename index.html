@@ -424,7 +424,7 @@ const $=i=>document.getElementById(i),PI=Math.PI,CX=490,CY=330;
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 // Indirizzo del servizio Cloudflare che nasconde le credenziali di IGDB
 const API="https://giocolegami.mariomautone1.workers.dev";
-const NOW=Math.floor(Date.now()/1000),DAY=86400;
+const NOW=Math.floor(Date.now()/3600000)*3600,DAY=86400;   // arrotondato all'ora: le richieste uguali si riusano dalla memoria del servizio
 let aT=0,cur=null,sel=null,selF=null,hasSel=false,tok=0,last=0;
 // collegamenti con la parte account (più in basso): restano vuoti se gli account sono spenti
 const AUTHHASH=location.hash;let seenHook=()=>{},fillComm=null,commSim=null,fillSimD=null,fillReco=null,recoRail=null,simVoted=()=>false;
@@ -433,7 +433,7 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 const cache=new Map();
 async function api(ep,body){
 const ck=ep+"|"+body;if(cache.has(ck))return cache.get(ck);
-const wait=Math.max(0,last+270-Date.now());last=Date.now()+wait;if(wait)await new Promise(r=>setTimeout(r,wait));
+const wait=Math.max(0,last+130-Date.now());last=Date.now()+wait;if(wait)await new Promise(r=>setTimeout(r,wait));
 const r=await fetch(API+"/"+ep,{method:"POST",body});
 if(r.status===429)throw{code:"rate"};
 if(!r.ok)throw{code:"http",status:r.status};
@@ -506,15 +506,23 @@ const roleOf=(dev,pub)=>dev&&pub?"Studio ed editore":dev?"Studio":"Editore";
 const XF=p=>GF.split(",").map(x=>p+"."+x).join(",");
 
 // giochi di una casa o di un genere (per le schede e per i legami)
-async function knownOf(e,skipId,gids){
-if(e.k==="c"){const x=(await api("companies",`fields description,${XF("developed")},${XF("published")}; where id = ${e.id};`))[0]||{};
+const kQ=(e,skipId)=>e.k==="c"?["companies",`fields description,${XF("developed")},${XF("published")}; where id = ${e.id};`]:["games",`fields ${GF},genres; where genres = (${e.id})${skipId?" & id != "+skipId:""} & version_parent = null & cover != null & total_rating_count > 15; sort total_rating_count desc; limit 40;`];
+function kP(e,r,skipId,gids){
+if(e.k==="c"){const x=(r||[])[0]||{};
 e.desc=e.desc||x.description||"";const m=new Map();
 (x.developed||[]).forEach(f=>{if(f&&f.name&&f.id!==skipId)m.set(f.id,Object.assign({},f,{dev:1}))});
 (x.published||[]).forEach(f=>{if(f&&f.name&&f.id!==skipId){const o=m.get(f.id);if(o)o.pub=1;else m.set(f.id,Object.assign({},f,{pub:1}))}});
 return[...m.values()].sort((a,b)=>(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
-const x=await api("games",`fields ${GF},genres; where genres = (${e.id})${skipId?" & id != "+skipId:""} & version_parent = null & cover != null & total_rating_count > 15; sort total_rating_count desc; limit 40;`);
 const sh=f=>gids?(f.genres||[]).filter(g=>gids.includes(g)).length:0;
-return x.slice().sort((a,b)=>sh(b)-sh(a)||(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
+return(r||[]).slice().sort((a,b)=>sh(b)-sh(a)||(b.total_rating_count||0)-(a.total_rating_count||0)).slice(0,12)}
+async function knownOf(e,skipId,gids){const[ep,b]=kQ(e,skipId);return kP(e,await api(ep,b),skipId,gids)}
+// tutte le case e i generi in una sola richiesta (multiquery di IGDB); se non va, una richiesta per volta
+let MQ=true;
+async function knownMany(E,skipId,gids){if(!E.length)return[];
+if(MQ){try{const r=await api("multiquery",E.map((e,i)=>{const[ep,b]=kQ(e,skipId);return`query ${ep} "q${i}" { ${b} };`}).join("\n"));
+const m=new Map((r||[]).map(x=>[x.name,x.result]));return E.map((e,i)=>{try{return kP(e,m.get("q"+i),skipId,gids)}catch(x){return[]}})}
+catch(err){if(err&&err.code==="http")MQ=false;else return E.map(()=>[])}}
+return Promise.all(E.map(e=>knownOf(e,skipId,gids).catch(()=>[])))}
 
 async function loadGame(id){
 const my=++tok;setMsg("Carico il gioco…");closeDlg();
@@ -536,9 +544,9 @@ const gens=(d.genres||[]).slice(0,3).map(g=>({key:"g"+g.id,id:g.id,k:"g",name:GI
 const E=[...comps,...gens],gids=gens.map(g=>g.id);
 // in parallelo: i giochi simili secondo la community di GiocoLegami
 const csP=commSim?commSim(d.id).catch(()=>[]):Promise.resolve([]);
-const res=await Promise.all(E.map(e=>knownOf(e,d.id,gids).catch(()=>[])));
+const res=await knownMany(E,d.id,gids);
 if(my!==tok)return;
-const cs=await Promise.race([csP,new Promise(r=>setTimeout(()=>r(null),1500))]);
+const cs=await Promise.race([csP,new Promise(r=>setTimeout(()=>r(null),350))]);
 if(my!==tok)return;
 const known={},L=new Map();
 const link=(f,key)=>{const o=L.get(f.id)||{f,who:[],sim:false};if(key&&!o.who.includes(key))o.who.push(key);L.set(f.id,o)};
@@ -976,7 +984,7 @@ else if(key[0]==="c"){const id=Number(key.slice(1));
 const d=(await tryApi("companies",[`fields name,description,start_date,country,logo.image_id,developed,published; where id = ${id};`,`fields name,description,start_date,country,developed,published; where id = ${id};`]))[0];
 if(!d)throw{code:"http"};
 const C={key,id,k:"c",name:d.name,logo:d.logo&&d.logo.image_id,role:roleOf((d.developed||[]).length>0,(d.published||[]).length>0)};
-const games=await knownOf(Object.assign({},C),null);dAll=await allOf(id).catch(()=>[]);
+const[games,da]=await Promise.all([knownOf(Object.assign({},C),null),allOf(id).catch(()=>[])]);dAll=da;
 if(my!==dTok)return;
 const here=!!cur&&cur.kind==="company"&&cur.id===id;
 openDlg(`<div class="dtop">${C.logo?`<img class="dposter logo" src="${logo(C.logo)}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([C.role,COUNTRY[d.country]])}${d.start_date?`<p class="ov">Fondata il ${esc(fmtLong(d.start_date))}</p>`:""}<p class="ov kd">${(d.developed||[]).length} giochi sviluppati · ${(d.published||[]).length} pubblicati</p></div></div>`+
