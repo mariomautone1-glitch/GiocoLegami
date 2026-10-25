@@ -207,16 +207,21 @@ body.dlgopen{overflow:hidden}
 .home:focus-visible .logo{filter:drop-shadow(0 0 10px rgba(250,192,34,.7))}
 .mark{display:none;width:min(44vw,190px);height:auto;margin:0 auto 4px}
 main:has(#home:not([hidden])) .mark,main:has(#seenview:not([hidden])) .mark{display:block}
-.os{display:inline-flex;flex-direction:row-reverse;vertical-align:middle;gap:2px;--oh:24px}
-.os.big{--oh:32px;gap:4px}.os.sm{--oh:15px}
-.os svg{display:block;height:var(--oh);width:var(--oh);fill:none;stroke:#6f695f;stroke-width:1.5;stroke-linejoin:round}
-.os button{background:none;border:0;padding:2px;margin:0;cursor:pointer;line-height:0;border-radius:6px}
-.os button.on svg,.os.rw button:hover svg,.os.rw button:hover~button svg{fill:var(--acc);stroke:#b97f12}
-.os.rw button:focus-visible{outline:2px solid var(--hl)}
-.os.ro{flex-direction:row}
-.os1{position:relative;display:inline-block}
-.osf{position:absolute;left:0;top:0;bottom:0;overflow:hidden}
-.osf svg{fill:var(--acc);stroke:#b97f12}
+.pr{--v:0;display:flex;align-items:center;gap:12px;max-width:380px;padding:6px 0;touch-action:pan-y;-webkit-user-select:none;user-select:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pr.ro{cursor:default;display:inline-flex;vertical-align:middle;width:150px;padding:0;gap:8px}
+.pr .prt{position:relative;flex:1;height:12px;margin:0 13px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid var(--bd);transition:border-color .25s}
+.pr .prf{position:absolute;left:0;top:-1px;bottom:-1px;width:calc(var(--v)*1%);border-radius:999px;background:linear-gradient(90deg,#d9661c,var(--acc));box-shadow:0 0 14px rgba(250,192,34,.45);transition:width .45s cubic-bezier(.2,.9,.25,1.1)}
+.pr .prf::after{content:"";position:absolute;right:-13px;top:50%;width:26px;height:26px;margin-top:-13px;background:#fff3d6;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21zM10.3 4.6h3.4v5.7h5.7v3.4h-5.7v5.7h-3.4v-5.7H4.6v-3.4h5.7z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 1.5a10.5 10.5 0 1 0 0 21 10.5 10.5 0 0 0 0-21zM10.3 4.6h3.4v5.7h5.7v3.4h-5.7v5.7h-3.4v-5.7H4.6v-3.4h5.7z'/%3E%3C/svg%3E") center/contain no-repeat;filter:drop-shadow(0 0 6px rgba(250,192,34,.6));transform:rotate(calc(var(--v)*3.6deg));transition:transform .45s cubic-bezier(.2,.9,.25,1.1),background .2s}
+.pr .prn{flex:none;min-width:3.1em;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;color:var(--acc)}
+.pr[data-v=""] .prn{color:var(--mut);font-weight:500}
+.pr[data-v=""]:not(.live) .prf::after{background:#8b8478;filter:none}
+.pr.rw:hover .prt,.pr.live .prt,.pr.rw:focus-visible .prt{border-color:var(--acc)}
+.pr.live .prf,.pr.live .prf::after{transition-duration:.07s}
+.pr.live .prn{color:var(--hl)}
+.pr:focus-visible{outline:2px solid var(--hl);outline-offset:3px;border-radius:10px}
+.pr.big .prt{height:16px;margin:0 16px}.pr.big .prf::after{width:32px;height:32px;margin-top:-16px;right:-16px}.pr.big .prn{font-size:1.15rem}
+.pr.sm .prt{height:7px;margin:0 9px}.pr.sm .prf::after{width:17px;height:17px;margin-top:-8.5px;right:-9px}.pr.sm .prn{min-width:2.8em;font-size:.82rem}
+@media(prefers-reduced-motion:reduce){.pr .prf,.pr .prf::after{transition:none}}
 .cm-sum{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .cm-me{margin-top:8px}
 .cm-me textarea,.delin{display:block;width:100%;margin-top:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;font-size:1rem;resize:vertical}
@@ -237,14 +242,13 @@ main:has(#home:not([hidden])) .mark,main:has(#seenview:not([hidden])) .mark{disp
 .toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--card);border:1px solid var(--hl);color:var(--fg);padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:.25s;z-index:80;max-width:90vw}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 #seenview[hidden]{display:none}
-@media(max-width:700px){.os.big{--oh:30px}}
 .av{width:var(--s,28px);height:var(--s,28px);border-radius:50%;object-fit:cover;vertical-align:middle;display:inline-grid;place-items:center;flex:none}
 .av.ph{background:var(--dir);color:#121014;font-weight:700;font-size:calc(var(--s,28px)*.5)}
 .accb .av{margin:-3px 4px -3px -8px}
 .phd{display:flex;gap:16px;align-items:center;margin-top:12px}
 #profview[hidden]{display:none}
 .rv.mine li{align-items:flex-start}
-.os svg,.top svg,.accb svg{min-width:0}
+.top svg,.accb svg{min-width:0}
 .home{display:block;color:inherit;text-decoration:none;border-radius:14px;-webkit-tap-highlight-color:transparent}.home:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
 .logo{display:block;margin:0 auto}
 .infol{text-align:center;margin:2px 0 14px;font-size:.88rem}
@@ -355,14 +359,30 @@ body.dlgopen .recobtn{animation:none}
 .smv.go{min-height:34px;padding:6px 12px;font-size:.8rem}
 .simbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
 .simbar .kd{flex:1 1 220px}
+/* ===== passaggio CineLegami / GiocoLegami ===== */
+main{position:relative}
+.sitesw{position:absolute;top:10px;left:12px;z-index:5;display:flex;gap:6px;padding:4px;border-radius:999px;background:rgba(24,24,27,.72);border:1px solid var(--bd);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.sitesw a{--c:#f2b447;--cr:242,180,71;display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;font-size:.8rem;font-weight:600;line-height:1;color:var(--mut);text-decoration:none;border:1px solid transparent;transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .25s,color .25s,box-shadow .3s,border-color .25s}
+.sitesw a+a{--c:#a98be0;--cr:169,139,224}
+.sitesw a::before{content:"";flex:none;width:15px;height:15px;background:var(--c);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;transition:transform .45s cubic-bezier(.34,1.56,.64,1)}
+.sitesw a:first-child{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM5 5v2h2V5H5zm0 4v2h2V9H5zm0 4v2h2v-2H5zm0 4v2h2v-2H5zM17 5v2h2V5h-2zm0 4v2h2V9h-2zm0 4v2h2v-2h-2zm0 4v2h2v-2h-2zM9 5v14h6V5H9z'/%3E%3C/svg%3E")}.sitesw a+a{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M6.5 7h11a4.5 4.5 0 0 1 4.4 5.4l-.9 4.2a2.8 2.8 0 0 1-4.7 1.4L14.4 16.5H9.6l-1.9 1.5a2.8 2.8 0 0 1-4.7-1.4l-.9-4.2A4.5 4.5 0 0 1 6.5 7zM7 10v1.5H5.5v1.4H7v1.5h1.4v-1.5h1.5v-1.4H8.4V10H7zm9.3.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zm2.4 2.4a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z'/%3E%3C/svg%3E")}
+.sitesw a[aria-current=page]{color:#1a1204;background:linear-gradient(180deg,var(--c),rgba(var(--cr),.78));box-shadow:0 0 14px rgba(var(--cr),.45)}
+.sitesw a[aria-current=page]::before{background:#1a1204}
+@media(hover:hover){.sitesw a:not([aria-current]):hover{color:var(--fg);border-color:rgba(var(--cr),.55);background:rgba(var(--cr),.12);box-shadow:0 0 14px rgba(var(--cr),.3);transform:translateY(-1px)}.sitesw a:not([aria-current]):hover::before{transform:scale(1.2) rotate(-10deg)}}
+.sitesw a:active{transform:scale(.94)}
+@media(max-width:480px){.sitesw a span{display:none}.sitesw a{padding:7px 9px}.sitesw a::before{width:17px;height:17px}}
+@media(max-width:430px){.sitesw{left:8px;gap:3px;padding:3px}.sitesw a{padding:6px 8px}.top .seenbtn,.top .accb{padding-left:10px;padding-right:10px;font-size:.8rem;gap:5px}.top{gap:6px}}
+body.leaving main{opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s}
 </style>
 </head>
 <body>
 <main>
+<nav class="sitesw" aria-label="Cambia sito"><a href="https://cinelegami.it/" aria-label="Vai a CineLegami: film, serie e anime"><span>Film</span></a><a href="https://giocolegami.it/" aria-current="page" aria-label="GiocoLegami: i videogiochi"><span>Giochi</span></a></nav>
 <div class="top"><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri I miei giochi">I miei giochi <b id="seenn">0</b></button><button id="accb" class="accb" type="button" hidden>Accedi</button></div>
 <a href="./" class="home" data-home aria-label="GiocoLegami, torna alla pagina iniziale"><img src="logo-simbolo.png?v=7" alt="" class="mark" width="440" height="444">
 <h1><img src="logo-scritta.png?v=7" alt="GiocoLegami" class="logo" width="760" height="144"></h1></a>
 <p class="infol"><a href="info.html">Cos'è GiocoLegami e chi c'è dietro</a></p>
+<p class="infol"><a href="https://cinelegami.it/">Ti piacciono anche film e serie? Prova CineLegami</a></p>
 <p class="sub">Scopri i collegamenti tra i videogiochi</p>
 <div class="row"><div class="sw"><input id="q" placeholder="Cerca un videogioco, uno studio o un editore" autocomplete="off" aria-label="Cosa vuoi cercare" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list"><ul id="sug" class="sug" role="listbox" hidden></ul></div><button id="go" class="go" type="button">Cerca</button></div>
 <div id="seg" class="seg" role="group" aria-label="Cosa mostrare nella pagina principale"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="ps" aria-pressed="false">PlayStation</button><button type="button" data-fl="xbox" aria-pressed="false">Xbox</button><button type="button" data-fl="switch" aria-pressed="false">Nintendo</button><button type="button" data-fl="pc" aria-pressed="false">PC</button><i class="brk" aria-hidden="true"></i><button type="button" id="recobtn" class="recobtn">Consigli dalla community</button></div>
@@ -396,7 +416,6 @@ body.dlgopen .recobtn{animation:none}
 <p class="note">Dati e immagini forniti da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB.com</a>. Trame e descrizioni in italiano da Wikipedia (licenza CC BY-SA) o da Steam; quando mancano, sono tradotte automaticamente dall'inglese. Classifiche: Steam, Xbox Game Pass e IGDB. Voti Metacritic da Wikidata e Steam, con link a Metacritic. <button class="link" type="button" data-priv id="privl" hidden>Privacy</button> <a href="info.html">Info</a></p>
 <p class="note copy">Copyright © 2026 Mario Mautone – Tutti i diritti riservati</p>
 </main>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="cup" viewBox="0 0 24 24"><path d="M7 3.5h10v5.2c0 3-2.2 5.4-5 5.4s-5-2.4-5-5.4z"/><path d="M7 5.2H4.2v1.6c0 2 1.4 3.6 3.3 3.9M17 5.2h2.8v1.6c0 2-1.4 3.6-3.3 3.9"/><path d="M10.6 14v3h2.8v-3"/><path d="M8.2 17.2h7.6l.8 3.3H7.4z"/></symbol></svg>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <div id="dlg" class="dlg" hidden><div class="dbk"></div><div class="dcard" role="dialog" aria-modal="true" aria-labelledby="dt"><button class="dx" type="button" aria-label="Chiudi">×</button><div id="dbody"></div></div></div>
 <script>
@@ -1016,7 +1035,7 @@ if(m){if(m[1]==="g")loadGame(Number(m[2]));else loadCompany(Number(m[2]))}else{s
 if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script>
 <script>
-// ===== Account, giocati con voto a coppe e recensioni (stesso progetto Supabase di CineLegami) =====
+// ===== Account, giocati con voto in percentuale e recensioni (stesso progetto Supabase di CineLegami) =====
 // Le tabelle dei giochi si creano una volta sola con giocolegami-supabase.sql. Se questi due valori restano vuoti, account e recensioni restano spenti.
 const SB_URL="https://ezswtznereojtyphdbfh.supabase.co",SB_KEY="sb_publishable_Wf5ItERbGV2aw1C0MzZCUA_fDZ3NruZ";
 const CONTACT="info@cinelegami.it";   // email di contatto per la privacy (facoltativa, appare nell'informativa)
@@ -1058,21 +1077,21 @@ function uiAcc(){const pl=$("privl");if(pl)pl.hidden=!SB_ON;const b=$("accb");if
 function avt(n,a,s){s=s||28;return a&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(a)?`<img class="av" style="--s:${s}px" src="${a}" alt="">`:`<span class="av ph" style="--s:${s}px" aria-hidden="true">${esc(String(n||"?").slice(0,1).toUpperCase())}</span>`}
 function refreshViews(){if(!$("seenview").hidden)renderSeen();if(!$("recoview").hidden)renderReco();if(!$("profview").hidden){if(ME)renderProfile();else show("home")}}
 function authDlg(mode,msg){lastFocus=document.activeElement;const up=mode==="up";
-openDlg(`<h2 id="dt">${up?"Crea il tuo account":"Accedi"}</h2><div class="seg" style="margin:8px 0 0"><button type="button" data-at="in" aria-pressed="${!up}">Accedi</button><button type="button" data-at="up" aria-pressed="${up}">Registrati</button></div><p class="ov">${esc(msg||"Con un account puoi dare voti in coppe, scrivere recensioni e ritrovare i tuoi giochi su ogni dispositivo. Lo stesso account vale anche su CineLegami.")}</p>`+
+openDlg(`<h2 id="dt">${up?"Crea il tuo account":"Accedi"}</h2><div class="seg" style="margin:8px 0 0"><button type="button" data-at="in" aria-pressed="${!up}">Accedi</button><button type="button" data-at="up" aria-pressed="${up}">Registrati</button></div><p class="ov">${esc(msg||"Con un account puoi dare voti in percentuale, scrivere recensioni e ritrovare i tuoi giochi su ogni dispositivo. Lo stesso account vale anche su CineLegami.")}</p>`+
 `<form id="af" novalidate data-m="${mode}"><label class="fl">Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>`+
 (up?`<label class="fl">Nickname pubblico (3-20 caratteri: lettere, numeri, . _ -)<input name="nick" autocomplete="nickname" maxlength="20" required></label>`:"")+
 `<label class="fl">Password${up?" (almeno 8 caratteri)":""}<input name="pw" type="password" autocomplete="${up?"new-password":"current-password"}" maxlength="72" required></label>`+
 (up?`<label class="fl ckb"><input type="checkbox" name="ok"><span>Ho letto l'<button type="button" class="link" data-priv>informativa privacy</button> e so che nickname e recensioni saranno pubblici.</span></label>`:"")+
 `<p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">${up?"Registrati":"Accedi"}</button>${up?"":'<button type="button" class="link" data-forgot style="margin-left:14px">Password dimenticata?</button>'}</form>`)}
 function privDlg(){lastFocus=lastFocus||document.activeElement;
-openDlg(`<h2 id="dt">Privacy</h2><p class="ov"><b>Che dati raccogliamo.</b> Solo se crei un account: email, password (conservata in forma cifrata, nessuno può leggerla), nickname, foto del profilo se la aggiungi, i giochi che segni come giocati, i tuoi voti, le tue recensioni, i giochi che consigli e quelli che segni come simili tra loro.</p><p class="ov"><b>Cosa è pubblico.</b> Nickname, foto, voti, testo delle recensioni e consigli. L'email, l'elenco dei giocati e i tuoi voti di somiglianza sono privati: li vedi solo tu.</p><p class="ov"><b>Giochi simili secondo la community.</b> Mostriamo solo dei totali anonimi: quante persone dicono che due giochi si somigliano, quante li hanno giocati entrambi (solo se sono almeno 3) e quante li hanno votati entrambi con almeno 4 coppe. Nessuno può vedere chi sono.</p><p class="ov"><b>Un account per due siti.</b> GiocoLegami e CineLegami usano lo stesso account: nickname e foto sono gli stessi su entrambi.</p><p class="ov"><b>A cosa servono.</b> Solo per far funzionare account, giocati e recensioni. Non vendiamo né cediamo i dati e non facciamo pubblicità.</p><p class="ov"><b>Dove sono.</b> I dati sono conservati da Supabase, con connessione cifrata. Le regole di accesso sono applicate direttamente dal database.</p><p class="ov"><b>I tuoi diritti.</b> Puoi eliminare in qualsiasi momento account, giocati, recensioni e consigli dalla pagina del tuo profilo.${CONTACT?" Per altre richieste scrivi a "+esc(CONTACT)+".":""}</p><p class="ov"><b>Senza account</b> la lista «I miei giochi» resta solo nel tuo dispositivo e non la riceviamo.</p><p class="ov"><a href="privacy.html" target="_blank" rel="noopener">Leggi l'informativa completa</a></p><button class="go dgo alt" type="button" data-authopen>Indietro</button>`)}
+openDlg(`<h2 id="dt">Privacy</h2><p class="ov"><b>Che dati raccogliamo.</b> Solo se crei un account: email, password (conservata in forma cifrata, nessuno può leggerla), nickname, foto del profilo se la aggiungi, i giochi che segni come giocati, i tuoi voti, le tue recensioni, i giochi che consigli e quelli che segni come simili tra loro.</p><p class="ov"><b>Cosa è pubblico.</b> Nickname, foto, voti, testo delle recensioni e consigli. L'email, l'elenco dei giocati e i tuoi voti di somiglianza sono privati: li vedi solo tu.</p><p class="ov"><b>Giochi simili secondo la community.</b> Mostriamo solo dei totali anonimi: quante persone dicono che due giochi si somigliano, quante li hanno giocati entrambi (solo se sono almeno 3) e quante li hanno votati entrambi con almeno il 70%. Nessuno può vedere chi sono.</p><p class="ov"><b>Un account per due siti.</b> GiocoLegami e CineLegami usano lo stesso account: nickname e foto sono gli stessi su entrambi.</p><p class="ov"><b>A cosa servono.</b> Solo per far funzionare account, giocati e recensioni. Non vendiamo né cediamo i dati e non facciamo pubblicità.</p><p class="ov"><b>Dove sono.</b> I dati sono conservati da Supabase, con connessione cifrata. Le regole di accesso sono applicate direttamente dal database.</p><p class="ov"><b>I tuoi diritti.</b> Puoi eliminare in qualsiasi momento account, giocati, recensioni e consigli dalla pagina del tuo profilo.${CONTACT?" Per altre richieste scrivi a "+esc(CONTACT)+".":""}</p><p class="ov"><b>Senza account</b> la lista «I miei giochi» resta solo nel tuo dispositivo e non la riceviamo.</p><p class="ov"><a href="privacy.html" target="_blank" rel="noopener">Leggi l'informativa completa</a></p><button class="go dgo alt" type="button" data-authopen>Indietro</button>`)}
 function newPwDlg(){lastFocus=document.activeElement;
 openDlg(`<h2 id="dt">Scegli una nuova password</h2><form id="rf" novalidate><label class="fl">Nuova password (almeno 8 caratteri)<input name="pw" type="password" autocomplete="new-password" maxlength="72" required></label><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva password</button></form>`)}
 async function loadMe(){try{const u=await sb("/auth/v1/user");const p=await sb("/rest/v1/profiles?select=nickname,avatar&id=eq."+encodeURIComponent(u.id));
 ME={id:u.id,email:u.email,nick:(p&&p[0]&&p[0].nickname)||"utente",avatar:(p&&p[0]&&p[0].avatar)||null};uiAcc();
 try{await loadMine()}catch(e){}await loadBlocks();await loadMyReco();await loadMySim();csC.clear();await syncSeen();refreshViews();if(cur&&cur.kind==="game")simRefresh();else if(cur&&!$("film").hidden)R()}
 catch(e){if(e.status===401||e.status===403)clearSess()}}
-async function loadMine(){MYR={};const rows=await sb("/rest/v1/game_reviews?select=game_id,rating,body,title,year,cover,updated_at,hidden&user_id=eq."+encodeURIComponent(ME.id)+"&limit=1000");(rows||[]).forEach(r=>{MYR[r.game_id]=r})}
+async function loadMine(){MYR={};const rows=await sbS("/rest/v1/game_reviews?select=game_id,rating,score,body,title,year,cover,updated_at,hidden&user_id=eq."+encodeURIComponent(ME.id)+"&limit=1000");(rows||[]).forEach(r=>{MYR[r.game_id]=r})}
 // utenti bloccati: valgono su GiocoLegami e su CineLegami (stesso account)
 async function loadBlocks(){try{const r=await sb("/rest/v1/blocks?select=blocked_id,profiles(nickname)&blocker_id=eq."+encodeURIComponent(ME.id)+"&limit=500");BLK=(r||[]).map(x=>({id:x.blocked_id,nick:(x.profiles&&x.profiles.nickname)||"utente"}))}catch(e){BLK=[]}}
 async function nickFree(n){const r=await sb("/rest/v1/profiles?select=id&nickname=ilike."+encodeURIComponent(n.replace(/[\\_%]/g,"\\$&")),{auth:false});return!(r&&r.length)}
@@ -1104,16 +1123,41 @@ let sct=0;
 function seenChanged(){if(!ME||!CLOUD)return;clearTimeout(sct);sct=setTimeout(async()=>{try{const ids=new Set(SEEN.map(x=>x.id)),add=SEEN.filter(x=>!CLOUD.has(x.id)),del=[...CLOUD].filter(id=>!ids.has(id));
 if(add.length)await pushSeen(add);for(const id of del){await sb("/rest/v1/game_seen?game_id=eq."+Number(id),{method:"DELETE"});CLOUD.delete(id)}}catch(e){}},400)}
 seenHook=function(){seenChanged();refreshViews()};
-// ---- coppe da 1 a 5 ----
-const CUP='<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#cup"/></svg>';
-const cupRW=(id,v,big)=>`<span class="os rw${big?" big":""}" role="radiogroup" aria-label="Il tuo voto, da 1 a 5 coppe">`+[5,4,3,2,1].map(n=>`<button type="button" role="radio" aria-checked="${n===v}" aria-label="${n} ${n>1?"coppe":"coppa"}" data-rate="${n}" data-k="${id}" class="${v&&n<=v?"on":""}">${CUP}</button>`).join("")+`</span>`;
-function cupRO(v,sm){const f=Math.max(0,Math.min(5,Number(v)||0));return`<span class="os ro${sm?" sm":""}" role="img" aria-label="${f.toFixed(1).replace(".",",")} su 5 coppe">`+[0,1,2,3,4].map(i=>`<span class="os1">${CUP}<span class="osf" style="width:${Math.max(0,Math.min(1,f-i))*100}%">${CUP}</span></span>`).join("")+`</span>`}
+// ---- voto in percentuale (0-100%): barra che sale al passaggio, manopola che gira ----
+let SCORE_OK=true;
+const noScore=p=>p.replace(/,score\b|,avg_pct\b/g,"");
+async function sbS(path,opt){if(!SCORE_OK)return sb(noScore(path),opt);try{return await sb(path,opt)}catch(e){if(e&&e.status===400){SCORE_OK=false;return sb(noScore(path),opt)}throw e}}
+const pctOf=r=>r?(r.score!=null?Number(r.score):Number(r.rating)*20):null;
+const clampP=p=>Math.max(0,Math.min(100,Math.round(Number(p)||0)));
+function pctRW(k,v,cls){const has=v!=null,p=has?clampP(v):0;return`<div class="pr rw${cls?" "+cls:""}" style="--v:${p}" data-prk="${k}" data-v="${has?p:""}" role="slider" tabindex="0" aria-label="Il tuo voto, da 0 a 100 per cento" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}" aria-valuetext="${has?p+" per cento":"nessun voto"}"><span class="prt"><span class="prf"></span></span><span class="prn">${has?p+"%":"Vota"}</span></div>`}
+function pctRO(v,sm){const p=clampP(v);return`<span class="pr ro${sm?" sm":""}" style="--v:${p}" role="img" aria-label="${p} per cento"><span class="prt"><span class="prf"></span></span><span class="prn">${p}%</span></span>`}
+const prAt=(el,e)=>{const r=el.querySelector(".prt").getBoundingClientRect();return clampP((e.clientX-r.left)/r.width*100)};
+function prShow(el,p){el.style.setProperty("--v",p);el.querySelector(".prn").textContent=p+"%";el.setAttribute("aria-valuenow",p);el.classList.add("live")}
+function prReset(el){const v=el.dataset.v;el.style.setProperty("--v",v===""?0:v);el.querySelector(".prn").textContent=v===""?"Vota":v+"%";el.setAttribute("aria-valuenow",v===""?0:v);el.classList.remove("live")}
+let PRD=null;
+document.addEventListener("pointermove",e=>{if(PRD){prShow(PRD.el,prAt(PRD.el,e));return}
+if(e.pointerType!=="mouse")return;const el=e.target.closest&&e.target.closest(".pr.rw");if(el)prShow(el,prAt(el,e))});
+document.addEventListener("pointerout",e=>{if(PRD)return;const el=e.target.closest&&e.target.closest(".pr.rw");if(el&&!el.contains(e.relatedTarget))prReset(el)});
+document.addEventListener("pointerdown",e=>{const el=e.target.closest&&e.target.closest(".pr.rw");if(!el||e.button>0)return;PRD={el,id:e.pointerId};try{el.setPointerCapture(e.pointerId)}catch(x){}prShow(el,prAt(el,e))});
+document.addEventListener("pointerup",e=>{if(!PRD)return;const{el}=PRD;PRD=null;const p=prAt(el,e);prShow(el,p);prCommit(Number(el.dataset.prk),p,el)});
+document.addEventListener("pointercancel",()=>{if(PRD){prReset(PRD.el);PRD=null}});
+document.addEventListener("keydown",e=>{const el=e.target.closest&&e.target.closest(".pr.rw");if(!el)return;
+const cu=el.dataset.v===""?0:Number(el.dataset.v),live=el.classList.contains("live")?Number(el.getAttribute("aria-valuenow")):cu;
+const st={ArrowRight:5,ArrowUp:5,ArrowLeft:-5,ArrowDown:-5,PageUp:10,PageDown:-10}[e.key];
+if(st!==undefined){e.preventDefault();prShow(el,clampP(live+st));return}
+if(e.key==="Home"){e.preventDefault();prShow(el,0);return}if(e.key==="End"){e.preventDefault();prShow(el,100);return}
+if(e.key==="Enter"||e.key===" "){e.preventDefault();prCommit(Number(el.dataset.prk),clampP(el.getAttribute("aria-valuenow")),el)}});
+async function prCommit(id,p,el){const m=metaFor(id);if(!m){if(el)prReset(el);return}
+if(!ME){if(el)prReset(el);authDlg("in","Accedi o registrati per dare voti e scrivere recensioni.");return}
+try{if(await rate(m,p)){if(COMM&&COMM.m.id===id&&$("comm"))renderComm();refreshViews();toast("Voto salvato: "+p+"%")}}catch(x){if(el)prReset(el);toast(aerr(x))}}
 const fmtRv=t=>{const d=new Date(t);return isNaN(d)?"":d.toLocaleDateString("it-IT",{day:"numeric",month:"short",year:"numeric"})};
 function metaFor(id){if(COMM&&COMM.m.id===id)return COMM.m;const x=SEEN.find(s=>s.id===id);return x?{id:x.id,t:x.t,y:x.y,c:x.c}:null}
 async function rate(m,n,body){if(!ME){authDlg("in","Accedi o registrati per dare voti e scrivere recensioni.");return false}
-const old=MYR[m.id],row={user_id:ME.id,game_id:m.id,title:String(m.t||"").slice(0,200),year:yr4(m.y),cover:m.c||null,rating:n,body:body===undefined?(old?old.body:null):body};
-await sb("/rest/v1/game_reviews?on_conflict=user_id,game_id",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:row});
-MYR[m.id]={game_id:m.id,rating:n,body:row.body,hidden:!!(old&&old.hidden),title:row.title,year:row.year,cover:row.cover,updated_at:new Date().toISOString()};
+const old=MYR[m.id],row={user_id:ME.id,game_id:m.id,title:String(m.t||"").slice(0,200),year:yr4(m.y),cover:m.c||null,rating:Math.max(1,Math.ceil(n/20)),body:body===undefined?(old?old.body:null):body};
+if(SCORE_OK)row.score=n;
+const put=()=>sb("/rest/v1/game_reviews?on_conflict=user_id,game_id",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:row});
+try{await put()}catch(e){if(SCORE_OK&&e&&e.status===400){SCORE_OK=false;delete row.score;await put()}else throw e}
+MYR[m.id]={game_id:m.id,rating:row.rating,score:SCORE_OK?n:null,body:row.body,hidden:!!(old&&old.hidden),title:row.title,year:row.year,cover:row.cover,updated_at:new Date().toISOString()};
 if(!isSeen(m.id)){SEEN.unshift({id:m.id,t:m.t,y:m.y||"",c:m.c||"",d:Date.now()});store.set("gl_played",JSON.stringify(SEEN));updSeen();seenChanged()}
 return true}
 // ---- community nella finestra dei dettagli ----
@@ -1122,31 +1166,31 @@ if(!SB_ON){el.innerHTML='<p class="kd">Voti e recensioni della community in arri
 COMM={m:{id:d.id,t:d.name,y:yr(d),c:cv(d)},ok,more:0,draft:null};renderComm()};
 async function renderComm(){const c=COMM,el=$("comm");if(!c||!el)return;const my=++cTok,alive=()=>my===cTok&&COMM===c&&(!c.ok||c.ok())&&$("comm");
 const draft=$("rvt")?$("rvt").value:c.draft;
-try{const id=Number(c.m.id),[st,rv]=await Promise.all([sb("/rest/v1/game_stats?select=n,avg&game_id=eq."+id),sb("/rest/v1/game_reviews?select=user_id,rating,body,updated_at,profiles(nickname,avatar)&game_id=eq."+id+"&body=not.is.null&order=updated_at.desc&limit=11&offset="+c.more)]);
+try{const id=Number(c.m.id),[st,rv]=await Promise.all([sbS("/rest/v1/game_stats?select=n,avg,avg_pct&game_id=eq."+id),sbS("/rest/v1/game_reviews?select=user_id,rating,score,body,updated_at,profiles(nickname,avatar)&game_id=eq."+id+"&body=not.is.null&order=updated_at.desc&limit=11&offset="+c.more)]);
 if(!alive())return;const s=st&&st[0],mine=MYR[id],list=(rv||[]).slice(0,10),more=(rv||[]).length>10;
 c.draft=draft;const txt=draft!=null?draft:(mine&&mine.body)||"";
-el.innerHTML=`<div class="cm-sum">${s&&s.n?`${cupRO(s.avg)} <b>${Number(s.avg).toFixed(1).replace(".",",")}</b> su 5 <span class="kd">· ${s.n} ${s.n>1?"voti":"voto"}</span>`:'<span class="kd">Ancora nessun voto: sii il primo!</span>'}</div>`+
-(ME?`<div class="cm-me">${mine&&mine.hidden?'<p class="err">La tua recensione è stata nascosta agli altri dopo alcune segnalazioni.</p>':""}<div class="k">Il tuo voto</div>${cupRW(id,mine?mine.rating:0,1)}<textarea id="rvt" maxlength="1500" rows="3" placeholder="Scrivi la tua recensione (facoltativa). La vedranno tutti." aria-label="La tua recensione">${esc(txt)}</textarea><div class="dact"><button class="go dgo" type="button" data-revsave>${mine&&mine.body?"Aggiorna recensione":"Pubblica recensione"}</button>${mine?'<button class="link" type="button" data-revdel>Elimina il mio voto e la recensione</button>':""}</div><p id="cmsg" class="kd" role="status"></p></div>`
+el.innerHTML=`<div class="cm-sum">${s&&s.n?`${pctRO(s.avg_pct!=null?s.avg_pct:s.avg*20)} <span class="kd">· media di ${s.n} ${s.n>1?"voti":"voto"}</span>`:'<span class="kd">Ancora nessun voto: sii il primo!</span>'}</div>`+
+(ME?`<div class="cm-me">${mine&&mine.hidden?'<p class="err">La tua recensione è stata nascosta agli altri dopo alcune segnalazioni.</p>':""}<div class="k">Il tuo voto</div>${pctRW(id,mine?pctOf(mine):null,"big")}<textarea id="rvt" maxlength="1500" rows="3" placeholder="Scrivi la tua recensione (facoltativa). La vedranno tutti." aria-label="La tua recensione">${esc(txt)}</textarea><div class="dact"><button class="go dgo" type="button" data-revsave>${mine&&mine.body?"Aggiorna recensione":"Pubblica recensione"}</button>${mine?'<button class="link" type="button" data-revdel>Elimina il mio voto e la recensione</button>':""}</div><p id="cmsg" class="kd" role="status"></p></div>`
 :`<div class="cm-me"><button class="go dgo alt" type="button" data-authopen>Accedi per votare e recensire</button></div>`)+
-(list.length?`<ul class="rv">${list.map(r=>`<li>${avt(r.profiles&&r.profiles.nickname,r.profiles&&r.profiles.avatar,30)}<div><div><b>${esc((r.profiles&&r.profiles.nickname)||"utente")}</b> ${cupRO(r.rating,1)} <span class="kd">${fmtRv(r.updated_at)}</span>${ME&&r.user_id===ME.id?"":` <button class="link rep" type="button" data-rep="${esc(r.user_id)}">Segnala</button> <button class="link rep" type="button" data-blk="${esc(r.user_id)}" data-bn="${esc((r.profiles&&r.profiles.nickname)||"utente")}">Blocca</button>`}</div><p class="rt">${esc(r.body)}</p></div></li>`).join("")}</ul>${more?'<button class="link" type="button" data-more>Mostra altre recensioni</button>':""}`:"")}
+(list.length?`<ul class="rv">${list.map(r=>`<li>${avt(r.profiles&&r.profiles.nickname,r.profiles&&r.profiles.avatar,30)}<div><div><b>${esc((r.profiles&&r.profiles.nickname)||"utente")}</b> ${pctRO(pctOf(r),1)} <span class="kd">${fmtRv(r.updated_at)}</span>${ME&&r.user_id===ME.id?"":` <button class="link rep" type="button" data-rep="${esc(r.user_id)}">Segnala</button> <button class="link rep" type="button" data-blk="${esc(r.user_id)}" data-bn="${esc((r.profiles&&r.profiles.nickname)||"utente")}">Blocca</button>`}</div><p class="rt">${esc(r.body)}</p></div></li>`).join("")}</ul>${more?'<button class="link" type="button" data-more>Mostra altre recensioni</button>':""}`:"")}
 catch(e){if(alive())el.innerHTML='<p class="kd">Recensioni non disponibili al momento.</p>'}}
 // ---- pagina «I miei giochi» ----
 function renderSeen(){const el=$("seenview"),n=SEEN.length;
 const rated=Object.keys(MYR).filter(id=>isSeen(Number(id))).length;
 el.innerHTML=`<h2 style="margin-top:10px">I miei giochi</h2>`+
-(n?`<p class="ov">${n} ${n>1?"giochi":"gioco"}${ME?` · ${rated} con il tuo voto`:""}</p><div class="svg">${SEEN.map(x=>{const r=MYR[x.id];return`<article class="svc"><button class="svp" type="button" data-d="f${x.id}" aria-label="Dettagli di ${esc(x.t)}">${x.c?`<img src="${cov(x.c,"cover_big")}" alt="" loading="lazy">`:`<span class="ph">${esc(ini(x.t))}</span>`}</button><div class="svb"><button class="l" type="button" data-d="f${x.id}">${esc(x.t)}${x.y?" ("+esc(x.y)+")":""}</button>${SB_ON?cupRW(x.id,r?r.rating:0):""}${r&&r.body?`<p class="svr">${esc(r.body)}</p>`:""}<div class="sva">${SB_ON?`<button class="link" type="button" data-d="f${x.id}">${r&&r.body?"Modifica recensione":"Scrivi recensione"}</button>`:"<span></span>"}<button class="svx" type="button" data-unsee="${x.id}" aria-label="Togli ${esc(x.t)} dalla tua lista">✕</button></div></div></article>`}).join("")}</div>`
+(n?`<p class="ov">${n} ${n>1?"giochi":"gioco"}${ME?` · ${rated} con il tuo voto`:""}</p><div class="svg">${SEEN.map(x=>{const r=MYR[x.id];return`<article class="svc"><button class="svp" type="button" data-d="f${x.id}" aria-label="Dettagli di ${esc(x.t)}">${x.c?`<img src="${cov(x.c,"cover_big")}" alt="" loading="lazy">`:`<span class="ph">${esc(ini(x.t))}</span>`}</button><div class="svb"><button class="l" type="button" data-d="f${x.id}">${esc(x.t)}${x.y?" ("+esc(x.y)+")":""}</button>${SB_ON?pctRW(x.id,r?pctOf(r):null,"sm"):""}${r&&r.body?`<p class="svr">${esc(r.body)}</p>`:""}<div class="sva">${SB_ON?`<button class="link" type="button" data-d="f${x.id}">${r&&r.body?"Modifica recensione":"Scrivi recensione"}</button>`:"<span></span>"}<button class="svx" type="button" data-unsee="${x.id}" aria-label="Togli ${esc(x.t)} dalla tua lista">✕</button></div></div></article>`}).join("")}</div>`
 :`<p class="ov">Non hai ancora segnato nessun gioco. Apri un gioco e premi «Segna come giocato»: lo ritroverai qui.</p>`)+
-(SB_ON?(ME?`<p class="kd" style="margin-top:14px">La tua lista è salvata nel tuo account ed è privata. Voti e recensioni sono pubblici con il tuo nickname.</p>`:`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo. <button class="link" type="button" data-authopen>Accedi o registrati</button> per sincronizzarlo, dare voti in coppe e scrivere recensioni.</p>`):`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo.</p>`)}
+(SB_ON?(ME?`<p class="kd" style="margin-top:14px">La tua lista è salvata nel tuo account ed è privata. Voti e recensioni sono pubblici con il tuo nickname.</p>`:`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo. <button class="link" type="button" data-authopen>Accedi o registrati</button> per sincronizzarlo, dare voti in percentuale e scrivere recensioni.</p>`):`<p class="kd" style="margin-top:14px">L'elenco è salvato solo su questo dispositivo.</p>`)}
 function showSeenView(){lastFocus=document.activeElement;closeDlg();show("seen");$("res").innerHTML="";setMsg("");sugKill();renderSeen();window.scrollTo(0,0)}
 $("seenbtn").addEventListener("click",showSeenView);
 $("accb").addEventListener("click",()=>ME?showProfile():authDlg("in"));
 // ---- pagina profilo ----
 function showProfile(){lastFocus=document.activeElement;closeDlg();show("prof");$("res").innerHTML="";setMsg("");sugKill();renderProfile();window.scrollTo(0,0)}
 function renderProfile(){const el=$("profview");if(!ME){show("home");return}
-const L=Object.values(MYR).sort((a,b)=>String(b.updated_at||"").localeCompare(String(a.updated_at||""))),nv=L.length,nr=L.filter(x=>x.body).length,av=nv?(L.reduce((s,x)=>s+x.rating,0)/nv).toFixed(1).replace(".",","):"";
+const L=Object.values(MYR).sort((a,b)=>String(b.updated_at||"").localeCompare(String(a.updated_at||""))),nv=L.length,nr=L.filter(x=>x.body).length,av=nv?Math.round(L.reduce((s,x)=>s+pctOf(x),0)/nv)+"%":"";
 el.innerHTML=`<div class="phd">${avt(ME.nick,ME.avatar,88)}<div><h2 style="margin:0">${esc(ME.nick)}</h2><p class="kd" style="margin:2px 0 8px">${esc(ME.email)}</p><button class="go dgo alt" type="button" data-pavatar>${ME.avatar?"Cambia foto":"Aggiungi foto"}</button>${ME.avatar?' <button class="link" type="button" data-pavrm>Rimuovi foto</button>':""}<input id="avf" type="file" accept="image/*" hidden><p id="amsg2" class="err" role="alert"></p></div></div>
 <form id="nf" novalidate><label class="fl">Nome utente (3-20 caratteri: lettere, numeri, . _ -)<input name="nick" value="${esc(ME.nick)}" maxlength="20" autocomplete="nickname"></label><p id="nmsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva nome</button></form>
-<h3 style="margin:26px 0 4px">I miei voti e recensioni</h3>${nv?`<p class="kd">${nv} ${nv>1?"voti":"voto"} · ${nr} ${nr===1?"recensione":"recensioni"} · media ${av} su 5</p><ul class="rv mine">${L.map(r=>`<li>${poster(r.cover,r.title)}<div><button class="l" type="button" data-d="f${r.game_id}">${esc(r.title)}${r.year?" ("+esc(r.year)+")":""}</button><div>${cupRO(r.rating,1)} <span class="kd">${fmtRv(r.updated_at)}</span></div>${r.hidden?'<p class="kd">⚠ Nascosta agli altri dopo alcune segnalazioni.</p>':""}${r.body?`<p class="rt">${esc(r.body)}</p>`:""}</div></li>`).join("")}</ul>`:'<p class="ov">Non hai ancora dato nessun voto. Apri un gioco dai tuoi giocati e assegna le tue coppe.</p>'}
+<h3 style="margin:26px 0 4px">I miei voti e recensioni</h3>${nv?`<p class="kd">${nv} ${nv>1?"voti":"voto"} · ${nr} ${nr===1?"recensione":"recensioni"} · media ${av}</p><ul class="rv mine">${L.map(r=>`<li>${poster(r.cover,r.title)}<div><button class="l" type="button" data-d="f${r.game_id}">${esc(r.title)}${r.year?" ("+esc(r.year)+")":""}</button><div>${pctRO(pctOf(r),1)} <span class="kd">${fmtRv(r.updated_at)}</span></div>${r.hidden?'<p class="kd">⚠ Nascosta agli altri dopo alcune segnalazioni.</p>':""}${r.body?`<p class="rt">${esc(r.body)}</p>`:""}</div></li>`).join("")}</ul>`:'<p class="ov">Non hai ancora dato nessun voto. Apri un gioco dai tuoi giocati e assegna la tua percentuale.</p>'}
 ${BLK.length?`<h3 style="margin:26px 0 4px">Utenti bloccati</h3><ul class="rv">${BLK.map(b=>`<li><span style="flex:1">${esc(b.nick)}</span><button class="link" type="button" data-unblk="${esc(b.id)}" aria-label="Sblocca ${esc(b.nick)}">Sblocca</button></li>`).join("")}</ul>`:""}<p class="kd" style="margin-top:12px">Nome, foto, voti, recensioni e consigli sono pubblici. Email, lista dei giochi e voti di somiglianza sono privati. Nome, foto e utenti bloccati valgono anche su CineLegami.</p>
 <div class="dact" style="margin-top:18px"><button class="go dgo alt" type="button" data-chpw>Cambia password</button><button class="go dgo" type="button" data-logout>Esci</button><button class="go dgo alt" type="button" data-delask>Elimina account</button></div><div id="delbox"></div>`}
 function repDlg(u){if(!ME){authDlg("in","Accedi per segnalare una recensione.");return}if(!COMM)return;COMM.rep=u;
@@ -1250,7 +1294,7 @@ RS.busy=false;rsList()},350)});
 document.addEventListener("click",async e=>{const t=e.target;if(!t.closest)return;
 const sv=t.closest("#seenview");
 if(sv){
-const d=t.closest("[data-d]");if(d&&!t.closest("[data-rate]")){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}
+const d=t.closest("[data-d]");if(d&&!t.closest("[data-prk]")){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}
 const u=t.closest("[data-unsee]");if(u){const i=SEEN.findIndex(x=>x.id===Number(u.dataset.unsee));if(i>=0){SEEN.splice(i,1);store.set("gl_played",JSON.stringify(SEEN));updSeen();seenHook()}return}}
 const pv=t.closest("#profview");
 if(pv){
@@ -1296,11 +1340,8 @@ if(t.closest("[data-logout]")){try{await sb("/auth/v1/logout?scope=local",{metho
 if(t.closest("[data-delask]")){$("delbox").innerHTML=`<p class="ov"><b>Attenzione:</b> l'account è lo stesso di CineLegami. Verranno eliminati per sempre l'account e, su entrambi i siti, i titoli segnati, i voti, le recensioni, i consigli e le somiglianze. Per confermare scrivi <b>ELIMINA</b>.</p><input id="delin" class="delin" autocomplete="off" aria-label="Scrivi ELIMINA per confermare"><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="button" data-delgo>Elimina definitivamente</button>`;$("delin").focus();return}
 if(t.closest("[data-delgo]")){if($("delin").value.trim().toUpperCase()!=="ELIMINA"){$("amsg").textContent="Scrivi ELIMINA per confermare.";return}
 try{await sb("/rest/v1/rpc/delete_my_account",{method:"POST",body:{}});clearSess();closeDlg();toast("Account eliminato.")}catch(x){$("amsg").textContent=aerr(x)}return}
-const rt=t.closest("[data-rate]");if(rt){const id=Number(rt.dataset.k),m=metaFor(id);if(!m)return;
-if(!ME){authDlg("in","Accedi o registrati per dare voti e scrivere recensioni.");return}
-try{if(await rate(m,Number(rt.dataset.rate))){if(COMM&&COMM.m.id===id&&$("comm"))renderComm();refreshViews();toast("Voto salvato")}}catch(x){toast(aerr(x))}return}
-if(t.closest("[data-revsave]")){const id=COMM&&COMM.m.id,mine=id&&MYR[id];if(!mine){$("cmsg").textContent="Prima scegli un voto da 1 a 5 coppe.";return}
-const b=$("rvt").value.trim()||null;try{await rate(COMM.m,mine.rating,b);COMM.draft=null;await renderComm();toast(b?"Recensione pubblicata":"Voto salvato")}catch(x){$("cmsg").textContent=aerr(x)}return}
+if(t.closest("[data-revsave]")){const id=COMM&&COMM.m.id,mine=id&&MYR[id];if(!mine){$("cmsg").textContent="Prima scegli un voto con la barra.";return}
+const b=$("rvt").value.trim()||null;try{await rate(COMM.m,pctOf(mine),b);COMM.draft=null;await renderComm();toast(b?"Recensione pubblicata":"Voto salvato")}catch(x){$("cmsg").textContent=aerr(x)}return}
 if(t.closest("[data-revdel]")){const id=COMM&&COMM.m.id;if(!id||!ME)return;
 try{await sb("/rest/v1/game_reviews?game_id=eq."+Number(id)+"&user_id=eq."+encodeURIComponent(ME.id),{method:"DELETE"});delete MYR[id];COMM.draft=null;await renderComm();refreshViews();toast("Eliminata")}catch(x){toast(aerr(x))}return}
 if(t.closest("[data-more]")&&COMM){COMM.more+=10;COMM.draft=$("rvt")?$("rvt").value:null;renderComm();return}
@@ -1331,6 +1372,9 @@ await loadMe();
 if(ty==="recovery")newPwDlg();else toast("Email confermata: sei dentro!")}
 else if(h.get("error_description"))toast("Il link non è più valido: richiedine uno nuovo.");
 else if(SESS)await loadMe()})();
+document.querySelector(".sitesw").addEventListener("click",e=>{const a=e.target.closest("a");if(!a||a.hasAttribute("aria-current")||e.metaKey||e.ctrlKey||e.shiftKey||e.button>0)return;
+if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;e.preventDefault();document.body.classList.add("leaving");setTimeout(()=>{location.href=a.href},190)});
+addEventListener("pageshow",ev=>{if(ev.persisted)document.body.classList.remove("leaving")});
 </script>
 </body>
 </html>
