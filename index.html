@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0d0d0e">
+<link rel="preconnect" href="https://giocolegami.mariomautone1.workers.dev" crossorigin>
+<link rel="preconnect" href="https://images.igdb.com" crossorigin>
+<link rel="preconnect" href="https://ezswtznereojtyphdbfh.supabase.co" crossorigin>
 <link rel="manifest" href="manifest.webmanifest?v=7">
 <link rel="icon" href="icon-192.png?v=7">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=7">
@@ -26,7 +29,7 @@
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"GiocoLegami","url":"https://mariomautone1-glitch.github.io/giocolegami/","inLanguage":"it","description":"Esplora i collegamenti tra videogiochi, studi di sviluppo, editori e generi in un grafico interattivo. Scopri dove giocarli, segna i giochi giocati e scrivi recensioni."}</script>
 <style>
-:root{color-scheme:dark;--bg:#0d0d0e;--card:#18181b;--fg:#f6f0e6;--mut:#a69f94;--bd:#2d2c30;--film:#f94632;--film-t:#ff8a73;--dir:#25a0e6;--dir-t:#7cc6f2;--act:#9d65e6;--gen:#36d277;--hl:#26c0c4;--acc:#fac022;--edge:#4a4850}
+:root{color-scheme:dark;--bg:#0d0d0e;--card:#18181b;--fg:#f6f0e6;--mut:#a69f94;--bd:#2d2c30;--film:#f94632;--film-t:#ff8a73;--dir:#25a0e6;--dir-t:#7cc6f2;--act:#9d65e6;--gen:#36d277;--hl:#26c0c4;--acc:#fac022;--edge:#4a4850;--sim:#ff6fae}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}
 main{max-width:900px;margin:0 auto;padding:max(22px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(40px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
@@ -168,13 +171,10 @@ body.dlgopen{overflow:hidden}
 .dposter{width:96px}
 .dcard h2{font-size:1.25rem}
 }
-.seenbtn{margin-left:auto;border-color:var(--hl)!important;color:var(--hl)!important}
 .seenbtn b{font-weight:700}
 .ck{color:var(--hl);font-weight:700;margin-right:4px}
 .dact{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .dact .dgo{margin-top:0}
-.go.alt{background:transparent;border:2px solid var(--hl);color:var(--hl)}
-.go.alt.on{background:var(--hl);color:#121014}
 .sl li{align-items:center}
 .sl .fa{width:36px;height:52px}
 .rm{flex:none;margin-left:auto;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.08);color:var(--mut);font-size:1rem;cursor:pointer}
@@ -199,7 +199,7 @@ body.dlgopen{overflow:hidden}
 .pv{display:inline-flex;align-items:center;gap:6px;margin:4px 8px 0 0;padding:3px 12px 3px 3px;border:1px solid var(--bd);border-radius:999px;font-size:.85rem;background:var(--card)}
 .pv img{width:26px;height:26px;border-radius:50%;object-fit:cover}
 .pv:not(:has(img)){padding-left:12px}
-.top{display:flex;justify-content:flex-end;min-height:30px}
+.top{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;min-height:30px}
 .accb{font:inherit;font-size:.85rem;max-width:60vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:5px 14px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--fg);cursor:pointer}
 .accb[hidden]{display:none}
 .mark,.logo{transition:filter .2s,transform .2s}
@@ -247,32 +247,123 @@ main:has(#home:not([hidden])) .mark,main:has(#seenview:not([hidden])) .mark{disp
 .os svg,.top svg,.accb svg{min-width:0}
 .home{display:block;color:inherit;text-decoration:none;border-radius:14px;-webkit-tap-highlight-color:transparent}.home:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
 .logo{display:block;margin:0 auto}
-.infol{text-align:center;margin:2px 0 14px;font-size:.88rem}.infol a{color:var(--mut)}
+.infol{text-align:center;margin:2px 0 14px;font-size:.88rem}
 .sug li.gh{cursor:default;padding:8px 8px 3px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
 .sug li.gh:hover{background:none}
 #allw{margin-top:10px;max-height:46vh;overflow-y:auto}
 #allw .chip{display:flex;width:100%;margin:4px 0 0;border-radius:12px;text-align:left;padding-right:10px}
-.cm-me textarea,.delin,.rpn{display:block;width:100%;margin-top:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;font-size:1rem;resize:vertical}
+.cm-me textarea,#rsb,.delin,.rpn{display:block;width:100%;margin-top:8px;padding:10px 12px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--fg);font:inherit;font-size:1rem;resize:vertical}
 .fl input[type=radio]{flex:none;width:20px;height:20px;margin-top:1px;accent-color:var(--acc)}
 .rps{border:0;margin:10px 0 0;padding:0}.rps legend{padding:0}
 .rep{margin-left:6px;font-size:.78rem}
 a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-color:var(--acc)}
 .pv .ic{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--bd);font-size:.65rem;font-weight:800}
+
+#recoview[hidden]{display:none}
+.rn{font-size:.82rem;color:var(--sim)}
+.rsec{margin:22px 0 0;font-size:1.05rem}
+/* ===== pulsanti luminosi (vetro scuro + bagliore colorato) ===== */
+:is(.seg,.top) button,.go,.accb{--c:#f6c445;--c2:#e0a417;--cr:250,192,34;--on:#1a1204;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:.92rem;line-height:1.1;min-height:42px;padding:9px 18px;border-radius:999px;color:var(--fg);cursor:pointer;-webkit-tap-highlight-color:transparent;
+border:1.5px solid rgba(var(--cr),.6);
+background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%) no-repeat 160% 0/250% 100%,linear-gradient(180deg,rgba(var(--cr),.16),rgba(var(--cr),.03) 65%),var(--card);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 16px rgba(var(--cr),.28),0 6px 16px rgba(0,0,0,.38);
+transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,background-position .8s,border-color .3s,color .25s,filter .25s}
+:is(.seg,.top) button::before,.seenbtn::before,.accb:not(:has(.av))::before,.recobtn::before{content:"";flex:none;width:1.2em;height:1.2em;background:var(--c);-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;transition:transform .45s cubic-bezier(.34,1.56,.64,1),background .25s}
+:is(.seg,.top) button:not([data-fl]):not([data-rf]):not(.seenbtn):not(.recobtn):not(.accb)::before{content:none}
+.recobtn::after,.accb:not(:has(.av))::after,#go::after{content:"";flex:none;width:1.05em;height:1.05em;background:currentColor;-webkit-mask:var(--ic2) center/contain no-repeat;mask:var(--ic2) center/contain no-repeat;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.accb:not(:has(.av))::after,.recobtn::after{--ic2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round' d='M9 5l7 7-7 7'/%3E%3C/svg%3E")}
+#go::after{--ic2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round' d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E")}
+.seg [data-fl=all],.seg [data-rf=all]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='8' height='8' rx='2.2'/%3E%3Crect x='13' y='3' width='8' height='8' rx='2.2'/%3E%3Crect x='3' y='13' width='8' height='8' rx='2.2'/%3E%3Crect x='13' y='13' width='8' height='8' rx='2.2'/%3E%3C/svg%3E")}
+.seg [data-fl=ps],.seg [data-rf=ps]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7 2h10a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-1v2h-2v-2h-4v2H8v-2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v13h10V4H7zm2 2h6v2H9V6zm0 9h2v1H9v-1z'/%3E%3C/svg%3E");--c:#5b8def;--c2:#3b6bd0;--cr:91,141,239;--on:#040d24}
+.seg [data-fl=xbox],.seg [data-rf=xbox]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M7.5 6h9a5.5 5.5 0 0 1 5.4 6.6l-.9 4.6a2.6 2.6 0 0 1-4.5 1.2L14.9 16H9.1l-1.6 2.4A2.6 2.6 0 0 1 3 17.2l-.9-4.6A5.5 5.5 0 0 1 7.5 6zM7 9v1.7H5.3v1.6H7V14h1.6v-1.7h1.7v-1.6H8.6V9H7zm9.3.2a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zm-2 2.3a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2z'/%3E%3C/svg%3E");--c:#5cc96b;--c2:#3a9a48;--cr:92,201,107;--on:#04210a}
+.seg [data-fl=switch],.seg [data-rf=switch]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M5 5h3v14H5a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3zm1 3.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zM19 5h-3v14h3a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3zm-1 7.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zM9 5h6v14H9V5z'/%3E%3C/svg%3E");--c:#f0604d;--c2:#c93f2e;--cr:240,96,77;--on:#2a0a03}
+.seg [data-fl=pc],.seg [data-rf=pc]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M3 4h18a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-7v2h3v2H7v-2h3v-2H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm1 2v9h16V6H4z'/%3E%3C/svg%3E");--c:#a98be0;--c2:#7a58b0;--cr:169,139,224;--on:#140a24}
+:is(.seg,.top) .seenbtn{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9.4 16.6 5.2 12.4 3.8 13.8l5.6 5.6L20.6 8.2 19.2 6.8z'/%3E%3C/svg%3E");--c:#3fd0c9;--c2:#1f9c96;--cr:38,192,196;margin-left:0;order:2}
+:is(.seg,.top) .accb{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 12.2a4.6 4.6 0 1 0 0-9.2 4.6 4.6 0 0 0 0 9.2zm0 2c-4.2 0-8 2.1-8 5.3V21h16v-1.5c0-3.2-3.8-5.3-8-5.3z'/%3E%3C/svg%3E");max-width:60vw;order:2;color:var(--acc);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.accb[hidden]{display:none}
+:is(.seg,.top) .recobtn{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.2l2.9 6.4 7 .7-5.3 4.7 1.6 6.9L12 17.2l-6.2 3.7 1.6-6.9L2.1 9.3l7-.7L12 2.2z'/%3E%3C/svg%3E");--c:#ff6fae;--c2:#d9488a;--cr:255,111,174;order:4;flex:1 1 100%;justify-content:flex-start;color:#ffa3cb}
+.recobtn::after{margin-left:auto}
+.accb:not(:has(.av))::after{margin-left:2px}
+.seg .brk{flex:1 1 100%;height:0;order:3}
+.seenbtn b{font-weight:700}
+#seenn::before{content:"("}#seenn::after{content:")"}
+:is(.seg,.top) button[aria-pressed="true"]{color:var(--on);border-color:transparent;font-weight:700;
+background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%) no-repeat 160% 0/250% 100%,linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 55%),linear-gradient(180deg,var(--c),var(--c2));
+box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 0 22px rgba(var(--cr),.55),0 6px 16px rgba(0,0,0,.4)}
+:is(.seg,.top) button[aria-pressed="true"]::before{background:currentColor}
+.go{--c:#ff6a52;--c2:#e0412b;--cr:249,70,50;color:#fff;font-weight:700;border-color:transparent;
+background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%) no-repeat 160% 0/250% 100%,linear-gradient(180deg,rgba(255,255,255,.28),rgba(255,255,255,0) 55%),linear-gradient(180deg,var(--c),var(--c2));
+box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 0 20px rgba(var(--cr),.45),0 6px 16px rgba(0,0,0,.4)}
+.go.alt{--c:#3fd0c9;--c2:#1f9c96;--cr:38,192,196;color:#8fe9e4;border-color:rgba(var(--cr),.6);
+background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.18) 50%,transparent 65%) no-repeat 160% 0/250% 100%,linear-gradient(180deg,rgba(var(--cr),.16),rgba(var(--cr),.03) 65%),var(--card);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 16px rgba(var(--cr),.28),0 6px 16px rgba(0,0,0,.38)}
+.go.alt.on{color:#04211f;border-color:transparent;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%) no-repeat 160% 0/250% 100%,linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,0) 55%),linear-gradient(180deg,var(--c),var(--c2));box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 0 22px rgba(var(--cr),.55),0 6px 16px rgba(0,0,0,.4)}
+.go.alt.rc,.go.alt.sm{--c:#ff6fae;--c2:#d9488a;--cr:255,111,174;color:#ffa3cb}
+.go.alt.rc.on,.go.alt.sm.on{color:#2a0616}
+.row .go{align-self:stretch;padding:0 22px}
+.go:disabled{opacity:.6;cursor:wait}
+@media(hover:hover){
+:is(.seg,.top) button:hover,.go:hover,.accb:hover{transform:translateY(-2px);background-position:-60% 0,0 0,0 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 26px rgba(var(--cr),.6),0 10px 22px rgba(0,0,0,.45);filter:brightness(1.08)}
+:is(.seg,.top) button:hover::before,.seenbtn:hover::before,.accb:hover::before{transform:scale(1.18) rotate(-8deg)}
+.recobtn:hover::after,.accb:hover::after,#go:hover::after{transform:translateX(4px)}
+:is(.seg,.top) button[aria-pressed="true"]:hover{background-position:-60% 0,0 0,0 0}
+}
+:is(.seg,.top) button:active,.go:active,.accb:active{transform:scale(.95);transition-duration:.12s}
+@media(prefers-reduced-motion:no-preference){
+#seg{animation:btnrise .6s cubic-bezier(.2,.8,.2,1) backwards}
+:is(.seg,.top) button[aria-pressed="true"]{animation:btnpop .5s cubic-bezier(.34,1.56,.64,1)}
+:is(.seg,.top) button[aria-pressed="true"]::before{animation:icospin .6s cubic-bezier(.34,1.56,.64,1)}
+.recobtn{animation:btnglow 3.6s ease-in-out infinite}
+}
+@media(prefers-reduced-motion:reduce){:is(.seg,.top) button,.go,.accb{transition:none}}
+@media(max-width:560px){.seg{gap:6px}.seg [data-fl],.seg [data-rf]{flex:1 1 0;min-width:0;padding:9px 3px;gap:4px;font-size:clamp(.66rem,3.1vw,.9rem);white-space:nowrap}}
+@media(max-width:400px){.seg [data-fl]::before,.seg [data-rf]::before{display:none}.seg [data-fl=ps],.seg [data-rf=ps]{flex-grow:1.55}.seg [data-fl=switch],.seg [data-rf=switch]{flex-grow:1.25}}
+.infol a{--cr:170,176,190;display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:999px;font-size:.82rem;font-weight:500;color:var(--mut);text-decoration:none;border:1px solid rgba(var(--cr),.28);background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.09) 50%,transparent 65%) no-repeat 160% 0/250% 100%,rgba(var(--cr),.05);box-shadow:0 0 10px rgba(var(--cr),.08);transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,background-position .8s,border-color .3s,color .25s}
+.infol a::before,.infol a::after{content:"";flex:none;width:1.1em;height:1.1em;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat;opacity:.85;transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.infol a::before{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill-rule='evenodd' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.1 5.2h2.2v2.2h-2.2V7.2zm0 4h2.2v5.6h-2.2v-5.6z'/%3E%3C/svg%3E")}.infol a::after{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round' d='M9 5l7 7-7 7'/%3E%3C/svg%3E");width:.95em;height:.95em}
+@media(hover:hover){.infol a:hover{transform:translateY(-2px);color:var(--fg);border-color:rgba(var(--cr),.55);background-position:-60% 0,0 0;box-shadow:0 0 16px rgba(var(--cr),.22),0 6px 14px rgba(0,0,0,.35)}.infol a:hover::before{transform:scale(1.15) rotate(-8deg)}.infol a:hover::after{transform:translateX(3px)}}
+.infol a:active{transform:scale(.96);transition-duration:.12s}
+@keyframes btnrise{from{opacity:0;transform:translateY(14px)}}
+@keyframes btnpop{0%{transform:scale(.88)}55%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes icospin{from{transform:scale(.4) rotate(-120deg)}}
+@keyframes btnglow{50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 28px rgba(var(--cr),.5),0 6px 16px rgba(0,0,0,.38)}}
+.top button{min-height:36px;padding:6px 14px;font-size:.84rem;gap:6px}
+.top{margin-bottom:10px}.top .accb{max-width:55vw}
+@media(max-width:560px){.top{margin-bottom:18px}}
+.rsl{margin-top:12px;max-height:50vh;overflow:auto}.rsi{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--bd)}.rsi:last-child{border-bottom:0}.rsp{flex:none;width:44px;height:59px;border-radius:6px;overflow:hidden;background:var(--bg);display:grid;place-items:center;color:var(--mut);font-weight:700;font-size:.8rem}.rsp img{width:100%;height:100%;object-fit:cover;display:block}.rst{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.rst b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rsone{margin:8px 0 12px;border-bottom:0}.rsone .rst b{white-space:normal}.go.rsb{min-height:34px;padding:6px 14px;font-size:.85rem;flex:none;margin:0}
+#rsq{margin-top:6px}
+body.dlgopen .recobtn{animation:none}
+@media(hover:none){.recobtn{animation:none!important}}
+/* ===== giochi simili: IGDB e community ===== */
+.pa.sim{border-color:var(--sim);background:var(--sim)}
+.pa.sim svg{width:70%;height:70%}
+.card.p.sim{border-left-color:var(--sim)}
+.dposter.sim{display:grid;place-items:center;aspect-ratio:1;background:var(--sim);border:0;border-radius:50%}.dposter.sim svg{width:58%;height:58%;min-width:0}
+.tag.cm{background:none;color:var(--sim);border:1px solid var(--sim)}
+.cmb{position:absolute;top:6px;right:6px;z-index:1;height:24px;padding:0 8px 0 6px;display:inline-flex;align-items:center;gap:4px;border-radius:12px;background:rgba(9,9,10,.86);border:1px solid var(--sim);color:var(--sim);font-size:.75rem;font-weight:700}
+.cmb svg{width:14px;height:14px;min-width:0;fill:currentColor}
+.cmb.ig{border-color:var(--acc);color:var(--acc)}
+.smr li{align-items:center}.smr .why{display:block;color:var(--mut);font-size:.78rem;margin-top:2px}.smr .why b{color:var(--sim);font-weight:700}
+.smv{flex:none;margin-left:auto}
+.smv.go{min-height:34px;padding:6px 12px;font-size:.8rem}
+.simbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.simbar .kd{flex:1 1 220px}
 </style>
 </head>
 <body>
 <main>
-<div class="top"><button id="accb" class="accb" type="button" hidden>Accedi</button></div>
+<div class="top"><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri I miei giochi">I miei giochi <b id="seenn">0</b></button><button id="accb" class="accb" type="button" hidden>Accedi</button></div>
 <a href="./" class="home" data-home aria-label="GiocoLegami, torna alla pagina iniziale"><img src="logo-simbolo.png?v=7" alt="" class="mark" width="440" height="444">
 <h1><img src="logo-scritta.png?v=7" alt="GiocoLegami" class="logo" width="760" height="144"></h1></a>
 <p class="infol"><a href="info.html">Cos'è GiocoLegami e chi c'è dietro</a></p>
 <p class="sub">Scopri i collegamenti tra i videogiochi</p>
 <div class="row"><div class="sw"><input id="q" placeholder="Cerca un videogioco, uno studio o un editore" autocomplete="off" aria-label="Cosa vuoi cercare" role="combobox" aria-expanded="false" aria-controls="sug" aria-autocomplete="list"><ul id="sug" class="sug" role="listbox" hidden></ul></div><button id="go" class="go" type="button">Cerca</button></div>
-<div id="seg" class="seg" role="group" aria-label="Cosa mostrare nella pagina principale"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="ps" aria-pressed="false">PlayStation</button><button type="button" data-fl="xbox" aria-pressed="false">Xbox</button><button type="button" data-fl="switch" aria-pressed="false">Nintendo</button><button type="button" data-fl="pc" aria-pressed="false">PC</button><button type="button" id="seenbtn" class="seenbtn" aria-label="Apri I miei giochi">✓ I miei giochi <b id="seenn">0</b></button></div>
+<div id="seg" class="seg" role="group" aria-label="Cosa mostrare nella pagina principale"><button type="button" data-fl="all" aria-pressed="true">Tutto</button><button type="button" data-fl="ps" aria-pressed="false">PlayStation</button><button type="button" data-fl="xbox" aria-pressed="false">Xbox</button><button type="button" data-fl="switch" aria-pressed="false">Nintendo</button><button type="button" data-fl="pc" aria-pressed="false">PC</button><i class="brk" aria-hidden="true"></i><button type="button" id="recobtn" class="recobtn">Consigli dalla community</button></div>
 <p id="msg" role="status" aria-live="polite"></p>
 <div id="res"></div>
 <section id="home" hidden>
 <div id="hs-soon"><h2>In uscita</h2><div id="soon" class="rail"></div></div>
+<div id="hs-rc"><h2>Consigliati dalla community</h2><p class="sub">I giochi che i giocatori di GiocoLegami consigliano di più</p><div id="rc" class="rail"></div></div>
 <div id="hs-gp"><h2>Novità Game Pass</h2><p class="sub">Aggiunti di recente al catalogo Xbox Game Pass</p><div id="gp" class="rail"></div></div>
 <div id="hs-top"><h2>I più venduti</h2><p class="sub">La classifica di Steam in Italia, aggiornata ogni ora</p><div id="top" class="rail"></div></div>
 <div id="hs-now"><h2>Usciti di recente</h2><div id="now" class="rail"></div></div>
@@ -282,6 +373,7 @@ a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-c
 <div id="hs-tpc"><h2>Di tendenza su PC</h2><p class="sub">Usciti negli ultimi mesi, i più seguiti adesso</p><div id="tpc" class="rail"></div></div>
 </section>
 <section id="seenview" hidden></section>
+<section id="recoview" hidden></section>
 <section id="profview" hidden></section>
 <div id="film" hidden>
 <div class="box"><svg id="g" viewBox="0 0 980 660" role="img" aria-label="Grafo dei collegamenti"></svg></div>
@@ -289,7 +381,7 @@ a.pv{color:var(--fg);text-decoration:none}a.pv:hover,a.pv:focus-visible{border-c
 <span><b class="pa ini" style="width:14px;height:14px;margin:0"></b>Studio di sviluppo</span>
 <span><b class="pa pub ini" style="width:14px;height:14px;margin:0"></b>Editore</span>
 <span><b class="pa gen" style="width:15px;height:15px;margin:0"></b>Genere</span>
-<span><svg width="26" height="8" style="min-width:0" aria-hidden="true"><line x1="1" y1="4" x2="25" y2="4" stroke="#F4E285" stroke-width="2" stroke-dasharray="3 4" stroke-linecap="round"/></svg>Simile secondo IGDB</span>
+<span><b class="pa sim" style="width:14px;height:14px;margin:0"></b>Giochi simili (IGDB e community)</span>
 </div>
 <div id="info"></div>
 <div id="p"></div>
@@ -309,7 +401,8 @@ const API="https://giocolegami.mariomautone1.workers.dev";
 const NOW=Math.floor(Date.now()/1000),DAY=86400;
 let aT=0,cur=null,sel=null,selF=null,hasSel=false,tok=0,last=0;
 // collegamenti con la parte account (più in basso): restano vuoti se gli account sono spenti
-const AUTHHASH=location.hash;let seenHook=()=>{},fillComm=null;
+const AUTHHASH=location.hash;let seenHook=()=>{},fillComm=null,commSim=null,fillSimD=null,fillReco=null,recoRail=null,simVoted=()=>false;
+const sbOn=()=>typeof SB_ON!=="undefined"&&SB_ON;
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 const cache=new Map();
 async function api(ep,body){
@@ -322,15 +415,15 @@ const j=await r.json();cache.set(ck,j);return j}
 async function tryApi(ep,bodies){let err;for(const b of bodies){try{return await api(ep,b)}catch(e){err=e;if(e.code!=="http"||e.status!==400)break}}throw err}
 const cov=(id,s)=>`https://images.igdb.com/igdb/image/upload/t_${s}/${id}.jpg`;
 const logo=id=>`https://images.igdb.com/igdb/image/upload/t_logo_med/${id}.png`;
-const yr=f=>f.first_release_date?String(new Date(f.first_release_date*1000).getUTCFullYear()):"";
+const yr=f=>f.first_release_date?String(new Date(f.first_release_date*1000).getUTCFullYear()):(f._y||"");
 const cv=f=>f.cover&&f.cover.image_id||"";
 const ST=new Set("il lo la le i gli un una di a the of and e".split(" "));
 const ini=s=>{const w=String(s).replace(/[:.,'’&()\[\]-]/g," ").split(/\s+/).filter(Boolean),b=w.filter(x=>!ST.has(x.toLowerCase())),u=b.length?b:w;if(!u.length)return"?";return(u.length>1?u[0][0]+u[u.length-1][0]:u[0].slice(0,2)).toUpperCase()};
-const ecn=e=>e.k==="g"?"gen":e.role==="Editore"?"act":"dir";
-const ecl=e=>e.k==="g"?"gen":e.role==="Editore"?"pub":"";
+const ecn=e=>e.k==="s"?"sim":e.k==="g"?"gen":e.role==="Editore"?"act":"dir";
+const ecl=e=>e.k==="s"?"sim":e.k==="g"?"gen":e.role==="Editore"?"pub":"";
 const setMsg=t=>{$("msg").textContent=t||""};
 const tags=a=>a.filter(Boolean).map(t=>`<span class="tag">${esc(t)}</span>`).join("");
-const pa=(e,big)=>{const c="pa "+ecl(e)+(big?" big":"");if(e.k==="g")return `<b class="${c}"><svg viewBox="-10 -10 20 20" aria-hidden="true">${gIcon(e.id)}</svg></b>`;return e.logo?`<img class="${c}" src="${logo(e.logo)}" alt="">`:`<b class="${c} ini">${esc(ini(e.name))}</b>`};
+const pa=(e,big)=>{const c="pa "+ecl(e)+(big?" big":"");if(e.k==="s")return `<b class="${c}"><svg viewBox="-10 -10 20 20" aria-hidden="true">${SIMI()}</svg></b>`;if(e.k==="g")return `<b class="${c}"><svg viewBox="-10 -10 20 20" aria-hidden="true">${gIcon(e.id)}</svg></b>`;return e.logo?`<img class="${c}" src="${logo(e.logo)}" alt="">`:`<b class="${c} ini">${esc(ini(e.name))}</b>`};
 const ch=e=>`<button class="chip" data-e="${e.key}">${pa(e)}${esc(e.name)}</button>`;
 const poster=(id,t,big)=>id?`<img class="fa${big?" big":""}" src="${cov(id,big?"cover_big":"cover_small")}" alt="">`:`<span class="fa${big?" big":""}">${esc(ini(t))}</span>`;
 const cut=(s,n)=>s&&s.length>n?s.slice(0,n).replace(/\s+\S*$/,"")+"…":(s||"");
@@ -392,16 +485,22 @@ const comps=[...cm.values()].filter(c=>c.dev||c.pub).sort((a,b)=>(b.dev-a.dev)||
 .map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:roleOf(c.dev,c.pub)}));
 const gens=(d.genres||[]).slice(0,3).map(g=>({key:"g"+g.id,id:g.id,k:"g",name:GIT[g.id]||g.name,role:"Genere"}));
 const E=[...comps,...gens],gids=gens.map(g=>g.id);
+// in parallelo: i giochi simili secondo la community di GiocoLegami
+const csP=commSim?commSim(d.id).catch(()=>[]):Promise.resolve([]);
 const res=await Promise.all(E.map(e=>knownOf(e,d.id,gids).catch(()=>[])));
 if(my!==tok)return;
+const cs=await Promise.race([csP,new Promise(r=>setTimeout(()=>r(null),1500))]);
+if(my!==tok)return;
 const known={},L=new Map();
-const link=(f,key,sim)=>{const o=L.get(f.id)||{f,who:[],sim:false};if(key&&!o.who.includes(key))o.who.push(key);if(sim)o.sim=true;L.set(f.id,o)};
+const link=(f,key)=>{const o=L.get(f.id)||{f,who:[],sim:false};if(key&&!o.who.includes(key))o.who.push(key);L.set(f.id,o)};
 E.forEach((e,i)=>{known[e.key]=res[i];res[i].slice(0,e.k==="c"?8:6).forEach(f=>link(f,e.key))});
 const sims=(d.similar_games||[]).filter(f=>f&&f.name);
-sims.slice(0,6).forEach(f=>link(f,null,true));
 const W={id:d.id,name:d.name,first_release_date:d.first_release_date,cover:d.cover,total_rating_count:d.total_rating_count};
-cur={kind:"game",id:d.id,w:W,title:d.name,year:yr(d),rating:d.total_rating?Math.round(d.total_rating):0,summary:d.summary,cover:cv(d),E,known,sims,links:[...L.values()]};
-sel=null;selF=null;$("q").value=d.name;setMsg("");show("film");R(true);
+cur={kind:"game",id:d.id,w:W,title:d.name,year:yr(d),rating:d.total_rating?Math.round(d.total_rating):0,summary:d.summary,cover:cv(d),E,known,igs:sims,sims:[],simAll:[],links:[...L.values()]};
+applySims(cur,cs||[]);
+// se la community risponde dopo, il grafo si aggiorna da solo
+if(cs===null){const c=cur;csP.then(r=>{if(cur===c&&r&&r.length){applySims(c,r);R()}})}
+sel=null;selF=null;$("q").value="";setMsg("");show("film");R(true);
 try{history.replaceState(null,"","#g"+d.id)}catch(e){}
 }catch(e){if(my===tok)showErr(e)}}
 
@@ -435,16 +534,44 @@ const E=[...partners,...gens],L=new Map();
 games.forEach(f=>{const ks=inG.get(f.id)||new Set();L.set(f.id,{f,who:E.filter(e=>ks.has(e.key)).map(e=>e.key),sim:false,dir:true})});
 const facts=[C.role,d.start_date?"Fondata nel "+new Date(d.start_date*1000).getUTCFullYear():"",COUNTRY[d.country]||""];
 cur={kind:"company",id:d.id,center:C,title:d.name,year:C.role,facts,summary:C.desc,cover:"",E,known:{[C.key]:games},sims:[],links:[...L.values()]};
-sel=null;selF=null;$("q").value=d.name;setMsg("");show("film");R(true);
+sel=null;selF=null;$("q").value="";setMsg("");show("film");R(true);
 try{history.replaceState(null,"","#c"+d.id)}catch(e){}
 }catch(e){if(my===tok)showErr(e)}}
 async function ensureKnown(e){const my=cur;
 try{const l=await knownOf(e,cur.kind==="game"?cur.id:null);if(cur!==my)return;cur.known[e.key]=l}
 catch(x){if(cur!==my)return;cur.known[e.key]=[]}
 if(cur===my&&sel===e.key)R()}
+// ---- giochi simili: IGDB + community (voti di somiglianza, fan e giocatori in comune) ----
+const SIMENT={key:"s",id:0,k:"s",name:"Giochi simili",role:"Simili"};
+const SIMO=new Map();
+function simMerge(ig,cm){const m=new Map();
+(ig||[]).filter(f=>f&&f.name).forEach((f,i)=>m.set(f.id,{f,ig:i,v:0,p:0,l:0}));
+(cm||[]).forEach(r=>{const id=Number(r.game_id);if(!id)return;
+const o=m.get(id)||{f:{id,name:r.title||"",cover:r.cover?{image_id:r.cover}:null,_y:r.year||""},ig:-1,v:0,p:0,l:0};
+o.v=r.voti||0;o.p=r.giocati||0;o.l=r.piaciuti||0;if(!o.f.name)o.f.name=r.title||"";m.set(id,o)});
+const L=[...m.values()].filter(o=>o.f.name);
+L.forEach(o=>{const c=o.v*4+o.l*2+o.p;o.cm=c;o.ss=(o.ig>=0?8-o.ig*.4:0)+c+(o.ig>=0&&c?3:0)});
+return L.sort((a,b)=>b.ss-a.ss)}
+function applySims(c,cm){const all=simMerge(c.igs,cm);c.simAll=all;c.sims=all.map(o=>o.f);c.known.s=c.sims;
+const has=c.E.some(e=>e.key==="s");if(all.length&&!has)c.E.push(SIMENT);if(!all.length&&has)c.E=c.E.filter(e=>e.key!=="s");
+c.links=c.links.filter(o=>{o.who=o.who.filter(k=>k!=="s");o.sim=false;o.cmv=null;o.ss=0;return o.who.length});
+const m=new Map(c.links.map(o=>[o.f.id,o]));
+all.slice(0,8).forEach(so=>{let o=m.get(so.f.id);if(!o){o={f:so.f,who:[]};m.set(so.f.id,o);c.links.push(o)}o.who.push("s");o.sim=so.ig>=0;o.cmv=so;o.ss=so.ss})}
+const simWhy=o=>[o.ig>=0?"Simile secondo IGDB":"",o.v?o.v+(o.v>1?" voti":" voto")+" di somiglianza":"",o.l?o.l+" fan in comune":"",o.p?o.p+" giocatori in comune":""].filter(Boolean);
+const simTags=o=>simWhy(o).map((t,i)=>`<span class="tag ${i===0&&o.ig>=0?"sim":"cm"}">${esc(t)}</span>`).join("");
+const peo=()=>`<svg viewBox="-10 -10 20 20" aria-hidden="true">${SIMI("currentColor")}</svg>`;
+const simBadge=o=>o.cm>0?`<span class="cmb" title="${esc(simWhy(o).join(" · "))}">${peo()}${o.v+o.l+o.p}</span>`:o.ig>=0?`<span class="cmb ig">IGDB</span>`:"";
+const simCard=(o,dlg)=>{const h=pc(o.f).replace(/^<button class="pc" data-f="(\d+)">/,(m,id)=>`<button class="pc" ${dlg?`data-d="f${id}"`:`data-f="${id}"`}>`+simBadge(o));return o.f.first_release_date?h:h.replace('<span class="pd"></span>',`<span class="pd">${esc(o.f._y||"")}</span>`)};
+const simRailO=(l,dlg)=>l.length?`<div class="rail">${l.slice(0,14).map(o=>simCard(o,dlg)).join("")}</div>`:'<span class="kd">Nessun gioco simile trovato.</span>';
+// righe con il perché e il voto «è simile»
+function simRows(l,dlg,base){base=base||(cur&&cur.w);if(base)SIMO.set(base.id,base);
+if(!l.length)return'<p class="kd">Nessun gioco simile trovato per ora.</p>';
+return`<ul class="smr">${l.map(o=>{SIMO.set(o.f.id,o.f);const on=!!base&&simVoted(base.id,o.f.id),why=simWhy(o);
+return`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" type="button" ${dlg?`data-d="f${o.f.id}"`:`data-f="${o.f.id}"`}>${ckm(o.f.id)}${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><span class="why">${why.map(t=>/IGDB/.test(t)?esc(t):"<b>"+esc(t)+"</b>").join(" · ")}</span></div>${sbOn()&&base?`<button class="go alt sm smv${on?" on":""}" type="button" data-simv="${o.f.id}" data-simb="${base.id}" aria-pressed="${on}">${on?"✓ Simile per te":"È simile"}</button>`:""}</li>`}).join("")}</ul>`}
+const simBar=w=>sbOn()&&w?(SIMO.set(w.id,w),`<div class="simbar"><span class="kd">Conosci un gioco che gli somiglia? Suggeriscilo: aiuti tutti a scoprire nuovi legami.</span><button class="go alt sm" type="button" data-simadd="${w.id}">Suggerisci un gioco simile</button></div>`):"";
 function centre(key){closeDlg();$("res").innerHTML="";if(key[0]==="c")loadCompany(Number(key.slice(1)));else if(key[0]==="f")loadGame(Number(key.slice(1)))}
 
-const show=v=>{$("home").hidden=v!=="home";$("film").hidden=v!=="film";$("seenview").hidden=v!=="seen";$("profview").hidden=v!=="prof"};
+const show=v=>{$("home").hidden=v!=="home";$("film").hidden=v!=="film";$("seenview").hidden=v!=="seen";$("profview").hidden=v!=="prof";$("recoview").hidden=v!=="reco"};
 let HOMEOK=false;
 function goHome(){closeDlg();show("home");try{history.replaceState(null,"",location.pathname)}catch(e){}if(!HOMEOK)loadHome();else renderHome()}
 const fmtD=t=>new Date(t*1000).toLocaleDateString("it-IT",{day:"numeric",month:"short"});
@@ -454,17 +581,18 @@ const getJ=async p=>{const r=await fetch(API+"/"+p);if(!r.ok)throw{code:"http"};
 const px=(x,sub,rk)=>`<button class="pc" data-s="${esc(x.nome)}">${rk?`<span class="rk">${rk}</span>`:""}${x.img?`<img src="${esc(x.img)}" alt="" loading="lazy" data-alt="${esc(x.ripiego||"")}" onerror="if(this.dataset.alt){this.src=this.dataset.alt;this.dataset.alt=''}else this.style.opacity=0">`:`<span class="ph"></span>`}<span class="pt">${esc(x.nome)}</span><span class="pd">${esc(sub||"")}</span></button>`;
 // pagina iniziale: le file da mostrare cambiano con il filtro in alto (Tutto, PlayStation, Xbox, Nintendo, PC)
 const PLATS={ps:[167,48,9],xbox:[169,49,12],switch:[130,508],pc:[6]};
-const HV={all:["soon","gp","top","now","tps","txbox","tswitch","tpc"],ps:["soon","now","tps"],xbox:["soon","gp","now","txbox"],switch:["soon","now","tswitch"],pc:["soon","gp","top","now","tpc"]};
-const HALL=["soon","gp","top","now","tps","txbox","tswitch","tpc"],HEXT={gp:1,top:1},HRANK={top:1,tps:1,txbox:1,tswitch:1,tpc:1},HFILT={soon:1,now:1};
+const HV={all:["soon","rc","gp","top","now","tps","txbox","tswitch","tpc"],ps:["soon","rc","now","tps"],xbox:["soon","rc","gp","now","txbox"],switch:["soon","rc","now","tswitch"],pc:["soon","rc","gp","top","now","tpc"]};
+const HALL=["soon","rc","gp","top","now","tps","txbox","tswitch","tpc"],HEXT={gp:1,top:1},HRANK={top:1,tps:1,txbox:1,tswitch:1,tpc:1},HFILT={soon:1,now:1};
 const HM={};
 const hOk=f=>FILT==="all"||(f.platforms||[]).some(p=>PLATS[FILT].includes(p));
 function renderHome(){for(const id of HALL){const box=$("hs-"+id);if(!box)continue;
-if(!HV[FILT].includes(id)){box.hidden=true;continue}
+if(!HV[FILT].includes(id)||(id==="rc"&&!sbOn())){box.hidden=true;continue}
 const L=HM[id];box.hidden=false;
 if(L===undefined){$(id).innerHTML='<p class="sub">Carico…</p>';continue}
 if(L===null){$(id).innerHTML='<p class="sub">Non disponibile al momento.</p>';continue}
-const F=(HFILT[id]?L.filter(hOk):L).slice(0,20);
-if(!F.length){$(id).innerHTML='<p class="sub">Nessun gioco trovato.</p>';continue}
+const F=(id==="rc"?L.filter(f=>FILT==="all"||(f.fam||[]).includes(FILT)):HFILT[id]?L.filter(hOk):L).slice(0,20);
+if(!F.length){$(id).innerHTML=id==="rc"?'<p class="sub">Ancora nessun consiglio qui: apri un gioco che ami e premi «Consiglia».</p>':'<p class="sub">Nessun gioco trovato.</p>';continue}
+if(id==="rc"){$(id).innerHTML=F.map((f,i)=>pc(f,false,i+1).replace('<span class="pd"></span>',`<span class="pd rn">${f.n} ${f.n>1?"consigli":"consiglio"}</span>`)).join("");continue}
 $(id).innerHTML=HEXT[id]?F.map((x,i)=>px(x,id==="top"?"Steam":x.editore,HRANK[id]?i+1:0)).join(""):F.map((f,i)=>pc(f,id==="soon",HRANK[id]?i+1:0)).join("")}}
 async function loadHome(){
 HOMEOK=true;setMsg("Carico le novità…");renderHome();
@@ -472,6 +600,7 @@ const F="name,cover.image_id,first_release_date,platforms";
 const put=(id,p)=>p.then(l=>{HM[id]=l;renderHome()}).catch(e=>{HM[id]=null;renderHome();throw e});
 const jobs=[
 put("soon",api("games",`fields ${F}; where first_release_date > ${NOW} & first_release_date < ${NOW+240*DAY} & cover != null & version_parent = null & hypes > 5; sort first_release_date asc; limit 60;`)),
+put("rc",new Promise(r=>document.readyState==="loading"?addEventListener("DOMContentLoaded",r,{once:true}):r()).then(()=>recoRail?recoRail():[])),
 put("gp",getJ("gamepass")),
 put("top",getJ("piu-venduti")),
 put("now",(async()=>{let n=await api("games",`fields ${F}; where first_release_date >= ${NOW-60*DAY} & first_release_date <= ${NOW} & cover != null & version_parent = null & hypes > 3; sort first_release_date desc; limit 60;`);
@@ -534,6 +663,8 @@ pin:O(3,-4,3)+S("M-7.5 6.5L1.5 3.5M7.5 6.5"),
 tag:F("M-7 -7H0.5L7.5 0L0 7.5L-7 0.5Z")+`<circle cx="-3.3" cy="-3.3" r="1.7" fill="var(--gen)"/>`};
 const GID={2:"poi",4:"fig",5:"sho",7:"mus",8:"pla",9:"puz",10:"rac",11:"str",12:"rpg",13:"sim",14:"spo",15:"str",16:"str",24:"str",25:"hac",26:"qui",30:"pin",31:"adv",32:"ind",33:"arc",34:"vno",35:"car",36:"mob"};
 const gIcon=id=>GIC[GID[id]]||GIC.tag;
+// icona dei giochi simili: due giocatori
+const SIMI=(c)=>{c=c||"#121014";return`<circle cx="-3.6" cy="-3.4" r="3" fill="${c}"/><circle cx="4.2" cy="-2.4" r="2.5" fill="${c}"/><path d="M-9 7.8C-9 2.6-6.6 .8-3.6 .8S1.8 2.6 1.8 7.8Z" fill="${c}"/><path d="M3.2 7.8C3.3 4.6 4.4 2.8 6.6 3 8.8 3.3 9.8 5.2 9.8 7.8Z" fill="${c}"/>`};
 const lay=(a,r)=>[CX+r*Math.cos(a),CY+r*Math.sin(a)];
 // scritte del grafo: titoli dei giochi su due righe, nomi delle case sotto il cerchio
 const wrap2=(t,n)=>{const ws=String(t||"").split(/\s+/).filter(Boolean);let l1="",i=0;
@@ -549,23 +680,25 @@ const IC={
 dir:`<path d="M-3 -5L-7.5 0L-3 5M3 -5L7.5 0L3 5" fill="none" stroke="#09090a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>`,
 act:`<path d="M-6 -2.5L0 -6L6 -2.5L6 4L0 7.5L-6 4Z" fill="#09090a"/><path d="M-6 -2.5L0 1L6 -2.5M0 1V7.5" fill="none" stroke="var(--act)" stroke-width="1.3" stroke-linejoin="round"/>`,
 gen:`<path d="M-6.5 -6.5H0.5L7 0L0 7L-6.5 0.5Z" fill="#09090a" stroke-linejoin="round"/><circle cx="-3" cy="-3" r="1.6" fill="var(--gen)"/>`,
+sim:`<path d="M-1.8 1.8L1.8 -1.8M-3.4 -.6L-5.2 1.2a2.6 2.6 0 0 0 3.7 3.7l1.8-1.8M3.4 .6L5.2 -1.2a2.6 2.6 0 0 0-3.7-3.7L-.3 -3.1" fill="none" stroke="#09090a" stroke-width="2.2" stroke-linecap="round"/>`,
 film:`<rect x="-8" y="-4.5" width="16" height="9" rx="4.5" fill="#09090a"/><path d="M-5.3 0h3.6M-3.5 -1.8v3.6" stroke="var(--film)" stroke-width="1.4"/><circle cx="3" cy="-0.9" r="1.1" fill="var(--film)"/><circle cx="5.1" cy="1.2" r="1.1" fill="var(--film)"/>`};
 const bdg=(x,y,c,r)=>`<g class="bd" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(r/12).toFixed(2)})"><circle r="12" fill="var(--${c})" stroke="#09090a" stroke-width="2"/>${IC[c]}</g>`;
 const hx=(x,y,R)=>[0,1,2,3,4,5].map(k=>(x+R*Math.cos(PI/6+k*PI/3)).toFixed(1)+","+(y+R*Math.sin(PI/6+k*PI/3)).toFixed(1)).join(" ");
 const nr=(e,hi,ctr)=>(ctr?44:(hi?38:30))*(e.k==="g"?1.18:1);
 function pn(e,q,i,ctr,hi,dim){const G=e.k==="g",r=ctr?44:(hi?38:30),id="ce"+(ctr?"c":i),R=G?r*1.18:r,c=`var(--${ecn(e)})`;
 const shp=at=>G?`<polygon points="${hx(q[0],q[1],R)}" ${at}/>`:`<circle cx="${q[0]}" cy="${q[1]}" r="${r}" ${at}/>`;
-const inner=e.logo&&!G?`<clipPath id="${id}">${shp("")}</clipPath>${shp('fill="#f6f0e6"')}<image href="${logo(e.logo)}" x="${(q[0]-R*.7).toFixed(1)}" y="${(q[1]-R*.7).toFixed(1)}" width="${(R*1.4).toFixed(1)}" height="${(R*1.4).toFixed(1)}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${id})"/>`:G?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11.5).toFixed(2)})">${gIcon(e.id)}</g>`:`<text class="in" x="${q[0]}" y="${q[1]+5}" text-anchor="middle"${ctr?' style="font-size:20px"':""}>${esc(ini(e.name))}</text>`;
+const inner=e.k==="s"?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11).toFixed(2)})">${SIMI()}</g>`:e.logo&&!G?`<clipPath id="${id}">${shp("")}</clipPath>${shp('fill="#f6f0e6"')}<image href="${logo(e.logo)}" x="${(q[0]-R*.7).toFixed(1)}" y="${(q[1]-R*.7).toFixed(1)}" width="${(R*1.4).toFixed(1)}" height="${(R*1.4).toFixed(1)}" preserveAspectRatio="xMidYMid meet" clip-path="url(#${id})"/>`:G?`<g transform="translate(${q[0].toFixed(1)} ${q[1].toFixed(1)}) scale(${(R/11.5).toFixed(2)})">${gIcon(e.id)}</g>`:`<text class="in" x="${q[0]}" y="${q[1]+5}" text-anchor="middle"${ctr?' style="font-size:20px"':""}>${esc(ini(e.name))}</text>`;
 return `<g class="n${ctr?" ctr":""}${hi&&!ctr?" on":""}" style="--i:${i}${dim?";opacity:.3":""}" ${ctr?'data-c="1"':`data-e="${e.key}"`} tabindex="0" role="button" aria-label="${esc(e.name)}, ${esc(e.role.toLowerCase())}"><title>${esc(e.name)} (${esc(e.role.toLowerCase())})</title><circle cx="${q[0]}" cy="${q[1]}" r="${r+9}" fill="transparent"/>${shp(`fill="${c}"`)}${inner}${shp(`fill="none" stroke="${hi&&!ctr?"var(--fg)":c}" stroke-width="4" stroke-linejoin="round"`)}${bdg(q[0]+R*.82,q[1]-R*.82,ecn(e),12)}</g>`}
 function fn(f,q,k,go,i,x){x=x||{};const w=17*k,h=24*k,id="cf"+(go?f.id:"c"),c=cv(f);
 const inner=c?`<clipPath id="${id}"><rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6"/></clipPath><image href="${cov(c,"cover_big")}" x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id})"/>`:`<text class="in f" x="${q[0]}" y="${q[1]+5}" text-anchor="middle">${esc(ini(f.name))}</text>`;
+const cmB=x.cm&&go?`<g class="bd" transform="translate(${(q[0]-w*.9).toFixed(1)} ${(q[1]-h*.9).toFixed(1)})"><circle r="11" fill="var(--sim)" stroke="#09090a" stroke-width="2"/><g transform="scale(.72)">${SIMI()}</g></g>`:"";
 const seen=isSeen(f.id)&&!go?`<g class="bd" transform="translate(${(q[0]+w*.9).toFixed(1)} ${(q[1]+h*.9).toFixed(1)})"><circle r="12" fill="var(--hl)" stroke="#09090a" stroke-width="2"/><path d="M-5 0.5l3.5 3.5 6.5-7.5" stroke="#09090a" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`:"";
-return `<g class="n${go?"":" ctr"}${x.on?" on":""}" style="--i:${i}${x.dim?";opacity:.3":""}" ${go?`data-f="${f.id}"`:'data-c="1"'} tabindex="0" role="button" aria-label="${esc(f.name)}"><title>${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}${x.names?", in comune: "+esc(x.names):""}${x.sim?" (simile secondo IGDB)":""}</title>${go?`<rect x="${q[0]-w-8}" y="${q[1]-h-8}" width="${2*w+16}" height="${2*h+16}" fill="transparent"/>`:""}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="var(--film)"/>${inner}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="none" stroke="${x.on?"var(--hl)":"#09090a"}" stroke-width="3"/>${bdg(q[0]+w*.9,q[1]-h*.9,"film",go?10:12)}${seen}</g>`}
-const sortedLinks=()=>[...cur.links].sort((a,b)=>b.who.length-a.who.length||(b.sim-a.sim)||(b.f.total_rating_count||0)-(a.f.total_rating_count||0));
+return `<g class="n${go?"":" ctr"}${x.on?" on":""}" style="--i:${i}${x.dim?";opacity:.3":""}" ${go?`data-f="${f.id}"`:'data-c="1"'} tabindex="0" role="button" aria-label="${esc(f.name)}"><title>${esc(f.name)}${yr(f)?" ("+yr(f)+")":""}${x.names?", in comune: "+esc(x.names):""}${x.why?" · "+esc(x.why):""}</title>${go?`<rect x="${q[0]-w-8}" y="${q[1]-h-8}" width="${2*w+16}" height="${2*h+16}" fill="transparent"/>`:""}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="var(--film)"/>${inner}<rect x="${q[0]-w}" y="${q[1]-h}" width="${2*w}" height="${2*h}" rx="6" fill="none" stroke="${x.on?"var(--hl)":"#09090a"}" stroke-width="3"/>${bdg(q[0]+w*.9,q[1]-h*.9,"film",go?10:12)}${cmB}${seen}</g>`}
+const sortedLinks=()=>[...cur.links].sort((a,b)=>b.who.length-a.who.length||((b.ss||0)-(a.ss||0))||(b.f.total_rating_count||0)-(a.f.total_rating_count||0));
 const STARS=(()=>{let x=7,o="";const rn=()=>(x=(x*16807)%2147483647)/2147483647;for(let i=0;i<46;i++){const a=rn()*980,b=rn()*660,r=.7+rn()*1.3;o+=`<circle cx="${a.toFixed(0)}" cy="${b.toFixed(0)}" r="${r.toFixed(1)}" fill="#f6f0e6" opacity="${(.1+rn()*.22).toFixed(2)}"/>`}return o})();
 const DEFS=`<defs><radialGradient id="gl"><stop offset="0" stop-color="#fac022" stop-opacity=".2"/><stop offset=".5" stop-color="#f94632" stop-opacity=".05"/><stop offset="1" stop-color="#f94632" stop-opacity="0"/></radialGradient></defs>${STARS}<circle cx="${CX}" cy="${CY}" r="340" fill="url(#gl)"/><circle class="dz" cx="${CX}" cy="${CY}" r="96"/><circle class="pulse" cx="${CX}" cy="${CY}" r="78" fill="none" stroke="#fac022" stroke-opacity=".3" stroke-width="2"/><circle cx="${CX}" cy="${CY}" r="140" fill="none" stroke="#2d2c30" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/><circle cx="${CX}" cy="${CY}" r="262" fill="none" stroke="#2d2c30" stroke-width="1.5" stroke-dasharray="2 7" stroke-linecap="round"/>`;
-const eg=(a,b,on,i,bend,an)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,qx=mx+(CX-mx)*bend,qy=my+(CY-my)*bend,d=`M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${qx.toFixed(1)} ${qy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`,hi=hasSel&&on;
-return `<path class="e${an?" eb":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"var(--hl)":"var(--edge)"}" stroke-width="${hi?4:1.5}" stroke-linecap="round" opacity="${hasSel?(on?1:.18):.6}"/>`+(hasSel&&!on?"":`<path class="ef${hi?" on":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"#fff":"var(--acc)"}" stroke-width="${hi?3:2.2}" stroke-linecap="round" opacity="${hi?.95:.8}"/>`)};
+const eg=(a,b,on,i,bend,an,col)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,qx=mx+(CX-mx)*bend,qy=my+(CY-my)*bend,d=`M${a[0].toFixed(1)} ${a[1].toFixed(1)}Q${qx.toFixed(1)} ${qy.toFixed(1)} ${b[0].toFixed(1)} ${b[1].toFixed(1)}`,hi=hasSel&&on;
+return `<path class="e${an?" eb":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?(col||"var(--hl)"):(col||"var(--edge)")}" stroke-width="${hi?4:(col?2:1.5)}" stroke-linecap="round" opacity="${hasSel?(on?1:.18):.6}"/>`+(hasSel&&!on?"":`<path class="ef${hi?" on":""}" pathLength="1" style="--i:${i}" d="${d}" fill="none" stroke="${hi?"#fff":(col||"var(--acc)")}" stroke-width="${hi?3:2.2}" stroke-linecap="round" opacity="${hi?.95:.8}"/>`)};
 // collegamento "simile secondo IGDB": tratteggio dorato dal centro
 const es=(a,b,on)=>`<path d="M${a[0].toFixed(1)} ${a[1].toFixed(1)}L${b[0].toFixed(1)} ${b[1].toFixed(1)}" fill="none" stroke="${hasSel&&on?"var(--hl)":"var(--acc)"}" stroke-width="${hasSel&&on?3:1.6}" stroke-dasharray="3 7" stroke-linecap="round" opacity="${hasSel?(on?.95:.15):.55}"/>`;
 // tasto + / ✓ sulla copertina: segna il gioco come giocato senza aprirlo
@@ -582,6 +715,7 @@ let items=[];
 if(ps){
 // una casa o un genere selezionato: i suoi giochi si aprono a ventaglio dalla sua parte
 const a=Math.atan2(pp[ps.key][1]-CY,pp[ps.key][0]-CX),L2=L.filter(o=>o.who.includes(ps.key));
+if(ps.k==="s")L2.sort((x,y)=>(y.ss||0)-(x.ss||0));
 const lst=L2.filter(ok).concat(L2.filter(o=>!ok(o))).slice(0,BLOOM),m=lst.length,st=m<4?.5:.4;
 items=lst.map((o,j)=>({o,ang:a+(j-(m-1)/2)*st,bloom:true}))}
 else{
@@ -594,20 +728,21 @@ if(fsel&&!items.some(it=>it.o.f.id===fsel.f.id)){selF=null;fsel=null;hasSel=!!se
 const anim=!first&&(sel||"")!==lastBloom;lastBloom=sel||"";
 items.forEach((it,j)=>{it.q=lay(it.ang,RO);it.j=j;GW.set(it.o.f.id,it.o.f)});
 let s=DEFS,k=0;
-P.forEach(e=>s+=eg(c,pp[e.key],hiP.has(e.key),k++,0));
+const SC=k=>k==="s"?"var(--sim)":0;
+P.forEach(e=>s+=eg(c,pp[e.key],hiP.has(e.key),k++,0,0,SC(e.key)));
 items.forEach(it=>{const on=!!fsel&&fsel.f.id===it.o.f.id;
-if(it.bloom)s+=eg(pp[ps.key],it.q,true,k++,.18,anim);
+if(it.bloom)s+=eg(pp[ps.key],it.q,true,k++,.18,anim,SC(ps.key));
 else if(!it.o.who.length)s+=isC?eg(c,it.q,on,k++,0):es(c,it.q,on);
-else it.o.who.forEach(key=>{if(pp[key])s+=eg(pp[key],it.q,on&&hiP.has(key),k++,.22)});
-if(on&&it.bloom)fsel.who.forEach(key=>{if(key!==ps.key&&pp[key])s+=eg(pp[key],it.q,true,k++,.22)})});
+else it.o.who.forEach(key=>{if(pp[key])s+=eg(pp[key],it.q,on&&hiP.has(key),k++,.22,0,SC(key))});
+if(on&&it.bloom)fsel.who.forEach(key=>{if(key!==ps.key&&pp[key])s+=eg(pp[key],it.q,true,k++,.22,0,SC(key))})});
 P.forEach((e,i)=>{const hi=hiP.has(e.key),dim=hasSel&&!hi;
 s+='<g class="u">'+pn(e,pp[e.key],i,0,hi,dim)+plab(pp[e.key],nr(e,hi),e.name,dim,hi)+'</g>'});
 items.forEach(it=>{const f=it.o.f,on=!!fsel&&fsel.f.id===f.id,kk=on?1.9:(it.bloom?1.5:1.3),w=17*kk,h=24*kk,dim=hasSel&&!on&&!it.bloom,
-names=it.o.who.map(key=>(P.find(x=>x.key===key)||{}).name).filter(Boolean).join(", ");
+names=it.o.who.filter(key=>key!=="s").map(key=>(P.find(x=>x.key===key)||{}).name).filter(Boolean).join(", "),cmv=it.o.cmv;
 const st=it.bloom&&anim?` bl" style="--dx:${(pp[ps.key][0]-it.q[0]).toFixed(1)}px;--dy:${(pp[ps.key][1]-it.q[1]).toFixed(1)}px;--i:${it.j}`:"";
-s+=`<g class="u${st}">`+fn(f,it.q,kk,1,P.length+it.j,{on,dim,names,sim:it.o.sim})+wlab(it.q,w,h,f.name,dim,on,it.ang)+sgBtn(f,it.q,w,h)+"</g>"});
+s+=`<g class="u${st}">`+fn(f,it.q,kk,1,P.length+it.j,{on,dim,names,cm:!!(cmv&&cmv.cm>0),why:cmv?simWhy(cmv).join(", "):""})+wlab(it.q,w,h,f.name,dim,on,it.ang)+sgBtn(f,it.q,w,h)+"</g>"});
 s+=(isC?pn(cur.center,c,0,1):fn(cur.w,c,2.1,0,0))+`<text class="ttl" x="28" y="46" font-weight="700" font-size="27">${esc(cut(cur.title,32))}</text>${cur.year?`<text class="ttl" x="28" y="72" font-size="18" style="fill:var(--mut)">${esc(cur.year)}</text>`:""}`;
-const mb=MOB(),hint=sel?(items.length?(mb?"Tocca un gioco · il + lo segna come giocato":"Tocca un gioco per i dettagli · il segno + lo aggiunge a «I miei giochi»"):"Nessun altro gioco collegato trovato"):(fsel?(mb?"Tocca ancora il gioco per la scheda":"Tocca ancora il gioco o fai doppio tocco per la scheda completa"):(mb?"Tocca una casa o un genere · trascina un gioco al centro":"Tocca una casa o un genere per vedere i suoi giochi · trascina un gioco al centro per farne il fulcro"));
+const mb=MOB(),hint=sel==="s"?(mb?"I più simili secondo IGDB e la community":"Giochi simili secondo IGDB e la community · il cerchietto rosa indica i voti dei giocatori"):sel?(items.length?(mb?"Tocca un gioco · il + lo segna come giocato":"Tocca un gioco per i dettagli · il segno + lo aggiunge a «I miei giochi»"):"Nessun altro gioco collegato trovato"):(fsel?(mb?"Tocca ancora il gioco per la scheda":"Tocca ancora il gioco o fai doppio tocco per la scheda completa"):(mb?"Tocca una casa o un genere · trascina un gioco al centro":"Tocca una casa o un genere per vedere i suoi giochi · trascina un gioco al centro per farne il fulcro"));
 s+=`<text class="hint" x="${MOB()?490:960}" y="${MOB()?634:648}" text-anchor="${MOB()?"middle":"end"}">${esc(hint)}</text>`;
 return s}
 const simRail=(l,dlg)=>l.length?`<div class="rail">${l.slice(0,14).map(f=>dlg?pc(f).replace(/data-f="(\d+)"/,'data-d="f$1"'):pc(f)).join("")}</div>`:'<span class="kd">Nessun gioco simile trovato.</span>';
@@ -632,8 +767,8 @@ i=`<section class="card"><div class="hd">${poster(cur.cover,cur.title,1)}<div><h
 (pub.length?`<div class="k">Edizione</div>${pub.map(ch).join("")}`:"")+
 (gen.length?`<div class="k">Genere</div>${gen.map(ch).join("")}`:"")+
 `<div class="k">Dove giocarlo</div><div id="wh" class="wh">Carico…</div>`+
-`<div class="k">Giochi simili</div>${simRail(cur.sims,false)}`+
-`<div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}<div class="dact"><button class="go alt${isSeen(cur.id)?" on":""}" type="button" data-seenc="1">${isSeen(cur.id)?"✓ Giocato":"Segna come giocato"}</button></div></section>`}
+`<div class="k">Giochi simili <span class="kd">· secondo IGDB e la community</span></div>${simRailO(cur.simAll,false)}${cur.simAll.length?'<button class="link" type="button" data-e="s">Perché si somigliano? Vedi e vota</button>':""}${simBar(cur.w)}`+
+`<div class="k">Collegamenti</div>${tags([cur.links.length+" giochi collegati"])}<div class="dact"><button class="go alt${isSeen(cur.id)?" on":""}" type="button" data-seenc="1">${isSeen(cur.id)?"✓ Giocato":"Segna come giocato"}</button>${sbOn()?'<button class="go alt rc" type="button" data-recc="1">Consiglia</button>':""}</div></section>`}
 else{const kn=cur.known[cur.center.key]||[];
 i=`<section class="card p ${ecl(cur.center)}"><div class="hd">${pa(cur.center,1)}<div><h2>${esc(cur.title)}</h2>${tags(cur.facts)}</div></div>`+
 (cur.summary?`<p class="ov" id="sum" data-src="${esc(cur.summary)}">${esc(cut(trC.get(cur.summary)||cur.summary,320))}</p>`:"")+
@@ -641,21 +776,22 @@ i=`<section class="card p ${ecl(cur.center)}"><div class="hd">${pa(cur.center,1)
 (gen.length?`<div class="k">Generi principali</div>${gen.map(ch).join("")}`:"")+
 `<div class="k">Giochi più noti</div><div>${kn.slice(0,10).map(fc).join("")}</div></section>`}
 const e=P.find(x=>x.key===sel);
-if(e){const kn=cur.known[e.key];
+if(e&&e.k==="s"){i=`<section class="card p sim"><div class="hd">${pa(e,1)}<div><h2>Giochi simili a ${esc(cur.title)}</h2>${tags(["IGDB e community"])}</div></div><p class="ov">Secondo IGDB e i giocatori di GiocoLegami: voti di somiglianza, fan e giocatori in comune.${sbOn()?" Premi «È simile» per dare il tuo voto.":""}</p>${simRows(cur.simAll.slice(0,10),false,cur.w)}${simBar(cur.w)}</section>`+i}
+else if(e){const kn=cur.known[e.key];
 i=`<section class="card p ${ecl(e)}"><div class="hd">${pa(e,1)}<div><h2>${esc(e.name)}</h2>${tags([e.role])}</div></div>`+
 (e.desc?`<p class="ov" id="edesc" data-src="${esc(e.desc)}">${esc(cut(trC.get(e.desc)||e.desc,320))}</p>`:"")+
 `<div class="k">${e.k==="g"?"Giochi simili per tipologia":"Altri giochi di "+esc(e.name)}</div><div>${kn?(kn.slice(0,10).map(fc).join("")||"Nessun altro gioco trovato."):"Carico…"}</div>`+
 `<div class="dact"><button class="go dgo" type="button" data-det="${e.key}">Dettagli</button>${e.k==="c"?`<button class="go dgo alt" type="button" data-go="${e.key}">Scopri i legami</button>`:""}</div></section>`+i;
 if(!kn)ensureKnown(e)}
 if(fsel){const com=fsel.who.map(key=>P.find(x=>x.key===key)).filter(Boolean);
-i=`<section class="card"><div class="hd">${poster(cv(fsel.f),fsel.f.name,1)}<div><h2>${esc(fsel.f.name)}</h2>${tags([yr(fsel.f),fsel.sim&&"Simile secondo IGDB"])}</div></div>`+
+i=`<section class="card"><div class="hd">${poster(cv(fsel.f),fsel.f.name,1)}<div><h2>${esc(fsel.f.name)}</h2>${tags([yr(fsel.f)])}${fsel.cmv?simTags(fsel.cmv):""}</div></div>`+
 (com.length?`<div class="k">In comune</div>${com.map(ch).join("")}`:"")+
-`<div class="dact"><button class="go dgo" type="button" data-det="f${fsel.f.id}">Dettagli</button><button class="go dgo alt" type="button" data-go="f${fsel.f.id}">Scopri i legami</button><button class="go dgo alt${isSeen(fsel.f.id)?" on":""}" type="button" data-sk="${fsel.f.id}">${isSeen(fsel.f.id)?"✓ Giocato":"Segna come giocato"}</button></div></section>`+i}
+`<div class="dact"><button class="go dgo" type="button" data-det="f${fsel.f.id}">Dettagli</button><button class="go dgo alt" type="button" data-go="f${fsel.f.id}">Scopri i legami</button><button class="go dgo alt${isSeen(fsel.f.id)?" on":""}" type="button" data-sk="${fsel.f.id}">${isSeen(fsel.f.id)?"✓ Giocato":"Segna come giocato"}</button>${sbOn()?`<button class="go dgo alt rc" type="button" data-recf="${fsel.f.id}">Consiglia</button>`:""}${fsel.cmv&&sbOn()&&!isC?`<button class="go dgo alt sm${simVoted(cur.id,fsel.f.id)?" on":""}" type="button" data-simv="${fsel.f.id}" data-simb="${cur.id}" aria-pressed="${simVoted(cur.id,fsel.f.id)}">${simVoted(cur.id,fsel.f.id)?"✓ Simile per te":"È simile"}</button>`:""}</div></section>`+i;if(fsel.cmv){SIMO.set(fsel.f.id,fsel.f);SIMO.set(cur.id,cur.w)}}
 $("info").innerHTML=i;
 if(cur.summary&&!trC.has(cur.summary))trInto("sum",cur.summary,320);
 if(!isC&&$("wh")){const ck=cur;fillWhere("wh",cur.id,()=>cur===ck)}
 if(e&&e.desc&&!trC.has(e.desc))trInto("edesc",e.desc,320);
-$("p").innerHTML=`<h2>${isC?"Giochi di ":"Giochi collegati a "}${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${ckm(o.f.id)}${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.sim?'<span class="tag sim">Simile secondo IGDB</span>':""}</div></div></li>`).join("")+"</ul>"}
+$("p").innerHTML=`<h2>${isC?"Giochi di ":"Giochi collegati a "}${esc(cur.title)}</h2><ul>`+L.slice(0,24).map(o=>`<li>${poster(cv(o.f),o.f.name)}<div><button class="l" data-f="${o.f.id}">${ckm(o.f.id)}${esc(o.f.name)}${yr(o.f)?" ("+yr(o.f)+")":""}</button><div>${o.who.filter(key=>key!=="s").map(key=>{const q=P.find(x=>x.key===key);return q?ch(q):""}).join("")}${o.cmv?simTags(o.cmv):""}</div></div></li>`).join("")+"</ul>"}
 
 // ---- ricerca: risultati e suggerimenti mentre si scrive (giochi, studi ed editori insieme) ----
 let FILT="all",lastQ="";
@@ -697,7 +833,7 @@ let DR=null,dragUntil=0;const DROP_R=96;
 function svgPt(e){const g=$("g"),m=g.getScreenCTM();if(!m)return{x:CX,y:CY};const pt=g.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(m.inverse())}
 $("g").addEventListener("pointerdown",e=>{if(e.button>0||DR)return;if(e.target.closest("[data-sk]"))return;
 const n=e.target.closest(".n[data-f],.n[data-e]");if(!n||!n.parentNode)return;
-const key=n.dataset.f?"f"+n.dataset.f:n.dataset.e;if(key[0]==="g")return;
+const key=n.dataset.f?"f"+n.dataset.f:n.dataset.e;if(key[0]==="g"||key==="s")return;
 DR={n,u:n.parentNode,key,x0:e.clientX,y0:e.clientY,on:false,id:e.pointerId,st:svgPt(e)}});
 $("g").addEventListener("pointermove",e=>{if(!DR||e.pointerId!==DR.id)return;
 const dx=e.clientX-DR.x0,dy=e.clientY-DR.y0;
@@ -764,26 +900,29 @@ if(!keep)lastFocus=document.activeElement;
 const my=++dTok;if(key==="x"&&cur)key=cur.kind==="company"?cur.center.key:"f"+cur.id;
 openDlg('<p class="ov">Carico…</p>',pt);
 try{
+if(key==="s"){if(!cur||!cur.simAll){closeDlg();return}
+openDlg(`<div class="dtop"><span class="dposter sim"><svg viewBox="-10 -10 20 20" aria-hidden="true">${SIMI()}</svg></span><div><h2 id="dt">Giochi simili a ${esc(cur.title)}</h2>${tags(["IGDB e community"])}<p class="ov">Secondo IGDB e i giocatori di GiocoLegami: voti di somiglianza, fan e giocatori in comune.</p></div></div>${simRows(cur.simAll.slice(0,16),true,cur.w)}${simBar(cur.w)}`);return}
 if(key[0]==="f"){const id=Number(key.slice(1));
 const base="name,first_release_date,summary,total_rating,total_rating_count,cover.image_id,genres.name,platforms.abbreviation,involved_companies.developer,involved_companies.publisher,involved_companies.company.name";
 const d=(await tryApi("games",[`fields ${base},involved_companies.company.logo.image_id,${XF("similar_games")}; where id = ${id};`,`fields ${base},${XF("similar_games")}; where id = ${id};`]))[0];
 if(my!==dTok)return;if(!d)throw{code:"http"};
-dW=Object.assign({},d,{id});const here=!!cur&&cur.kind==="game"&&cur.id===id,o=cur&&cur.links?cur.links.find(x=>x.f.id===id):null;
+dW=Object.assign({},d,{id});const igl=(d.similar_games||[]).filter(f=>f&&f.name);const here=!!cur&&cur.kind==="game"&&cur.id===id,o=cur&&cur.links?cur.links.find(x=>x.f.id===id):null;
 const cm=new Map();(d.involved_companies||[]).forEach(ic=>{const c=ic.company;if(!c||!c.id)return;const m=cm.get(c.id)||{id:c.id,name:c.name,logo:c.logo&&c.logo.image_id,dev:0,pub:0};if(ic.developer)m.dev=1;if(ic.publisher)m.pub=1;cm.set(c.id,m)});
 const ce=[...cm.values()].map(c=>({key:"c"+c.id,id:c.id,k:"c",name:c.name,logo:c.logo,role:roleOf(c.dev,c.pub)}));
 const devs=ce.filter(c=>c.role!=="Editore"),pubs=ce.filter(c=>c.role!=="Studio");
 const plat=(d.platforms||[]).map(p=>p.abbreviation).filter(Boolean).slice(0,8).join(" · ");
 const rate=d.total_rating?"★ "+Math.round(d.total_rating)+"/100 ("+(d.total_rating_count||0)+" voti)":"";
-const com=o?o.who.map(k=>(cur.E.find(x=>x.key===k)||{}).name).filter(Boolean).join(", "):"";
+const com=o?o.who.filter(k=>k!=="s").map(k=>(cur.E.find(x=>x.key===k)||{}).name).filter(Boolean).join(", "):"";
 openDlg(`<div class="dtop">${cv(d)?`<img class="dposter" src="${cov(cv(d),"cover_big")}" alt="">`:`<span class="dposter ph">${esc(ini(d.name))}</span>`}<div><h2 id="dt">${esc(d.name)}</h2>${tags([d.first_release_date?fmtLong(d.first_release_date):"",...(d.genres||[]).map(g=>GIT[g.id]||g.name)])}${rate?`<p class="ov">${esc(rate)}</p>`:""}${plat?`<p class="ov"><span class="kd">Piattaforme:</span> ${esc(plat)}</p>`:""}</div></div>`+
 dtext(d.summary,"Trama non disponibile.")+
 (com?`<p class="ov"><b>In comune:</b> ${esc(com)}</p>`:"")+
 (devs.length?`<div class="k">Sviluppo</div><div>${devs.map(dec).join("")}</div>`:"")+
 (pubs.length?`<div class="k">Edizione</div><div>${pubs.map(dec).join("")}</div>`:"")+
-`<div class="k">Giochi simili</div>${simRail((d.similar_games||[]).filter(f=>f&&f.name),true)}`+
-`<div class="k">Dove giocarlo</div><div id="whd" class="wh">Carico…</div><div class="k">Community</div><div id="comm" class="comm">Carico…</div>`+
-`<div class="dact">${here?"":`<button class="go dgo" type="button" data-go="${key}">Scopri i legami</button>`}<button class="go dgo alt${isSeen(id)?" on":""}" type="button" data-seen="1">${isSeen(id)?"✓ Giocato":"Segna come giocato"}</button></div>`);
-if(d.summary)trInto("dsum",d.summary,5000);fillWhere("whd",id,()=>my===dTok);if(typeof fillComm==="function")fillComm(Object.assign({},d,{id}),()=>my===dTok)}
+`<div class="k">Giochi simili <span class="kd">· secondo IGDB e la community</span></div><div id="simd">${simRailO(simMerge(igl,[]),true)}</div>`+
+`<div class="k">Dove giocarlo</div><div id="whd" class="wh">Carico…</div><div class="k">Community</div><div id="comm" class="comm">Carico…</div>`+(sbOn()?`<div class="k">Consigliato dalla community</div><div id="reco" class="comm">Carico…</div>`:"")+
+`<div class="dact">${here?"":`<button class="go dgo" type="button" data-go="${key}">Scopri i legami</button>`}<button class="go dgo alt${isSeen(id)?" on":""}" type="button" data-seen="1">${isSeen(id)?"✓ Giocato":"Segna come giocato"}</button>${sbOn()?'<button class="go dgo alt rc" type="button" data-recd="1">Consiglia</button>':""}</div>`);
+const dw=Object.assign({},d,{id}),alive=()=>my===dTok;
+if(d.summary)trInto("dsum",d.summary,5000);fillWhere("whd",id,alive);if(typeof fillSimD==="function")fillSimD(dw,igl,alive);if(typeof fillComm==="function"){fillComm(dw,alive);if(typeof fillReco==="function")fillReco(dw,alive)}}
 else if(key[0]==="c"){const id=Number(key.slice(1));
 const d=(await tryApi("companies",[`fields name,description,start_date,country,logo.image_id,developed,published; where id = ${id};`,`fields name,description,start_date,country,developed,published; where id = ${id};`]))[0];
 if(!d)throw{code:"http"};
@@ -828,6 +967,7 @@ $("q").addEventListener("input",()=>{clearTimeout(sugT);const v=$("q").value.tri
 if(v.length<2){sugKill();return}
 sugT=setTimeout(async()=>{const my=++sugN;
 try{const L=sugGroup(await fetchResults(v));if(my!==sugN||$("q").value.trim()!==v)return;sugShow(L)}catch(e){if(my===sugN)sugHide()}},300)});
+$("q").addEventListener("focus",()=>{if($("q").value.trim().length>=2)$("q").dispatchEvent(new Event("input"))});
 $("q").addEventListener("keydown",e=>{const open=!$("sug").hidden;
 if(e.key==="ArrowDown"&&open){e.preventDefault();sugMark((sugI+1)%sugL.length)}
 else if(e.key==="ArrowUp"&&open){e.preventDefault();sugMark(sugI<=0?sugL.length-1:sugI-1)}
@@ -851,7 +991,7 @@ if("serviceWorker" in navigator&&location.protocol.startsWith("http"))addEventLi
 const SB_URL="https://ezswtznereojtyphdbfh.supabase.co",SB_KEY="sb_publishable_Wf5ItERbGV2aw1C0MzZCUA_fDZ3NruZ";
 const CONTACT="info@cinelegami.it";   // email di contatto per la privacy (facoltativa, appare nell'informativa)
 const SB_ON=!!(SB_URL&&SB_KEY);
-let SESS=null,ME=null,MYR={},BLK=[],CLOUD=null,COMM=null,cTok=0,tT=0,busy=false;
+let SESS=null,ME=null,MYR={},MYRC={},BLK=[],CLOUD=null,COMM=null,RC=null,cTok=0,rTok=0,tT=0,busy=false;
 try{SESS=JSON.parse(store.get("gl_sess")||"null")}catch(e){}
 if(SESS&&!(SESS.at&&SESS.rt))SESS=null;
 const nowS=()=>Math.floor(Date.now()/1000);
@@ -868,7 +1008,7 @@ let rP=null;
 function refreshSess(){if(!SESS)return Promise.resolve();if(rP)return rP;
 rP=(async()=>{try{const j=await sb("/auth/v1/token?grant_type=refresh_token",{method:"POST",auth:false,body:{refresh_token:SESS.rt}});setSess(j)}catch(e){if(e.status>=400&&e.status<500)clearSess()}finally{rP=null}})();return rP}
 function setSess(j){SESS={at:j.access_token,rt:j.refresh_token,exp:j.expires_at||nowS()+(j.expires_in||3600)};store.set("gl_sess",JSON.stringify(SESS))}
-function clearSess(){SESS=null;ME=null;MYR={};BLK=[];CLOUD=null;store.del("gl_sess");uiAcc();refreshViews()}
+function clearSess(){SESS=null;ME=null;MYR={};MYRC={};MYSV=new Set();csC.clear();BLK=[];CLOUD=null;store.del("gl_sess");uiAcc();refreshViews()}
 function aerr(e){const m=String(e&&e.message||"").toLowerCase(),s=e&&e.status;
 if(e instanceof TypeError)return"Connessione non riuscita. Controlla internet e riprova.";
 if(m.includes("invalid login"))return"Email o password non corretti.";
@@ -880,12 +1020,13 @@ if(m.includes("not authorized"))return"Impossibile inviare l'email in questo mom
 if(m.includes("troppe"))return"Hai inviato troppe richieste in poco tempo: riprova più tardi.";
 if(s===429||m.includes("rate limit")||m.includes("too many"))return"Troppi tentativi ravvicinati: riprova tra qualche minuto.";
 if(s===401||s===403)return"Sessione scaduta: accedi di nuovo.";
-if(s===404||m.includes("game_"))return"Voti e recensioni dei giochi non sono ancora attivi. Riprova più tardi.";
+if(m.includes("troppe somiglianze"))return"Hai segnato tante somiglianze oggi: riprova domani.";
+if(s===404||m.includes("game_"))return"Questa funzione non è ancora attiva. Riprova più tardi.";
 return"Qualcosa non ha funzionato. Riprova tra poco."}
 // ---- account: bottone e finestre ----
 function uiAcc(){const pl=$("privl");if(pl)pl.hidden=!SB_ON;const b=$("accb");if(!b)return;b.hidden=!SB_ON;b.innerHTML=ME?avt(ME.nick,ME.avatar,22)+" "+esc(ME.nick):"Accedi";b.setAttribute("aria-label",ME?"Il tuo account":"Accedi o registrati")}
 function avt(n,a,s){s=s||28;return a&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(a)?`<img class="av" style="--s:${s}px" src="${a}" alt="">`:`<span class="av ph" style="--s:${s}px" aria-hidden="true">${esc(String(n||"?").slice(0,1).toUpperCase())}</span>`}
-function refreshViews(){if(!$("seenview").hidden)renderSeen();if(!$("profview").hidden){if(ME)renderProfile();else show("home")}}
+function refreshViews(){if(!$("seenview").hidden)renderSeen();if(!$("recoview").hidden)renderReco();if(!$("profview").hidden){if(ME)renderProfile();else show("home")}}
 function authDlg(mode,msg){lastFocus=document.activeElement;const up=mode==="up";
 openDlg(`<h2 id="dt">${up?"Crea il tuo account":"Accedi"}</h2><div class="seg" style="margin:8px 0 0"><button type="button" data-at="in" aria-pressed="${!up}">Accedi</button><button type="button" data-at="up" aria-pressed="${up}">Registrati</button></div><p class="ov">${esc(msg||"Con un account puoi dare voti in coppe, scrivere recensioni e ritrovare i tuoi giochi su ogni dispositivo. Lo stesso account vale anche su CineLegami.")}</p>`+
 `<form id="af" novalidate data-m="${mode}"><label class="fl">Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>`+
@@ -894,12 +1035,12 @@ openDlg(`<h2 id="dt">${up?"Crea il tuo account":"Accedi"}</h2><div class="seg" s
 (up?`<label class="fl ckb"><input type="checkbox" name="ok"><span>Ho letto l'<button type="button" class="link" data-priv>informativa privacy</button> e so che nickname e recensioni saranno pubblici.</span></label>`:"")+
 `<p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">${up?"Registrati":"Accedi"}</button>${up?"":'<button type="button" class="link" data-forgot style="margin-left:14px">Password dimenticata?</button>'}</form>`)}
 function privDlg(){lastFocus=lastFocus||document.activeElement;
-openDlg(`<h2 id="dt">Privacy</h2><p class="ov"><b>Che dati raccogliamo.</b> Solo se crei un account: email, password (conservata in forma cifrata, nessuno può leggerla), nickname, foto del profilo se la aggiungi, i giochi che segni come giocati, i tuoi voti e le tue recensioni.</p><p class="ov"><b>Cosa è pubblico.</b> Nickname, foto, voti e testo delle recensioni. L'email e l'elenco dei giocati sono privati: li vedi solo tu.</p><p class="ov"><b>Un account per due siti.</b> GiocoLegami e CineLegami usano lo stesso account: nickname e foto sono gli stessi su entrambi.</p><p class="ov"><b>A cosa servono.</b> Solo per far funzionare account, giocati e recensioni. Non vendiamo né cediamo i dati e non facciamo pubblicità.</p><p class="ov"><b>Dove sono.</b> I dati sono conservati da Supabase, con connessione cifrata. Le regole di accesso sono applicate direttamente dal database.</p><p class="ov"><b>I tuoi diritti.</b> Puoi eliminare in qualsiasi momento account, giocati e recensioni dalla pagina del tuo profilo.${CONTACT?" Per altre richieste scrivi a "+esc(CONTACT)+".":""}</p><p class="ov"><b>Senza account</b> la lista «I miei giochi» resta solo nel tuo dispositivo e non la riceviamo.</p><p class="ov"><a href="privacy.html" target="_blank" rel="noopener">Leggi l'informativa completa</a></p><button class="go dgo alt" type="button" data-authopen>Indietro</button>`)}
+openDlg(`<h2 id="dt">Privacy</h2><p class="ov"><b>Che dati raccogliamo.</b> Solo se crei un account: email, password (conservata in forma cifrata, nessuno può leggerla), nickname, foto del profilo se la aggiungi, i giochi che segni come giocati, i tuoi voti, le tue recensioni, i giochi che consigli e quelli che segni come simili tra loro.</p><p class="ov"><b>Cosa è pubblico.</b> Nickname, foto, voti, testo delle recensioni e consigli. L'email, l'elenco dei giocati e i tuoi voti di somiglianza sono privati: li vedi solo tu.</p><p class="ov"><b>Giochi simili secondo la community.</b> Mostriamo solo dei totali anonimi: quante persone dicono che due giochi si somigliano, quante li hanno giocati entrambi (solo se sono almeno 3) e quante li hanno votati entrambi con almeno 4 coppe. Nessuno può vedere chi sono.</p><p class="ov"><b>Un account per due siti.</b> GiocoLegami e CineLegami usano lo stesso account: nickname e foto sono gli stessi su entrambi.</p><p class="ov"><b>A cosa servono.</b> Solo per far funzionare account, giocati e recensioni. Non vendiamo né cediamo i dati e non facciamo pubblicità.</p><p class="ov"><b>Dove sono.</b> I dati sono conservati da Supabase, con connessione cifrata. Le regole di accesso sono applicate direttamente dal database.</p><p class="ov"><b>I tuoi diritti.</b> Puoi eliminare in qualsiasi momento account, giocati, recensioni e consigli dalla pagina del tuo profilo.${CONTACT?" Per altre richieste scrivi a "+esc(CONTACT)+".":""}</p><p class="ov"><b>Senza account</b> la lista «I miei giochi» resta solo nel tuo dispositivo e non la riceviamo.</p><p class="ov"><a href="privacy.html" target="_blank" rel="noopener">Leggi l'informativa completa</a></p><button class="go dgo alt" type="button" data-authopen>Indietro</button>`)}
 function newPwDlg(){lastFocus=document.activeElement;
 openDlg(`<h2 id="dt">Scegli una nuova password</h2><form id="rf" novalidate><label class="fl">Nuova password (almeno 8 caratteri)<input name="pw" type="password" autocomplete="new-password" maxlength="72" required></label><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva password</button></form>`)}
 async function loadMe(){try{const u=await sb("/auth/v1/user");const p=await sb("/rest/v1/profiles?select=nickname,avatar&id=eq."+encodeURIComponent(u.id));
 ME={id:u.id,email:u.email,nick:(p&&p[0]&&p[0].nickname)||"utente",avatar:(p&&p[0]&&p[0].avatar)||null};uiAcc();
-try{await loadMine()}catch(e){}await loadBlocks();await syncSeen();refreshViews();if(cur&&!$("film").hidden)R()}
+try{await loadMine()}catch(e){}await loadBlocks();await loadMyReco();await loadMySim();csC.clear();await syncSeen();refreshViews();if(cur&&cur.kind==="game")simRefresh();else if(cur&&!$("film").hidden)R()}
 catch(e){if(e.status===401||e.status===403)clearSess()}}
 async function loadMine(){MYR={};const rows=await sb("/rest/v1/game_reviews?select=game_id,rating,body,title,year,cover,updated_at,hidden&user_id=eq."+encodeURIComponent(ME.id)+"&limit=1000");(rows||[]).forEach(r=>{MYR[r.game_id]=r})}
 // utenti bloccati: valgono su GiocoLegami e su CineLegami (stesso account)
@@ -976,8 +1117,8 @@ const L=Object.values(MYR).sort((a,b)=>String(b.updated_at||"").localeCompare(St
 el.innerHTML=`<div class="phd">${avt(ME.nick,ME.avatar,88)}<div><h2 style="margin:0">${esc(ME.nick)}</h2><p class="kd" style="margin:2px 0 8px">${esc(ME.email)}</p><button class="go dgo alt" type="button" data-pavatar>${ME.avatar?"Cambia foto":"Aggiungi foto"}</button>${ME.avatar?' <button class="link" type="button" data-pavrm>Rimuovi foto</button>':""}<input id="avf" type="file" accept="image/*" hidden><p id="amsg2" class="err" role="alert"></p></div></div>
 <form id="nf" novalidate><label class="fl">Nome utente (3-20 caratteri: lettere, numeri, . _ -)<input name="nick" value="${esc(ME.nick)}" maxlength="20" autocomplete="nickname"></label><p id="nmsg" class="err" role="alert"></p><button class="go dgo" type="submit">Salva nome</button></form>
 <h3 style="margin:26px 0 4px">I miei voti e recensioni</h3>${nv?`<p class="kd">${nv} ${nv>1?"voti":"voto"} · ${nr} ${nr===1?"recensione":"recensioni"} · media ${av} su 5</p><ul class="rv mine">${L.map(r=>`<li>${poster(r.cover,r.title)}<div><button class="l" type="button" data-d="f${r.game_id}">${esc(r.title)}${r.year?" ("+esc(r.year)+")":""}</button><div>${cupRO(r.rating,1)} <span class="kd">${fmtRv(r.updated_at)}</span></div>${r.hidden?'<p class="kd">⚠ Nascosta agli altri dopo alcune segnalazioni.</p>':""}${r.body?`<p class="rt">${esc(r.body)}</p>`:""}</div></li>`).join("")}</ul>`:'<p class="ov">Non hai ancora dato nessun voto. Apri un gioco dai tuoi giocati e assegna le tue coppe.</p>'}
-${BLK.length?`<h3 style="margin:26px 0 4px">Utenti bloccati</h3><ul class="rv">${BLK.map(b=>`<li><span style="flex:1">${esc(b.nick)}</span><button class="link" type="button" data-unblk="${esc(b.id)}" aria-label="Sblocca ${esc(b.nick)}">Sblocca</button></li>`).join("")}</ul>`:""}<p class="kd" style="margin-top:12px">Nome, foto, voti e recensioni sono pubblici. Email e lista dei giochi sono private. Nome, foto e utenti bloccati valgono anche su CineLegami.</p>
-<div class="dact" style="margin-top:18px"><button class="go dgo" type="button" data-logout>Esci</button><button class="go dgo alt" type="button" data-delask>Elimina account</button></div><div id="delbox"></div>`}
+${BLK.length?`<h3 style="margin:26px 0 4px">Utenti bloccati</h3><ul class="rv">${BLK.map(b=>`<li><span style="flex:1">${esc(b.nick)}</span><button class="link" type="button" data-unblk="${esc(b.id)}" aria-label="Sblocca ${esc(b.nick)}">Sblocca</button></li>`).join("")}</ul>`:""}<p class="kd" style="margin-top:12px">Nome, foto, voti, recensioni e consigli sono pubblici. Email, lista dei giochi e voti di somiglianza sono privati. Nome, foto e utenti bloccati valgono anche su CineLegami.</p>
+<div class="dact" style="margin-top:18px"><button class="go dgo alt" type="button" data-chpw>Cambia password</button><button class="go dgo" type="button" data-logout>Esci</button><button class="go dgo alt" type="button" data-delask>Elimina account</button></div><div id="delbox"></div>`}
 function repDlg(u){if(!ME){authDlg("in","Accedi per segnalare una recensione.");return}if(!COMM)return;COMM.rep=u;
 openDlg(`<h2 id="dt">Segnala una recensione</h2><p class="ov">Dicci cosa non va. L'autore non saprà chi ha segnalato. Le segnalazioni le controlliamo noi.</p><form id="rpf" novalidate><fieldset class="rps"><legend class="kd">Motivo</legend>${[["offensivo","Offensiva, insulti o odio"],["spam","Spam o pubblicità"],["nome_foto","Nome o foto inappropriati"],["altro","Altro"]].map((x,i)=>`<label class="fl ckb"><input type="radio" name="reason" value="${x[0]}"${i?"":" checked"}><span>${x[1]}</span></label>`).join("")}</fieldset><label class="fl">Nota (facoltativa, max 300 caratteri)<textarea name="note" class="rpn" maxlength="300" rows="3"></textarea></label><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">Invia segnalazione</button> <button class="link" type="button" data-repback style="margin-left:12px">Annulla</button></form>`,null,true)}
 function blkDlg(u,n){if(!ME){authDlg("in","Accedi per bloccare un utente.");return}if(!COMM)return;COMM.blk=u;
@@ -986,6 +1127,95 @@ function toAvatar(file){return new Promise((ok,ko)=>{if(!file||!/^image\//.test(
 fr.onload=()=>{const im=new Image();im.onerror=()=>ko(new Error("img"));im.onload=()=>{const S=128,c=document.createElement("canvas");c.width=c.height=S;const x=c.getContext("2d"),m=Math.min(im.width,im.height);if(!m)return ko(new Error("img"));
 x.fillStyle="#18181b";x.fillRect(0,0,S,S);x.drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,S,S);let q=.85,u=c.toDataURL("image/jpeg",q);while(u.length>25000&&q>.4){q-=.1;u=c.toDataURL("image/jpeg",q)}ok(u)};im.src=fr.result};fr.readAsDataURL(file)})}
 async function patchProfile(o){const r=await sb("/rest/v1/profiles?id=eq."+encodeURIComponent(ME.id),{method:"PATCH",headers:{Prefer:"return=representation"},body:o});if(!r||!r.length)throw new Error("not saved");return r[0]}
+// ---- giochi simili secondo la community ----
+let MYSV=new Set(),SIMD=null;const csC=new Map();
+simVoted=(a,b)=>MYSV.has(Math.min(a,b)+"-"+Math.max(a,b));
+commSim=async gid=>{if(!SB_ON)return[];gid=Number(gid);const c=csC.get(gid);if(c&&Date.now()-c.t<60000)return c.d;
+const d=await sb("/rest/v1/rpc/gl_simili_community",{method:"POST",body:{gid}});const r=Array.isArray(d)?d:[];csC.set(gid,{t:Date.now(),d:r});return r};
+async function loadMySim(){MYSV=new Set();try{const r=await sb("/rest/v1/game_sim_votes?select=game_a,game_b&user_id=eq."+encodeURIComponent(ME.id)+"&limit=5000");(r||[]).forEach(x=>MYSV.add(x.game_a+"-"+x.game_b))}catch(e){}}
+const okCov=c=>/^[A-Za-z0-9_]{1,64}$/.test(c||"")?c:null;
+async function simToggle(a,b){if(!ME){authDlg("in","Accedi o registrati per dire quali giochi si somigliano.");return null}
+if(!a||!b||a.id===b.id)return null;const[x,y]=a.id<b.id?[a,b]:[b,a],k=x.id+"-"+y.id;
+if(MYSV.has(k)){await sb("/rest/v1/game_sim_votes?user_id=eq."+encodeURIComponent(ME.id)+"&game_a=eq."+Number(x.id)+"&game_b=eq."+Number(y.id),{method:"DELETE"});MYSV.delete(k)}
+else{await sb("/rest/v1/game_sim_votes",{method:"POST",headers:{Prefer:"resolution=ignore-duplicates,return=minimal"},body:{user_id:ME.id,game_a:Number(x.id),game_b:Number(y.id),title_a:String(x.name||"").slice(0,200),title_b:String(y.name||"").slice(0,200),year_a:yr4(yr(x)),year_b:yr4(yr(y)),cover_a:okCov(cv(x)),cover_b:okCov(cv(y))}});MYSV.add(k)}
+csC.delete(Number(x.id));csC.delete(Number(y.id));return MYSV.has(k)}
+// dopo un voto: aggiorna grafo e finestra
+async function simRefresh(){if(cur&&cur.kind==="game"){const c=cur;try{const r=await commSim(c.id);if(cur===c){applySims(c,r);R()}}catch(e){}}
+if(SIMD&&$("simd")&&(!SIMD.ok||SIMD.ok()))fillSimD(SIMD.w,SIMD.ig,SIMD.ok,SIMD.open)}
+fillSimD=function(w,ig,ok,open){SIMD={w,ig,ok,open:!!open};SIMO.set(w.id,w);if(!$("simd"))return;
+const draw=cm=>{const e=$("simd");if(!e||(ok&&!ok()))return;const all=simMerge(ig,cm||[]),o=SIMD&&SIMD.w===w&&SIMD.open;
+e.innerHTML=simRailO(all,true)+(all.length?`<button class="link" type="button" data-simopen aria-expanded="${o}">${o?"Nascondi i voti":"Perché si somigliano? Vedi e vota"}</button><div id="simvl"${o?"":" hidden"}>${simRows(all.slice(0,12),true,w)}</div>`:"")+simBar(w)};
+draw(null);if(SB_ON)commSim(w.id).then(draw).catch(()=>{})};
+// ---- consigli alla community ----
+let RF="all",RROWS=null;
+async function loadMyReco(){MYRC={};try{const rows=await sb("/rest/v1/game_recos?select=game_id,body,hidden,title,year,cover,fam,updated_at&user_id=eq."+encodeURIComponent(ME.id)+"&limit=1000");(rows||[]).forEach(r=>{MYRC[r.game_id]=r})}catch(e){}}
+const famOf=ids=>Object.keys(PLATS).filter(k=>(ids||[]).some(p=>PLATS[k].includes(Number(p&&p.id!==undefined?p.id:p))));
+async function recoSave(w,body){let pl=w.platforms;
+if(!Array.isArray(pl)){try{const x=await api("games",`fields platforms; where id = ${Number(w.id)};`);pl=(x[0]&&x[0].platforms)||[]}catch(e){pl=[]}}
+const row={user_id:ME.id,game_id:Number(w.id),title:String(w.name||"").slice(0,200),year:yr4(yr(w)),cover:okCov(cv(w)),fam:famOf(pl),body};
+await sb("/rest/v1/game_recos?on_conflict=user_id,game_id",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:row});
+const old=MYRC[row.game_id];MYRC[row.game_id]=Object.assign({},row,{hidden:!!(old&&old.hidden),updated_at:new Date().toISOString()});RROWS=null;RAIL=null}
+fillReco=function(w,ok){const el=$("reco");if(!el)return;RC={w,ok,show:5,draft:null};renderReco1()};
+async function renderReco1(){const c=RC,el=$("reco");if(!c||!el)return;const my=++rTok,alive=()=>my===rTok&&RC===c&&(!c.ok||c.ok())&&$("reco");
+const draft=$("rcb")?$("rcb").value:c.draft;
+try{const id=Number(c.w.id),[st,rv]=await Promise.all([sb("/rest/v1/game_reco_stats?select=n&game_id=eq."+id),sb("/rest/v1/game_recos?select=user_id,body,updated_at,profiles(nickname,avatar)&game_id=eq."+id+"&order=updated_at.desc&limit="+(c.show+1))]);
+if(!alive())return;const n=(st&&st[0]&&st[0].n)||0,mine=MYRC[id],list=(rv||[]).slice(0,c.show),more=(rv||[]).length>c.show;
+c.draft=draft;const txt=draft!=null?draft:(mine&&mine.body)||"";
+el.innerHTML=`<p class="cm-sum">${n?`<b class="rn">${n} ${n>1?"persone lo consigliano":"persona lo consiglia"}</b>`:'<span class="kd">Nessuno l\'ha ancora consigliato: sii il primo!</span>'}</p>`+
+(ME?`<div class="cm-me">${mine&&mine.hidden?'<p class="err">Il tuo consiglio è stato nascosto agli altri dopo alcune segnalazioni.</p>':""}<label class="fl" for="rcb">${mine?"Il tuo consiglio":"Perché lo consigli? Da 10 a 500 caratteri, lo vedranno tutti."}</label><textarea id="rcb" maxlength="500" rows="3" placeholder="Scrivi in poche parole perché vale la pena giocarci.">${esc(txt)}</textarea><div class="dact"><button class="go dgo" type="button" data-recsave>${mine?"Aggiorna il consiglio":"Consiglia alla community"}</button>${mine?'<button class="link" type="button" data-recdel>Ritira il mio consiglio</button>':""}</div><p id="rmsg" class="kd" role="status"></p></div>`
+:`<div class="cm-me"><button class="go dgo alt" type="button" data-authopen>Accedi per consigliarlo</button></div>`)+
+(list.length?`<ul class="rv">${list.map(r=>`<li>${avt(r.profiles&&r.profiles.nickname,r.profiles&&r.profiles.avatar,30)}<div><div><b>${esc((r.profiles&&r.profiles.nickname)||"utente")}</b> <span class="kd">${fmtRv(r.updated_at)}</span>${ME&&r.user_id===ME.id?"":` <button class="link rep" type="button" data-rrep="${esc(r.user_id)}">Segnala</button> <button class="link rep" type="button" data-blk="${esc(r.user_id)}" data-bn="${esc((r.profiles&&r.profiles.nickname)||"utente")}">Blocca</button>`}</div><p class="rt">${esc(r.body)}</p></div></li>`).join("")}</ul>${more?'<button class="link" type="button" data-rmore>Mostra altri consigli</button>':""}`:"")}
+catch(e){if(alive())el.innerHTML='<p class="kd">I consigli della community non sono disponibili al momento.</p>'}}
+function rrepDlg(u){if(!ME){authDlg("in","Accedi per segnalare un consiglio.");return}if(!RC)return;RC.rep=u;
+openDlg(`<h2 id="dt">Segnala un consiglio</h2><p class="ov">Dicci cosa non va. L'autore non saprà chi ha segnalato. Le segnalazioni le controlliamo noi.</p><form id="rrf" novalidate><fieldset class="rps"><legend class="kd">Motivo</legend>${[["offensivo","Offensivo, insulti o odio"],["spam","Spam o pubblicità"],["nome_foto","Nome o foto inappropriati"],["altro","Altro"]].map((x,i)=>`<label class="fl ckb"><input type="radio" name="reason" value="${x[0]}"${i?"":" checked"}><span>${x[1]}</span></label>`).join("")}</fieldset><label class="fl">Nota (facoltativa, max 300 caratteri)<textarea name="note" class="rpn" maxlength="300" rows="3"></textarea></label><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="submit">Invia segnalazione</button> <button class="link" type="button" data-repback style="margin-left:12px">Annulla</button></form>`,null,true)}
+// riga «Consigliati dalla community» nella pagina iniziale
+let RAIL=null;
+recoRail=async()=>{if(!SB_ON)return[];const rows=await sb("/rest/v1/game_reco_stats?select=game_id,n,title,year,cover,fam,last_at&order=n.desc,last_at.desc&limit=60");
+return(rows||[]).map(x=>({id:x.game_id,name:x.title,cover:x.cover?{image_id:x.cover}:null,_y:x.year||"",fam:String(x.fam||"").split(",").filter(Boolean),n:x.n}))};
+function homeReco(){if(!HOMEOK)return;recoRail().then(l=>{HM.rc=l;renderHome()}).catch(()=>{})}
+// ---- pagina «Consigli dalla community» ----
+function showReco(){lastFocus=document.activeElement;closeDlg();show("reco");$("res").innerHTML="";setMsg("");sugKill();renderReco();window.scrollTo(0,0)}
+$("recobtn").addEventListener("click",showReco);
+function drawReco(){const el=$("recoview");if(!el)return;
+const head=`<h2 style="margin-top:10px">Consigli dalla community</h2><p class="ov">Hai giocato qualcosa che vale la pena? Consiglialo in un attimo, oppure scopri i giochi più consigliati dai giocatori di GiocoLegami, per piattaforma.</p><button class="go dgo" type="button" data-recsearch>Cerca un gioco da consigliare</button><div class="seg" role="group" aria-label="Piattaforma">${[["all","Tutto"],["ps","PlayStation"],["xbox","Xbox"],["switch","Nintendo"],["pc","PC"]].map(([k,l])=>`<button type="button" data-rf="${k}" aria-pressed="${RF===k}">${l}</button>`).join("")}</div>`;
+if(!SB_ON){el.innerHTML=head.replace(/<button class="go dgo"[^]*?<\/button>/,"")+'<p class="ov">I consigli della community arrivano presto.</p>';return}
+if(RROWS===null){el.innerHTML=head+'<p class="ov">Carico…</p>';return}
+if(RROWS===false){el.innerHTML=head+'<p class="ov">La sezione non è disponibile al momento. Riprova tra poco.</p>';return}
+const L=RROWS.filter(x=>RF==="all"||String(x.fam||"").split(",").includes(RF));
+el.innerHTML=head+(L.length?`<h3 class="rsec">${RF==="all"?"I più consigliati":"I più consigliati su "+{ps:"PlayStation",xbox:"Xbox",switch:"Nintendo",pc:"PC"}[RF]} <span class="kd">· ${L.length} ${L.length>1?"giochi":"gioco"}</span></h3><div class="svg">${L.map(x=>`<article class="svc"><button class="svp" type="button" data-d="f${x.game_id}" aria-label="Dettagli di ${esc(x.title)}">${x.cover?`<img src="${cov(x.cover,"cover_big")}" alt="" loading="lazy">`:`<span class="ph">${esc(ini(x.title))}</span>`}</button><div class="svb"><button class="l" type="button" data-d="f${x.game_id}">${ckm(x.game_id)}${esc(x.title)}${x.year?" ("+esc(x.year)+")":""}</button><div class="rn"><b>${x.n}</b> ${x.n>1?"persone lo consigliano":"persona lo consiglia"}</div></div></article>`).join("")}</div>`:'<p class="ov">Nessun consiglio per ora qui: sii il primo!</p>')}
+async function renderReco(){drawReco();if(!SB_ON)return;
+try{const rows=await sb("/rest/v1/game_reco_stats?select=game_id,n,title,year,cover,fam,last_at&order=n.desc,last_at.desc&limit=500");RROWS=rows||[]}catch(e){RROWS=false}
+if(!$("recoview").hidden)drawReco()}
+// ---- finestra di ricerca: «Consiglia un gioco» e «Suggerisci un gioco simile» ----
+let RS={q:"",list:[],sel:null,busy:false,err:false,tok:0,t:0,mode:"reco",base:null};
+const rsPoster=w=>`<span class="rsp">${cv(w)?`<img src="${cov(cv(w),"cover_small")}" alt="" loading="lazy">`:`<span>${esc(ini(w.name))}</span>`}</span>`;
+function rsList(){const el=$("rsl");if(!el)return;const sim=RS.mode==="sim";
+if(RS.q.length<2){el.innerHTML='<p class="kd">Scrivi il titolo di un videogioco.</p>';return}
+if(RS.busy){el.innerHTML='<p class="kd">Cerco…</p>';return}
+if(RS.err){el.innerHTML='<p class="kd">Ricerca non riuscita. Controlla internet e riprova.</p>';return}
+const L=RS.list.filter(w=>!sim||w.id!==RS.base.id);
+if(!L.length){el.innerHTML='<p class="kd">Nessun risultato per «'+esc(RS.q)+'».</p>';return}
+el.innerHTML=L.map(w=>{const done=sim?simVoted(RS.base.id,w.id):!!MYRC[w.id];return`<div class="rsi">${rsPoster(w)}<div class="rst"><b>${esc(w.name)}</b><span class="kd">${yr(w)||"Gioco"}${done?(sim?" · già segnato da te come simile":" · già consigliato da te"):""}</span></div><button class="go rsb" type="button" data-rsel="${w.id}">${sim?(done?"✓ Simile":"È simile"):"Consiglia"}</button></div>`}).join("")}
+function rsView(){const sim=RS.mode==="sim";$("dbody").innerHTML=`<h2 id="dt">${sim?"Un gioco simile a "+esc(RS.base.name):"Consiglia un gioco"}</h2><p class="ov">${sim?"Cerca il gioco che secondo te gli somiglia: il tuo voto rafforza il legame tra i due nel grafo di tutti.":"Cerca il gioco e consiglialo in un attimo."}</p><input id="rsq" type="search" placeholder="Cerca un videogioco…" autocomplete="off" enterkeyhint="search" aria-label="Titolo del gioco" value="${esc(RS.q)}"><div id="rsl" class="rsl" aria-live="polite"></div>${sim?'<button class="link" type="button" data-rsdone style="margin-top:12px">Fatto</button>':""}`;
+rsList();setTimeout(()=>{const q=$("rsq");if(q)q.focus()},60)}
+function openRecoSearch(mode,base){lastFocus=document.activeElement;RS={q:"",list:[],sel:null,busy:false,err:false,tok:0,t:0,mode:mode||"reco",base:base||null};openDlg("",null);rsView()}
+function openRecoFor(w){lastFocus=document.activeElement;RS={q:"",list:[w],sel:null,busy:false,err:false,tok:0,t:0,mode:"reco",base:null};openDlg("",null);rsPick(w)}
+function rsPick(w){RS.sel=w;if(!ME){authDlg("in","Accedi o registrati per consigliare un gioco.");return}
+const mine=MYRC[w.id];
+$("dbody").innerHTML=`<h2 id="dt">Consiglia un gioco</h2><div class="rsi rsone">${rsPoster(w)}<div class="rst"><b>${esc(w.name)}</b><span class="kd">${yr(w)||"Gioco"}</span></div></div><label class="fl" for="rsb">Perché lo consigli? Da 10 a 500 caratteri, lo vedranno tutti.</label><textarea id="rsb" maxlength="500" rows="4" placeholder="Scrivi in poche parole perché vale la pena giocarci.">${esc(mine?mine.body:"")}</textarea><div class="dact"><button class="go dgo" type="button" data-rssend>${mine?"Aggiorna il consiglio":"Consiglia alla community"}</button><button class="link" type="button" data-rsback>‹ Cambia gioco</button></div><p id="rsm" class="err" role="alert"></p>`;
+setTimeout(()=>{const b=$("rsb");if(b)b.focus()},60)}
+async function rsSend(btn){const w=RS.sel;if(!w||!ME||busy)return;const b=$("rsb").value.trim();
+if(b.length<10){$("rsm").textContent="Scrivi almeno 10 caratteri: racconta perché lo consigli.";return}
+busy=true;btn.disabled=true;
+try{await recoSave(w,b);closeDlg();toast("Grazie! Il tuo consiglio è stato pubblicato.");if(!$("recoview").hidden)renderReco();homeReco()}
+catch(x){const m=$("rsm");if(m)m.textContent=aerr(x);btn.disabled=false}finally{busy=false}}
+$("dlg").addEventListener("input",e=>{if(e.target.id!=="rsq")return;const q=e.target.value.trim();RS.q=q;clearTimeout(RS.t);const my=++RS.tok;
+if(q.length<2){RS.list=[];RS.busy=false;RS.err=false;rsList();return}
+RS.busy=true;rsList();
+RS.t=setTimeout(async()=>{try{const d=await api("games",`search "${qs(q)}"; fields name,first_release_date,cover.image_id,platforms; where version_parent = null; limit 10;`);if(my!==RS.tok)return;
+RS.list=(d||[]).filter(x=>x&&x.name).slice(0,8);RS.err=false}
+catch(err){if(my!==RS.tok)return;RS.list=[];RS.err=true}
+RS.busy=false;rsList()},350)});
 // ---- eventi ----
 document.addEventListener("click",async e=>{const t=e.target;if(!t.closest)return;
 const sv=t.closest("#seenview");
@@ -998,17 +1228,42 @@ const d=t.closest("[data-d]");if(d){openDetail(d.dataset.d,{x:e.clientX||innerWi
 if(t.closest("[data-pavatar]")){$("avf").click();return}
 const ub=t.closest("[data-unblk]");if(ub){try{await sb("/rest/v1/blocks?blocked_id=eq."+encodeURIComponent(ub.dataset.unblk)+"&blocker_id=eq."+encodeURIComponent(ME.id),{method:"DELETE"});BLK=BLK.filter(b=>b.id!==ub.dataset.unblk);renderProfile();toast("Utente sbloccato")}catch(x){toast(aerr(x))}return}
 if(t.closest("[data-pavrm]")){try{await patchProfile({avatar:null});ME.avatar=null;uiAcc();renderProfile();toast("Foto rimossa")}catch(x){$("amsg2").textContent=aerr(x)}return}}
+const rvw=t.closest("#recoview");
+if(rvw){const fb=t.closest("[data-rf]");if(fb){RF=fb.dataset.rf;drawReco();return}
+if(t.closest("[data-recsearch]")){if(!ME){authDlg("in","Accedi o registrati per consigliare un gioco.");return}openRecoSearch("reco");return}
+const d=t.closest("[data-d]");if(d){openDetail(d.dataset.d,{x:e.clientX||innerWidth/2,y:e.clientY||innerHeight/2});return}}
+const rcf=t.closest("[data-recf]");if(rcf){const w=GW.get(Number(rcf.dataset.recf))||(cur&&cur.links.map(o=>o.f).find(x=>x.id===Number(rcf.dataset.recf)));if(w)openRecoFor(w);return}
+if(t.closest("[data-recc]")){if(cur&&cur.w)openRecoFor(cur.w);return}
+if(t.closest("[data-recd]")){if(dW)openRecoFor(dW);return}
+const rsl=t.closest("[data-rsel]");if(rsl){const w=RS.list.find(x=>x.id===Number(rsl.dataset.rsel));if(!w)return;
+if(RS.mode==="sim"){rsl.disabled=true;try{const on=await simToggle(RS.base,w);if(on!==null){toast(on?"Grazie! Hai collegato «"+w.name+"» a «"+RS.base.name+"».":"Somiglianza tolta");simRefresh()}rsList()}catch(x){toast(aerr(x));rsl.disabled=false}return}
+rsPick(w);return}
+if(t.closest("[data-rssend]")){rsSend(t.closest("[data-rssend]"));return}
+if(t.closest("[data-rsback]")){rsView();return}
+if(t.closest("[data-rsdone]")){const b=RS.base;if(b&&dW&&dW.id===b.id)openDetail("f"+b.id,null,true);else closeDlg();return}
+const sa=t.closest("[data-simadd]");if(sa){const b=SIMO.get(Number(sa.dataset.simadd));if(!b)return;if(!ME){authDlg("in","Accedi o registrati per suggerire giochi simili.");return}openRecoSearch("sim",b);return}
+const sv2=t.closest("[data-simv]");if(sv2){const a=SIMO.get(Number(sv2.dataset.simb)),b=SIMO.get(Number(sv2.dataset.simv));if(!a||!b)return;sv2.disabled=true;
+try{const on=await simToggle(a,b);if(on!==null){sv2.classList.toggle("on",on);sv2.setAttribute("aria-pressed",on);sv2.textContent=on?"✓ Simile per te":"È simile";toast(on?"Grazie! Il tuo voto rafforza il legame tra i due giochi.":"Voto tolto");if(SIMD)SIMD.open=!!$("simvl")&&!$("simvl").hidden;simRefresh()}}catch(x){toast(aerr(x))}finally{sv2.disabled=false}return}
+const so=t.closest("[data-simopen]");if(so){const b=$("simvl");if(b){b.hidden=!b.hidden;so.setAttribute("aria-expanded",!b.hidden);so.textContent=b.hidden?"Perché si somigliano? Vedi e vota":"Nascondi i voti";if(SIMD)SIMD.open=!b.hidden}return}
+const rrp=t.closest("[data-rrep]");if(rrp){rrepDlg(rrp.dataset.rrep);return}
+if(t.closest("[data-rmore]")&&RC){RC.show+=5;RC.draft=$("rcb")?$("rcb").value:null;renderReco1();return}
+if(t.closest("[data-recsave]")){if(!ME){authDlg("in","Accedi o registrati per consigliare un gioco.");return}const b=$("rcb").value.trim();
+if(b.length<10){$("rmsg").textContent="Scrivi almeno 10 caratteri: racconta perché lo consigli.";return}
+try{await recoSave(RC.w,b);RC.draft=null;await renderReco1();toast("Grazie! Il tuo consiglio è stato pubblicato.");homeReco()}catch(x){$("rmsg").textContent=aerr(x)}return}
+if(t.closest("[data-recdel]")){const id=RC&&Number(RC.w.id);if(!id||!ME)return;
+try{await sb("/rest/v1/game_recos?game_id=eq."+id+"&user_id=eq."+encodeURIComponent(ME.id),{method:"DELETE"});delete MYRC[id];RROWS=null;RC.draft=null;await renderReco1();refreshViews();homeReco();toast("Consiglio ritirato")}catch(x){toast(aerr(x))}return}
+if(t.closest("[data-chpw]")){newPwDlg();return}
 const ao=t.closest("[data-authopen]");if(ao){authDlg("in");return}
 const at=t.closest("[data-at]");if(at){authDlg(at.dataset.at);return}
 const bk=t.closest("[data-blk]");if(bk){blkDlg(bk.dataset.blk,bk.dataset.bn);return}
 const bg=t.closest("[data-blkgo]");if(bg&&COMM&&ME){bg.disabled=true;try{try{await sb("/rest/v1/blocks",{method:"POST",headers:{Prefer:"return=minimal"},body:{blocker_id:ME.id,blocked_id:COMM.blk}})}catch(x){if(x.status!==409)throw x}
-if(!BLK.some(b=>b.id===COMM.blk))BLK.push({id:COMM.blk,nick:bg.dataset.bn});toast("Utente bloccato");openDetail("f"+COMM.m.id,null,true)}catch(x){bg.disabled=false;const a=$("amsg");if(a)a.textContent=aerr(x)}return}
+if(!BLK.some(b=>b.id===COMM.blk))BLK.push({id:COMM.blk,nick:bg.dataset.bn});csC.clear();RROWS=null;homeReco();toast("Utente bloccato");openDetail("f"+COMM.m.id,null,true)}catch(x){bg.disabled=false;const a=$("amsg");if(a)a.textContent=aerr(x)}return}
 const rp=t.closest("[data-rep]");if(rp){repDlg(rp.dataset.rep);return}
 if(t.closest("[data-repback]")&&COMM){openDetail("f"+COMM.m.id,null,true);return}
 if(t.closest("[data-priv]")){privDlg();return}
 if(t.closest("[data-forgot]")){forgot();return}
 if(t.closest("[data-logout]")){try{await sb("/auth/v1/logout?scope=local",{method:"POST"})}catch(x){}clearSess();closeDlg();toast("Hai effettuato l'uscita.");return}
-if(t.closest("[data-delask]")){$("delbox").innerHTML=`<p class="ov"><b>Attenzione:</b> l'account è lo stesso di CineLegami. Verranno eliminati per sempre l'account e, su entrambi i siti, i titoli segnati, i voti e le recensioni. Per confermare scrivi <b>ELIMINA</b>.</p><input id="delin" class="delin" autocomplete="off" aria-label="Scrivi ELIMINA per confermare"><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="button" data-delgo>Elimina definitivamente</button>`;$("delin").focus();return}
+if(t.closest("[data-delask]")){$("delbox").innerHTML=`<p class="ov"><b>Attenzione:</b> l'account è lo stesso di CineLegami. Verranno eliminati per sempre l'account e, su entrambi i siti, i titoli segnati, i voti, le recensioni, i consigli e le somiglianze. Per confermare scrivi <b>ELIMINA</b>.</p><input id="delin" class="delin" autocomplete="off" aria-label="Scrivi ELIMINA per confermare"><p id="amsg" class="err" role="alert"></p><button class="go dgo" type="button" data-delgo>Elimina definitivamente</button>`;$("delin").focus();return}
 if(t.closest("[data-delgo]")){if($("delin").value.trim().toUpperCase()!=="ELIMINA"){$("amsg").textContent="Scrivi ELIMINA per confermare.";return}
 try{await sb("/rest/v1/rpc/delete_my_account",{method:"POST",body:{}});clearSess();closeDlg();toast("Account eliminato.")}catch(x){$("amsg").textContent=aerr(x)}return}
 const rt=t.closest("[data-rate]");if(rt){const id=Number(rt.dataset.k),m=metaFor(id);if(!m)return;
@@ -1026,6 +1281,9 @@ try{await submitAuth(f)}catch(x){const a=$("amsg");if(a)a.textContent=aerr(x)}fi
 else if(f.id==="rpf"){if(!ME||!COMM)return;busy=true;const b=f.querySelector("[type=submit]");b.disabled=true;
 try{await sb("/rest/v1/game_reports",{method:"POST",headers:{Prefer:"return=minimal"},body:{reporter_id:ME.id,review_user_id:COMM.rep,game_id:Number(COMM.m.id),reason:f.elements.reason.value,note:f.elements.note.value.trim()||null}});toast("Grazie: la segnalazione è stata inviata.");openDetail("f"+COMM.m.id,null,true)}
 catch(x){const a=$("amsg");if(a)a.textContent=x.status===409?(/duplicate/i.test(x.message)?"Hai già segnalato questa recensione.":"Questa recensione non esiste più."):aerr(x)}finally{busy=false;b.disabled=false}}
+else if(f.id==="rrf"){if(!ME||!RC)return;busy=true;const b=f.querySelector("[type=submit]");b.disabled=true;
+try{await sb("/rest/v1/game_reco_reports",{method:"POST",headers:{Prefer:"return=minimal"},body:{reporter_id:ME.id,reco_user_id:RC.rep,game_id:Number(RC.w.id),reason:f.elements.reason.value,note:f.elements.note.value.trim()||null}});toast("Grazie: la segnalazione è stata inviata.");openDetail("f"+RC.w.id,null,true)}
+catch(x){const a=$("amsg");if(a)a.textContent=x.status===409?(/duplicate/i.test(x.message)?"Hai già segnalato questo consiglio.":"Questo consiglio non esiste più."):aerr(x)}finally{busy=false;b.disabled=false}}
 else if(f.id==="rf"){const pw=f.elements.pw.value;if(pw.length<8){$("amsg").textContent="La password deve avere almeno 8 caratteri.";return}
 busy=true;try{await sb("/auth/v1/user",{method:"PUT",body:{password:pw}});closeDlg();toast("Password aggiornata")}catch(x){$("amsg").textContent=aerr(x)}finally{busy=false}}});
 $("profview").addEventListener("submit",async e=>{e.preventDefault();if(e.target.id!=="nf"||busy||!ME)return;const n=e.target.elements.nick.value.trim(),out=$("nmsg");out.style.color="";
